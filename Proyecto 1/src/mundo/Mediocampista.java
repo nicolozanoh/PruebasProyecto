@@ -1,5 +1,7 @@
 package mundo;
 
-public class Mediocampista {
+public class Mediocampista extends Jugador{
 
+	
+	
 }

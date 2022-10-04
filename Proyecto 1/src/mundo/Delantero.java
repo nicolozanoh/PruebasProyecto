@@ -1,5 +1,7 @@
 package mundo;
 
-public class Delantero {
+public class Delantero extends Jugador{
 
+	
+	
 }

@@ -1,5 +1,7 @@
 package mundo;
 
-public class Defensa {
+public class Defensa extends Jugador{
 
+	private int golesRecibidos;
+	
 }
