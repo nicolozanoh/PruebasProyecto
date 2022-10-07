@@ -4,19 +4,20 @@ import java.sql.Time;
 
 public abstract class Jugador {
 
-	private String nombre;
-	private String posicion;
-	private double precio;
-	private double puntos;
-	private Time minutosJugados;
-	private Time minutoInicio;
-	private Time minutoSustitucion;
-	private int golesAnotados;
-	private int autogoles;
-	private int asistencias;
-	private int penaltisErrados;
-	private int amarillas;
-	private int rojas;
+	protected String nombre;
+	protected String posicion;
+	protected double precio;
+	protected double puntos;
+	protected int minutosJugados;
+	protected int minutoInicio;
+	protected int minutoSustitucion;
+	protected int golesAnotados;
+	protected int autogoles;
+	protected int asistencias;
+	protected int penaltisErrados;
+	protected int amarillas;
+	protected int rojas;
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,22 +42,22 @@ public abstract class Jugador {
 	public void setPuntos(double puntos) {
 		this.puntos = puntos;
 	}
-	public Time getMinutosJugados() {
+	public int getMinutosJugados() {
 		return minutosJugados;
 	}
-	public void setMinutosJugados(Time minutosJugados) {
+	public void setMinutosJugados(int minutosJugados) {
 		this.minutosJugados = minutosJugados;
 	}
-	public Time getMinutoInicio() {
+	public int getMinutoInicio() {
 		return minutoInicio;
 	}
-	public void setMinutoInicio(Time minutoInicio) {
+	public void setMinutoInicio(int minutoInicio) {
 		this.minutoInicio = minutoInicio;
 	}
-	public Time getMinutoSustitucion() {
+	public int getMinutoSustitucion() {
 		return minutoSustitucion;
 	}
-	public void setMinutoSustitucion(Time minutoSustitucion) {
+	public void setMinutoSustitucion(int minutoSustitucion) {
 		this.minutoSustitucion = minutoSustitucion;
 	}
 	public int getGolesAnotados() {
@@ -98,4 +99,6 @@ public abstract class Jugador {
 	
 	
 
+	abstract public double calcularPuntaje();
+	
 }

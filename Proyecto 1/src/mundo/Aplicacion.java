@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class Aplicacion {
 
-	private String tipoUsuarioActivo;
 	private ArrayList<Administrador> administrador;
 	private ArrayList<Participante> participantes;
 	private ArrayList<Temporada> temporadas;
+	private String tipoUsuarioActivo;
+	
 	public String getTipoUsuarioActivo() {
 		return tipoUsuarioActivo;
 	}
@@ -41,7 +42,7 @@ public class Aplicacion {
 	}
 	public String crearUsuario(String nombreUsuario, String clave) {
 		//TODO Devuelve un String confirmando que se creo correctamente el usuario o mensaje de error
-		Participante nuevo= new Participante(nombreUsuario, clave);
+		Participante nuevo = new Participante(nombreUsuario, clave);
 		return "";
 	}
 	public void cerrarSesion() {

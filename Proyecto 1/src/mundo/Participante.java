@@ -50,6 +50,7 @@ public class Participante {
 	}
 	public String venderJugador() {
 		//TODO Devuelve un String confirmando la venta del jugador
+		return "";
 	}
 	public void comprarJugador() {
 		//TODO
@@ -59,9 +60,11 @@ public class Participante {
 	}
 	public int consultarPuntajesEquipo() {
 		//TODO No deberia recibir por parametro el equipo?
+		return 0;
 	}
 	public int consultarPuntajeJugador() {
 		//TODO Es el puntaje de toda la temporada? o de cada fecha?
+		return 0;
 	}
 	
 	
