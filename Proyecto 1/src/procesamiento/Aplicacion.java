@@ -31,6 +31,7 @@ public class Aplicacion {
 	public void setAdministrador(ArrayList<Administrador> administrador) {
 		this.administrador = administrador;
 	}
+
 	public ArrayList<Participante> getParticipantes() {
 		return participantes;
 	}
@@ -78,8 +79,20 @@ public class Aplicacion {
 
 	public Jugador mejorJugadorFecha() {
 		//TODO
+		//Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal
+		ArrayList<EquipoFantasia> equiposTemporadaActual=new ArrayList<EquipoFantasia>();
+		EquipoFantasia mejorEquipo=null;
+		for (int i=0; i<participantes.size();i++) {
+			equiposTemporadaActual.add(participantes.get(i).getEquipo());
+		}
+		for (int i=0; i<equiposTemporadaActual.size();i++) {
+			if (equiposTemporadaActual.get(i).getPuntosTotales()>mejorEquipo.getPuntosTotales()) {
+				mejorEquipo=equiposTemporadaActual.get(i);
+			}
+		}
 		return null;
 	}
+	
 
 	public EquipoFantasia mejorEquipoActual() {
 		//Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal

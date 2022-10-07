@@ -1,0 +1,23 @@
+{
+	"participantes":[
+		{
+			"nombreUsuario": "je.Lopez",
+			"contraseña":"123"
+		},
+		{
+			"nombreUsuario": "n.lozano",
+			"contraseña":"nico"
+		},
+		{
+			"nombreUsuario": "m.perez",
+			"contraseña:":"456"
+		}
+	],
+	"temporada":{
+		"Hola":[
+			{
+				"hplq 2":""
+			}
+		]
+	}
+}
