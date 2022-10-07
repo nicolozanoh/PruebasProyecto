@@ -7,8 +7,8 @@ public class Aplicacion {
 	private ArrayList<Administrador> administrador;
 	private ArrayList<Participante> participantes;
 	private ArrayList<Temporada> temporadas;
-	
 	private String tipoUsuarioActivo;
+	
 	public String getTipoUsuarioActivo() {
 		return tipoUsuarioActivo;
 	}
