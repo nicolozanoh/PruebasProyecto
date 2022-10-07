@@ -8,9 +8,9 @@ public abstract class Jugador {
 	private String posicion;
 	private double precio;
 	protected double puntos;
-	protected Time minutosJugados;
-	private Time minutoInicio;
-	private Time minutoSustitucion;
+	protected int minutosJugados;
+	private int minutoInicio;
+	private int minutoSustitucion;
 	protected int golesAnotados;
 	protected int autogoles;
 	protected int asistencias;
