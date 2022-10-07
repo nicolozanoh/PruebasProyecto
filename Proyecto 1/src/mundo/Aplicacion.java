@@ -37,10 +37,12 @@ public class Aplicacion {
 	
 	public boolean iniciarSesion(String tipoUsuario, String nombreUsuario, String clave) {
 		//TODO
+		return true;
 	}
 	public String crearUsuario(String nombreUsuario, String clave) {
 		//TODO Devuelve un String confirmando que se creo correctamente el usuario o mensaje de error
-		Participante nuevo= new Participante()
+		Participante nuevo= new Participante(nombreUsuario, clave);
+		return "";
 	}
 	public void cerrarSesion() {
 		//TODO
@@ -60,6 +62,7 @@ public class Aplicacion {
 	}
 	public Jugador mejorJugadorFecha() {
 		//TODO
+		return null;
 	}
 	public EquipoFantasia mejorEquipoActual() {
 		//Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal
@@ -77,12 +80,14 @@ public class Aplicacion {
 	}
 	public Jugador mejorJugadorActual() {
 		//TODO
+		return null;
 	}
 	public void crearEquipo() {
 		//TODO
 	}
 	public String venderJugador() {
 		//TODO Devuelve un String confirmando la venta del jugador
+		return "";
 	}
 	public void comprarJugador() {
 		//TODO
@@ -92,9 +97,11 @@ public class Aplicacion {
 	}
 	public int consultarPuntajesEquipo() {
 		//TODO No deberia recibir por parametro el equipo?
+		return 0;
 	}
 	public int consultarPuntajeJugador() {
 		//TODO Es el puntaje de toda la temporada? o de cada fecha?
+		return 0;
 	}
 	public void configurarTemporada(File archivo) {
 		//TODO
