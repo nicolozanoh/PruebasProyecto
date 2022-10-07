@@ -1,7 +1,5 @@
 package mundo;
 
-import java.sql.Time;
-
 public abstract class Jugador {
 
 	private String nombre;
