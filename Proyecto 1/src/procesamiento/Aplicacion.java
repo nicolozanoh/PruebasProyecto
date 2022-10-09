@@ -1,5 +1,6 @@
 package procesamiento;
 
+import modelo.Participante;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -63,14 +64,14 @@ public class Aplicacion {
 		//TODO
 	}
 
-	public EquipoFantasia mejorEquipoFecha() {
+	public EquipoFantasia mejorEquipoFecha(int jornada) {
 		ArrayList<EquipoFantasia> equiposFecha=new ArrayList<EquipoFantasia>();
 		EquipoFantasia mejorEquipo=null;
 		for (int i=0; i<participantes.size();i++) {
 			equiposFecha.add(participantes.get(i).getEquipo());
 		}
 		for (int i=0; i<equiposFecha.size();i++) {
-			if (equiposFecha.get(i).getPuntosJornada()>mejorEquipo.getPuntosJornada()) {
+			if (equiposFecha.get(i).getPuntosJornada().get(jornada-1)>mejorEquipo.getPuntosJornada().get(jornada-1)) {
 				mejorEquipo=equiposFecha.get(i);
 			}
 		}
@@ -131,14 +132,15 @@ public class Aplicacion {
 		//TODO
 	}
 
-	public int consultarPuntajesEquipo() {
+	public int consultarPuntajeEquipo(EquipoFantasia equipo) {
 		//TODO No deberia recibir por parametro el equipo?
+		
 		return 0;
 	}
 
-	public int consultarPuntajeJugador() {
-		//TODO Es el puntaje de toda la temporada? o de cada fecha?
-		return 0;
+	public double consultarPuntajeJugador(Jugador jugador) {
+		// Suponiendo que entra por parametro un jugador y que se consultan los puntos totales
+		return jugador.getPuntosTotales();
 	}
 
 	public void configurarTemporada(File archivo) {

@@ -12,6 +12,7 @@ public class Participante {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.contraseña = contraseña;
+		this.presupuesto = 100000000;
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -48,12 +49,19 @@ public class Participante {
 	public void crearEquipo() {
 		//TODO
 	}
-	public String venderJugador() {
-		//TODO Devuelve un String confirmando la venta del jugador
-		return "";
+	public String venderJugador(Jugador jugador) {
+		equipo.quitarJugador(jugador);
+		presupuesto+= 0.97*(jugador.getPrecio());
+		return "Se vendio exitosamente el jugador";
 	}
-	public void comprarJugador() {
-		//TODO
+	public String comprarJugador(Jugador jugador) {
+		String respuesta="No se puede comprar el jugador porque el equipo esta completo o porque la posicion del "
+				+ "jugador esta completa.";
+		if (equipo.agregarJugador(jugador)==true) {
+			presupuesto+= -1*jugador.getPrecio();
+			respuesta="Se ha comprado exitosamente el jugador.";
+		}
+		return respuesta;
 	}
 	public void seleccionarTitular(Jugador nuevoTitular, Jugador nuevoSuplente) {
 		//TODO

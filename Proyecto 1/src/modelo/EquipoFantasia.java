@@ -8,7 +8,7 @@ public class EquipoFantasia {
 	private double puntosTotales;
 	private double precio;
 	private Jugador capitan;
-	private double puntosJornada;
+	private ArrayList<Double> puntosJornada;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<Jugador> titulares;
 	private ArrayList<Jugador> suplentes;
@@ -36,11 +36,19 @@ public class EquipoFantasia {
 	public void setCapitan(Jugador capitan) {
 		this.capitan = capitan;
 	}
-	public double getPuntosJornada() {
+	public ArrayList<Double> getPuntosJornada() {
 		return puntosJornada;
 	}
-	public void setPuntosJornada(double puntosJornada) {
-		this.puntosJornada = puntosJornada;
+	public void actualizarPuntosJornada() {
+		double puntos=0;
+		for (Jugador j: titulares) {
+			if (j==capitan) {
+				puntos= puntos + (j.getPuntosJornada().get(-1))*2;
+			}	
+			else {
+				puntos+=j.getPuntosJornada().get(-1);
+			}
+		}
 	}
 	public ArrayList<Jugador> getJugadores() {
 		return jugadores;
@@ -60,6 +68,49 @@ public class EquipoFantasia {
 	public void setSuplentes(ArrayList<Jugador> suplentes) {
 		this.suplentes = suplentes;
 	}
-	
+	public void quitarJugador (Jugador jugador) {
+		jugadores.remove(jugador);
+	}
+	public boolean agregarJugador (Jugador jugador) {
+		boolean respuesta=false;
+		if (jugadores.size()<15) {
+			//Hay que mirar los casos por posicion porque solo puede haber cierta cantidad de jugadores por posicion
+			String posicion = jugador.getPosicion();
+			int contador = 0;
+			int maximo =0;
+			for (int i=0; i<jugadores.size(); i++) {
+				String posicionComparar = jugadores.get(i).getPosicion();
+				if (posicionComparar==posicion) 
+					i++;
+			}
+			if (posicion=="arquero")
+				maximo=2;
+			else if (posicion=="defensa")
+				maximo=5;
+			else if (posicion=="mediocampista")
+				maximo=5;
+			else if (posicion=="delantero")
+				maximo=3;	
+			if (maximo>contador) {
+				jugadores.add(jugador);
+				respuesta=true;
+			}	
+			else
+				respuesta=false;
+		}
+		return respuesta;
+	}
+
+	public String cambiarAlineacion(Jugador nuevoTitular, Jugador nuevoSuplente) {
+		String respuesta = "No se puede hacerel cambio porque los jugadores no tienen la misma posicion.";
+		if (nuevoTitular.getPosicion()== nuevoSuplente.getPosicion()) {
+			titulares.add(nuevoTitular);
+			titulares.remove(nuevoSuplente);
+			suplentes.add(nuevoTitular);
+			suplentes.remove(nuevoSuplente);
+			respuesta="El cambio se realozo exitosamente.";
+		}
+		return respuesta;
+	}
 	
 }

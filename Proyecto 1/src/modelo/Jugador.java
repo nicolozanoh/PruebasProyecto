@@ -1,13 +1,15 @@
 package modelo;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public abstract class Jugador {
 
 	protected String nombre;
 	protected String posicion;
 	protected double precio;
-	protected double puntos;
+	protected double puntosTotales;
+	protected ArrayList<Double> puntosJornada;
 	protected int minutosJugados;
 	protected int minutoInicio;
 	protected int minutoSustitucion;
@@ -36,11 +38,14 @@ public abstract class Jugador {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public double getPuntos() {
-		return puntos;
+	public double getPuntosTotales() {
+		return puntosTotales;
 	}
-	public void setPuntos(double puntos) {
-		this.puntos = puntos;
+	public void setPuntosTotales() {
+		this.puntosTotales=0;
+		for (Double d: puntosJornada) {
+			this.puntosTotales+=d;
+		}
 	}
 	public int getMinutosJugados() {
 		return minutosJugados;
@@ -96,9 +101,14 @@ public abstract class Jugador {
 	public void setRojas(int rojas) {
 		this.rojas = rojas;
 	}
+	public ArrayList<Double> getPuntosJornada() {
+		return puntosJornada;
+	}
+	public void setPuntosJornada(ArrayList<Double> puntosJornada) {
+		this.puntosJornada = puntosJornada;
+	}
 	
 	
-
 	abstract public double calcularPuntaje();
 	
 }
