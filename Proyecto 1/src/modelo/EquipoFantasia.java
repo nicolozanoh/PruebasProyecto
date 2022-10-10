@@ -49,6 +49,7 @@ public class EquipoFantasia {
 				puntos+=j.getPuntosJornada().get(-1);
 			}
 		}
+		
 	}
 	public ArrayList<Jugador> getJugadores() {
 		return jugadores;
