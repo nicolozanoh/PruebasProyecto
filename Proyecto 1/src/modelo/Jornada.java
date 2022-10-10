@@ -25,15 +25,26 @@ public class Jornada {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
-		this.rankingEquiposFantasia = rankingEquiposFantasia;
+
+		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroFecha()), b.getPuntosJornada().get(getNumeroFecha())));
 	}
+	
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;
 	}
 	public void setRankingJugadores(ArrayList<Jugador> rankingJugadores) {
-		this.rankingJugadores = rankingJugadores;
+		
+		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosJornada().get(getNumeroFecha()), b.getPuntosJornada().get(getNumeroFecha())));
 	}
 	
+	public void agregarJugador(Jugador jugador) {
+		this.rankingJugadores.add(jugador);
+		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+	}
 	
+	public void agregarEquipoFantasia(EquipoFantasia equipoFantasia) {
+		this.rankingEquiposFantasia.add(equipoFantasia);
+		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroFecha()), b.getPuntosJornada().get(getNumeroFecha())));
+	}
 
 }
