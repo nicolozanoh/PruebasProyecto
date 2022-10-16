@@ -1,0 +1,102 @@
+[
+	{
+		"nombre":"Nicolas Lozano",
+		"posicion":"defensa",
+		"precio":300000
+	},
+	{
+		"nombre":"Manuel Perez",
+		"posicion":"delantero",
+		"precio":2000
+	},
+	{
+		"nombre":"Juan Esteban Lopez",
+		"posicion":"mediocampista",
+		"precio":100000
+	},
+	{
+		"nombre":"Lionel Messi",
+		"posicion":"delantero",
+		"precio":30000,
+	},
+	{
+		"nombre":"Cristiano Ronaldo",
+		"posicion":"delantero",
+		"precio":43000
+	},
+	{
+		"nombre":"Pepe Perez",
+		"posicion":"arquero",
+		"precio":50000
+	},
+	{
+		"nombre":"Carlos Cadena",
+		"posicion":"mediocampista",
+		"precio":3000
+	},
+	{
+		"nombre":"Juan E. Lozano",
+		"posicion":"mediocampista",
+		"precio":500
+	},
+	{
+		"nombre":"Tomas Perez",
+		"posicion":"arquero",
+		"precio":40000
+	},
+	{
+		"nombre":"Lucas Gonzalez",
+		"posicion":"defensa",
+		"precio":9000
+	},
+	{
+		"nombre":"Julian Ortega",
+		"posicion":"defensa",
+		"precio":4000
+	},
+	{
+		"nombre":"Santiago Fernandez",
+		"posicion":"delantero",
+		"precio":32000
+	},
+	{
+		"nombre":"Armando Manzanero",
+		"posicion":"defensa",
+		"precio":100000
+	},
+	{
+		"nombre":"Pablo Mejia",
+		"posicion":"mediocampista",
+		"precio":200
+	},
+	{
+		"nombre":"Alex Herrera",
+		"posicion":"arquero",
+		"precio":4000
+	},
+	{
+		"nombre":"Juan Rodriguez",
+		"posicion":"defensa",
+		"precio":3000
+	},
+	{
+		"nombre":"Fabio Fernandez",
+		"posicion":"mediocampista",
+		"precio":5000
+	},
+	{
+		"nombre":"Sando Ortegon",
+		"posicion":"defensa",
+		"precio":3000
+	},
+	{
+		"nombre":"Luis Diaz",
+		"posicion":"mediocampista",
+		"precio":45000
+	},
+	{
+		"nombre":"Rufino Ortega",
+		"posicion":"delantero",
+		"precio":3500
+	}
+]
