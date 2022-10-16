@@ -1,12 +1,13 @@
 package modelo;
 import java.io.File;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class Administrador {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Administrador implements Usuario{
 
 	private String nombreUsuario;
 	private String contraseña;
-	private Temporada temporadaActual;
 	
 	public void configurarTemporada(File archivo) {
 		//TODO
@@ -27,11 +28,4 @@ public class Administrador {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	public Temporada getTemporadaActual() {
-		return temporadaActual;
-	}
-	public void setTemporadaActual(Temporada temporadaActual) {
-		this.temporadaActual = temporadaActual;
-	}
-	
 }

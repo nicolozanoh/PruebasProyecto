@@ -1,7 +1,4 @@
 {
-	"administrador":
-		{
-			"nombreUsuario": "je.Lopez",
-			"contraseña":"123"
-		}
+	"nombreUsuario": "admin",
+	"contraseña":"123"
 }
