@@ -1,5 +1,8 @@
 package modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Delantero extends Jugador{
 
 	public double calcularPuntaje() {

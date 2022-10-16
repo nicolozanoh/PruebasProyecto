@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Administrador implements Usuario{
+public class Administrador extends Usuario{
 
-	private String nombreUsuario;
-	private String contraseña;
+//	private String nombreUsuario;
+//	private String contraseña;
 	
 	public void configurarTemporada(File archivo) {
 		//TODO

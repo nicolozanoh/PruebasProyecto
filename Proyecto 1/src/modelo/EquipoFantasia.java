@@ -7,6 +7,7 @@ public class EquipoFantasia {
 	private String nombre;
 	private double puntosTotales;
 	private double precio;
+	private double numeroJugadores;
 	private Jugador capitan;
 	private ArrayList<Double> puntosJornada;
 	private ArrayList<Jugador> jugadores;
@@ -20,6 +21,9 @@ public class EquipoFantasia {
 	}
 	public double getPuntosTotales() {
 		return puntosTotales;
+	}
+	public double getNumeroJugadores() {
+		return numeroJugadores;
 	}
 	public void setPuntosTotales(double puntosTotales) {
 		this.puntosTotales = puntosTotales;
@@ -72,32 +76,40 @@ public class EquipoFantasia {
 	public void quitarJugador (Jugador jugador) {
 		jugadores.remove(jugador);
 	}
-	public boolean agregarJugador (Jugador jugador) {
-		boolean respuesta=false;
+	public int agregarJugador (Jugador jugador) {
+		int respuesta=1;
 		if (jugadores.size()<15) {
-			//Hay que mirar los casos por posicion porque solo puede haber cierta cantidad de jugadores por posicion
 			String posicion = jugador.getPosicion();
 			int contador = 0;
 			int maximo =0;
 			for (int i=0; i<jugadores.size(); i++) {
 				String posicionComparar = jugadores.get(i).getPosicion();
-				if (posicionComparar==posicion) 
-					i++;
+				if (posicionComparar==posicion) { 
+					contador++;
+				}
 			}
-			if (posicion=="arquero")
+			if (posicion=="arquero") {
 				maximo=2;
-			else if (posicion=="defensa")
+				respuesta = 2;
+				}
+			else if (posicion=="defensa") {
 				maximo=5;
-			else if (posicion=="mediocampista")
+				respuesta = 3;
+			}
+			else if (posicion=="mediocampista") {
 				maximo=5;
-			else if (posicion=="delantero")
-				maximo=3;	
+				respuesta = 4;
+			}
+			else if (posicion=="delantero") {
+				maximo=3;
+				respuesta = 5;
+			}	
 			if (maximo>contador) {
 				jugadores.add(jugador);
-				respuesta=true;
+				respuesta=0;
 			}	
 			else
-				respuesta=false;
+				respuesta=2;
 		}
 		return respuesta;
 	}

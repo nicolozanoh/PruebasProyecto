@@ -15,7 +15,6 @@ public class Aplicacion {
 
 	private Administrador administrador;
 	private ArrayList<Participante> participantes;
-	private ArrayList<Temporada> temporadas;
 	private String tipoUsuarioActivo;
 	private Temporada temporadaActual;
 	private ManejoPersistencia loader;
@@ -24,7 +23,6 @@ public class Aplicacion {
 	public Aplicacion() {
 		administrador = new Administrador();
 		participantes = new ArrayList<Participante>();
-		temporadas = new ArrayList<Temporada>();
 		temporadaActual = new Temporada();
 		loader = new ManejoPersistencia();
 		
@@ -53,12 +51,12 @@ public class Aplicacion {
 		this.participantes = participantes;
 	}
 
-	public ArrayList<Temporada> getTemporadas() {
-		return temporadas;
+	public Temporada getTemporada() {
+		return this.temporadaActual;
 	}
 
-	public void setTemporadas(ArrayList<Temporada> temporadas) {
-		this.temporadas = temporadas;
+	public void setTemporadas(Temporada temporada) {
+		this.temporadaActual = temporada;
 	}
 	
 	public int iniciarSesion(String nombreUsuario, String clave) {
@@ -68,7 +66,7 @@ public class Aplicacion {
 				resp = 1;
 				if(this.administrador.getContraseña() == clave) {
 					resp = 0;
-					this.usuarioActivo = this.administrador;
+					this.usuarioActivo = administrador;
 				}
 			}
 		}
@@ -106,9 +104,6 @@ public class Aplicacion {
 		return resp;
 	}
 	
-	public Usuario getUsuarioActivo() {
-		return this.usuarioActivo;
-	}
 
 	public void cerrarSesion() {
 		//TODO
@@ -163,17 +158,22 @@ public class Aplicacion {
 		return null;
 	}
 
-	public void crearEquipo() {
-		//TODO
+	public int crearEquipo(String[] jugadoresSeleccionados) {
+		int resp = 0;
+		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+		for (int i = 0; i<jugadoresSeleccionados.length;i++) {
+			jugadores.add(this.temporadaActual.getJugadores().get(Integer.parseInt(jugadoresSeleccionados[i])-1));
+		}
+		resp = ((Participante) usuarioActivo).crearEquipo(jugadores);
+		return resp;
 	}
 
 	public String venderJugador() {
-		//TODO Devuelve un String confirmando la venta del jugador
 		return "";
 	}
 
-	public void comprarJugador() {
-		//TODO
+	public int comprarJugador(Jugador jugador) {
+		return 0;
 	}
 
 	public void seleccionarTitular(Jugador nuevoTitular, Jugador nuevoSuplente) {
@@ -201,7 +201,7 @@ public class Aplicacion {
 	
 	public int ejecutarCargarParticipantes() {
 		
-		File archivoParticipantes = new File("data/participantes.json");
+		File archivoParticipantes = new File("data/usuarios/participantes.json");
 		
 		try {
 			if (archivoParticipantes.exists()) {
@@ -217,9 +217,13 @@ public class Aplicacion {
 		
 	}
 	
+	public Usuario getUsuarioActivo() {
+		return this.usuarioActivo;
+	}
+	
 	public int ejecutarCargarAdministrador() {
 		
-		File archivoAdministrador = new File("data/administrador.json");
+		File archivoAdministrador = new File("data/usuarios/administrador.json");
 		
 		if (archivoAdministrador.exists()) {
 			administrador = this.loader.cargarAdministrador(archivoAdministrador);
@@ -231,14 +235,22 @@ public class Aplicacion {
 	
 	public int ejecutarCargarTemporadaActual() {
 		
-		File archivoParticipantes = new File("data/participantes.json");
+		File archivoJugadores = new File("data/temporada/jugadores.json");
 		
-		if (archivoParticipantes.exists()) {
-			this.temporadaActual = this.loader.cargarTemporadaActual();
+		if (archivoJugadores.exists()) {
+			this.temporadaActual.setJugadores(this.loader.cargarJugadores(archivoJugadores));
 		}
 		
 		return 0;
 		
+	}
+	public int guardarEquipo() {
+		loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), ((Participante)this.usuarioActivo).getNombreUsuario());
+		loader.guardarParticipantes(participantes);
+		return 0;
+	}
+	public int borrarEquipo() {
+		return 0;
 	}
 	
 }

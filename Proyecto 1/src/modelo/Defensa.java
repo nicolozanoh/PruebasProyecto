@@ -1,5 +1,8 @@
 package modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Defensa extends Jugador{
 
 	private int golesRecibidos;

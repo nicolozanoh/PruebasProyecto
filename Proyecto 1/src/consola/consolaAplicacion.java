@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import modelo.Administrador;
+import modelo.Participante;
 
 
 public class consolaAplicacion {
@@ -42,7 +43,7 @@ public class consolaAplicacion {
     			
     		}
     		while(sesionIniciada) {
-    			if (aplicacion.getUsuarioActivo().getClass().getName()==  "modelo.Administrador") {
+    			if (aplicacion.getUsuarioActivo().getClass().getName() == "modelo.Administrador") {
     				menuAdmin();
     				opcionSeleccionada =Integer.parseInt(input("Por favor seleccione una opción"));
     				if(opcionSeleccionada == 1){}
@@ -53,10 +54,12 @@ public class consolaAplicacion {
     				}
     			}
     			
-    			if (aplicacion.getUsuarioActivo().getClass().getName()==  "modelo.Participante") {
+    			if (aplicacion.getUsuarioActivo().getClass().getName() ==  "modelo.Participante") {
     				menuParticipante();
     				opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
-    				if(opcionSeleccionada == 1){}
+    				if(opcionSeleccionada == 1){
+    					ejecutarCrearEquipo();
+    				}
     				if(opcionSeleccionada == 2){}
     				if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
@@ -70,6 +73,7 @@ public class consolaAplicacion {
     private void cargarDataActual(){
         aplicacion.ejecutarCargarParticipantes();
         aplicacion.ejecutarCargarAdministrador();
+        aplicacion.ejecutarCargarTemporadaActual();
     }
     private int ejecutarIniciarSesion() {
     	String nombreUsuario = input("Ingrese su nombre de usuario");
@@ -77,7 +81,7 @@ public class consolaAplicacion {
     	int resp = aplicacion.iniciarSesion(nombreUsuario, contraseña);
     	
     	if (resp == 0) {
-    		System.out.println("Inicio de sesión exitoso!\n" + "Bienvenido " + aplicacion.getUsuarioActivo().getNombreUsuario() + "!");
+    		System.out.println("Inicio de sesión exitoso!\n" + "Bienvenido " + aplicacion.getUsuarioActivo().getNombreUsuario() + "!");	
     	}
     	if (resp == 2) {
     		System.out.println("Error al iniciar sesión: El nombre de usuario no existe.");
@@ -108,7 +112,54 @@ public class consolaAplicacion {
     	System.out.println("2) Crear Usuario");
     	System.out.println("0) Cerrar Aplicación");
     }
-    
+    private void ejecutarCrearEquipo() {
+    	double presupuestoInicial = ((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto();
+    	mostrarJugadores();
+    	System.out.println("Seleccione los jugadores que quiere que hagan parte de su equipo./n Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	System.out.println("Recuerde, usted tiene un presupuesto de: " + presupuestoInicial);
+    	String[] jugadoresSeleccionados = input("\nSeleccione el número de todos los jugadores que quiere agregar, separados por comas (',').").trim().split(",");
+    	
+    	int resp = aplicacion.crearEquipo(jugadoresSeleccionados);
+    	if(resp==0) {
+    		System.out.println("Su equipo ha sido creado con los siguientes jugadores: ");
+    		int cont = 1;
+        	for (int i = 0; i < ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().size(); i++) {
+        		System.out.println(Integer.toString(cont) + ". Nombre: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getNombre() + ", Posición: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getPosicion());
+        	}
+        	System.out.println("Su nuevo saldo es de $"+((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto());
+        	System.out.println("¿Desea guardar su equipo?");
+        	System.out.println("1) Si");
+        	System.out.println("2) No");
+        	int opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+        	if (opcionSeleccionada == 1) {
+        		aplicacion.guardarEquipo();
+        	}
+        	if(opcionSeleccionada == 2) {
+        		aplicacion.borrarEquipo();
+        	}
+    	}
+    	else if(resp==1) {
+    		System.out.println("Error: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
+    	}
+    	else if(resp==2) {
+    		System.out.println("Error: Numero de arqueros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	}
+    	else if(resp==3) {
+    		System.out.println("Error: Numero de defensas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	}
+    	else if(resp==4) {
+    		System.out.println("Error: Numero de mediocampistas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	}
+    	else if(resp==5) {
+    		System.out.println("Error: Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	}
+    	else if(resp==6) {
+    		System.out.println("Error: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
+    	}
+    	else if(resp==7) {
+    		System.out.println("Error: Debe seleccionar 15 jugadores para crear el equipo.");
+    	}
+    }
     private void menuAdmin(){
     	System.out.println("1) Cargar información temporada");
     	System.out.println("2) Cargar información jornada");
@@ -116,7 +167,7 @@ public class consolaAplicacion {
     }
     
     private void menuParticipante() {
-    	
+    	System.out.println("1) Crear equipo");
     }
     
     public String input(String mensaje)
@@ -134,6 +185,13 @@ public class consolaAplicacion {
 		}
 		return null;
 	}
+    
+    public void mostrarJugadores() {
+    	int cont = 1;
+    	for (int i = 0; i < this.aplicacion.getTemporada().getJugadores().size(); i++) {
+    		System.out.println(Integer.toString(cont) + ". Nombre: " + this.aplicacion.getTemporada().getJugadores().get(i).getNombre() + ", Posición: " + this.aplicacion.getTemporada().getJugadores().get(i).getPosicion() + ", Precio: " + Double.toString(this.aplicacion.getTemporada().getJugadores().get(i).getPrecio()));
+    	}
+    }
 
     public static void main(String[] args)
 	{

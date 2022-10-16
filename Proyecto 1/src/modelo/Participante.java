@@ -1,14 +1,15 @@
 package modelo;
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Participante implements Usuario{
+public class Participante extends Usuario{
 
-	private String nombreUsuario;
-	private String contraseña;
+//	private String nombreUsuario;
+//	private String contraseña;
 	private double presupuesto;
-	//private EquipoFantasia equipo;
-	//private Temporada temporadaActual;
+	private EquipoFantasia equipo;
 	
 	public Participante() {
 		
@@ -36,37 +37,57 @@ public class Participante implements Usuario{
 	public void setPresupuesto(double presupuesto) {
 		this.presupuesto = presupuesto;
 	}
-//	public EquipoFantasia getEquipo() {
-//		return equipo;
-//	}
-//	public void setEquipo(EquipoFantasia equipo) {
-//		this.equipo = equipo;
-//	}
-//	public Temporada getTemporadaActual() {
-//		return temporadaActual;
-//	}
-//	public void setTemporadaActual(Temporada temporadaActual) {
-//		this.temporadaActual = temporadaActual;
-//	}
-	
-	
-	public void crearEquipo() {
-		//TODO
+	public EquipoFantasia getEquipo() {
+		return equipo;
 	}
-//	public String venderJugador(Jugador jugador) {
-//		equipo.quitarJugador(jugador);
-//		presupuesto+= 0.97*(jugador.getPrecio());
-//		return "Se vendio exitosamente el jugador";
-//	}
-//	public String comprarJugador(Jugador jugador) {
-//		String respuesta="No se puede comprar el jugador porque el equipo esta completo o porque la posicion del "
-//				+ "jugador esta completa.";
-//		if (equipo.agregarJugador(jugador)==true) {
-//			presupuesto+= -1*jugador.getPrecio();
-//			respuesta="Se ha comprado exitosamente el jugador.";
-//		}
-//		return respuesta;
-//	}
+	
+	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados) {
+		int resp = 0;
+		if (equipo != null) {
+			if (jugadoresSeleccionados.size() != 15){
+				this.equipo = new EquipoFantasia();
+				for (int i = 0; i< jugadoresSeleccionados.size();i++) {
+					resp = comprarJugador(jugadoresSeleccionados.get(i));
+					if(resp != 0) {
+						this.equipo = null;
+						break;
+					}
+				}
+			}
+			else{
+				resp = 7;
+			}
+		}
+		else {
+			resp = 6;
+		}
+			
+		return resp;
+	}
+	public int borrarEquipo() {
+		this.equipo = null;
+		return 0;
+	}
+
+	public String venderJugador(Jugador jugador) {
+		equipo.quitarJugador(jugador);
+		presupuesto+= 0.97*(jugador.getPrecio());
+		return "Se vendio exitosamente el jugador";
+	}
+	public int comprarJugador(Jugador jugador) {
+		int respuesta= 0;
+		if (this.equipo.getNumeroJugadores() < 15)
+		{
+			respuesta = this.equipo.agregarJugador(jugador);
+			if (respuesta == 0) {
+				presupuesto+= -1*jugador.getPrecio();
+			}
+		}
+		else {
+			respuesta = 1;
+		}
+		return respuesta;
+	}
 	public void seleccionarTitular(Jugador nuevoTitular, Jugador nuevoSuplente) {
 		//TODO
 	}

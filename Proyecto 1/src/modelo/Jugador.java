@@ -3,6 +3,9 @@ package modelo;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Jugador {
 
 	protected String nombre;
