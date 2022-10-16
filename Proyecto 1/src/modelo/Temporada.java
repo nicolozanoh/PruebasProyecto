@@ -22,7 +22,7 @@ public class Temporada {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
-	public ArrayList<EquipoFantasia> getRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
+	public ArrayList<EquipoFantasia> getRankingEquiposFantasia() {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia() {
@@ -45,15 +45,24 @@ public class Temporada {
 		this.equiposFantasia.add(equipoFantasia);
 	}
 	
-	public Jugador mejorJugadorJornada(Jornada jornada) {
-		ArrayList<Jugador> ranking = jornada.getRankingJugadores();
+	public void actualizarRankingEquiposFantasia( ) {
+		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+	}
+	
+	public void actualizarRankingJugadores() {
+		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+	}
+	
+	public Jugador mejorJugadorTemporada() {
+		ArrayList<Jugador> ranking = this.getRankingJugadores();
 		Jugador respuesta = ranking.get(0);
 		return respuesta;
 	}
 	
-	public EquipoFantasia mejorEquipoFantasiaJornada(Jornada jornada) {
-		ArrayList<EquipoFantasia> ranking = jornada.getRankingEquiposFantasia();
+	public EquipoFantasia mejorEquipoFantasiaTemporada() {
+		ArrayList<EquipoFantasia> ranking = this.getRankingEquiposFantasia();
 		EquipoFantasia respuesta = ranking.get(0);
 		return respuesta;
 	}
+	
 }

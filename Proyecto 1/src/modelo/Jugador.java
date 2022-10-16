@@ -110,7 +110,11 @@ public abstract class Jugador {
 	public void setPuntosJornada(ArrayList<Double> puntosJornada) {
 		this.puntosJornada = puntosJornada;
 	}
-	
+	public void actualizarPuntosJornada(int numJornada, double puntos) {
+		double puntosJ = this.puntosJornada.get(numJornada);
+		this.puntosJornada.add(numJornada, puntosJ+puntos);
+		setPuntosTotales();
+	}
 	
 	abstract public double calcularPuntaje();
 	
