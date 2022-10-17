@@ -55,7 +55,7 @@ public class ManejoPersistencia {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data/usuarios/participantes.json").toFile(), lParticipantes);
+			writer.writeValue(Paths.get("data/participantes.json").toFile(), lParticipantes);
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());

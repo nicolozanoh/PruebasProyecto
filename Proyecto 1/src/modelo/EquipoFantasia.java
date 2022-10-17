@@ -104,7 +104,7 @@ public class EquipoFantasia {
 				maximo=3;
 				respuesta = 5;
 			}	
-			if (maximo>=contador) {
+			if (maximo>contador) {
 				jugadores.add(jugador);
 				respuesta=0;
 			}	
@@ -121,7 +121,7 @@ public class EquipoFantasia {
 			titulares.remove(nuevoSuplente);
 			suplentes.add(nuevoTitular);
 			suplentes.remove(nuevoSuplente);
-			respuesta="El cambio se realizo exitosamente.";
+			respuesta="El cambio se realozo exitosamente.";
 		}
 		return respuesta;
 	}

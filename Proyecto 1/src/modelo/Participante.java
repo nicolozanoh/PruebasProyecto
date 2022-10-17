@@ -43,6 +43,7 @@ public class Participante extends Usuario{
 	
 	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados) {
 		int resp = 0;
+		if (equipo != null) {
 			if (jugadoresSeleccionados.size() != 15){
 				this.equipo = new EquipoFantasia();
 				for (int i = 0; i< jugadoresSeleccionados.size();i++) {
