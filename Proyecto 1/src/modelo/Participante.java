@@ -88,9 +88,44 @@ public class Participante extends Usuario{
 		}
 		return respuesta;
 	}
-	public void seleccionarTitular(ArrayList<Jugador> jugadores) {
-		//TODO
-		//No se hace validacion de que la lista de titulares esta vacia porque mi idea es usarla de una en crear equipo
+	public boolean seleccionarTitular(ArrayList<Jugador> jugadores) {
+		/*
+		 * No se hace validacion de que la lista de titulares esta vacia porque mi 
+		 * idea es usarla de una en crear equipo. Devuelve true si todas las condiciones
+		 * de un equipo se cumplen.
+		 * 
+		 * La idea es que en la consola el participante escoja 11 jugadores y se vayan
+		 * guardando en una lista y que esa lista sea la que entre por parametro
+		 */
+		boolean respuesta=false;
+		int arquero=0;
+		int defensa=0;
+		int mediocampista=0;
+		int delantero=0;
+		if(jugadores.size()==11) {
+			for(Jugador j:jugadores) {
+				if (j.getPosicion()=="arquero") {
+					arquero++;
+				}
+				else if (j.getPosicion()=="defensa") {
+					defensa++;
+				}
+				else if (j.getPosicion()=="mediocampista") {
+					mediocampista++;
+				}
+				else if (j.getPosicion()=="delantero") {
+					delantero++;
+				}
+			}
+			if(arquero==1 && defensa==4 && mediocampista==4 && delantero==2) {
+				equipo.setTitulares(jugadores);
+				respuesta=true;
+			}
+			else {
+				respuesta=false;
+			}
+		}
+		return respuesta;
 	}
 	public double consultarPuntajesEquipo() {
 		return this.equipo.getPuntosTotales();
@@ -98,6 +133,4 @@ public class Participante extends Usuario{
 	public double consultarPuntajeJugador(Jugador jugador) {
 		return jugador.getPuntosTotales();
 	}
-	
-	
 }
