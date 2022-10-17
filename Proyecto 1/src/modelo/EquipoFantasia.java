@@ -78,9 +78,6 @@ public class EquipoFantasia {
 	}
 	public int agregarJugador (Jugador jugador) {
 		int respuesta=1;
-		if(jugadores == null) {
-			jugadores = new ArrayList<Jugador>();
-		}
 		if (jugadores.size()<15) {
 			String posicion = jugador.getPosicion();
 			int contador = 0;

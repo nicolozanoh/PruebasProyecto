@@ -22,7 +22,7 @@ public class Temporada {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
-	public ArrayList<EquipoFantasia> getRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
+	public ArrayList<EquipoFantasia> getRankingEquiposFantasia() {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia() {

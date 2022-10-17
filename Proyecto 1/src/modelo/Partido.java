@@ -7,6 +7,8 @@ public class Partido {
 	private Date fecha;
 	private EquipoReal equipoLocal;
 	private EquipoReal equipoVisitante;
+	private int golesLocal;
+	private int golesVisitante;
 	
 	public Date getFecha() {
 		return fecha;
