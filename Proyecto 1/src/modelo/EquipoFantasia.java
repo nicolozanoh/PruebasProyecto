@@ -104,7 +104,7 @@ public class EquipoFantasia {
 				maximo=3;
 				respuesta = 5;
 			}	
-			if (maximo>contador) {
+			if (maximo>=contador) {
 				jugadores.add(jugador);
 				respuesta=0;
 			}	

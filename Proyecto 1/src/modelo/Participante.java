@@ -88,16 +88,15 @@ public class Participante extends Usuario{
 		}
 		return respuesta;
 	}
-	public void seleccionarTitular(Jugador nuevoTitular, Jugador nuevoSuplente) {
+	public void seleccionarTitular(ArrayList<Jugador> jugadores) {
 		//TODO
+		//No se hace validacion de que la lista de titulares esta vacia porque mi idea es usarla de una en crear equipo
 	}
-	public int consultarPuntajesEquipo() {
-		//TODO No deberia recibir por parametro el equipo?
-		return 0;
+	public double consultarPuntajesEquipo() {
+		return this.equipo.getPuntosTotales();
 	}
-	public int consultarPuntajeJugador() {
-		//TODO Es el puntaje de toda la temporada? o de cada fecha?
-		return 0;
+	public double consultarPuntajeJugador(Jugador jugador) {
+		return jugador.getPuntosTotales();
 	}
 	
 	
