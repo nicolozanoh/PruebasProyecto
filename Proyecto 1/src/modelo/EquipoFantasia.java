@@ -78,6 +78,9 @@ public class EquipoFantasia {
 	}
 	public int agregarJugador (Jugador jugador) {
 		int respuesta=1;
+		if(jugadores == null) {
+			jugadores = new ArrayList<Jugador>();
+		}
 		if (jugadores.size()<15) {
 			String posicion = jugador.getPosicion();
 			int contador = 0;
@@ -104,7 +107,7 @@ public class EquipoFantasia {
 				maximo=3;
 				respuesta = 5;
 			}	
-			if (maximo>contador) {
+			if (maximo>=contador) {
 				jugadores.add(jugador);
 				respuesta=0;
 			}	
@@ -121,7 +124,7 @@ public class EquipoFantasia {
 			titulares.remove(nuevoSuplente);
 			suplentes.add(nuevoTitular);
 			suplentes.remove(nuevoSuplente);
-			respuesta="El cambio se realozo exitosamente.";
+			respuesta="El cambio se realizo exitosamente.";
 		}
 		return respuesta;
 	}

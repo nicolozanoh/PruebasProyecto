@@ -190,6 +190,7 @@ public class consolaAplicacion {
     	int cont = 1;
     	for (int i = 0; i < this.aplicacion.getTemporada().getJugadores().size(); i++) {
     		System.out.println(Integer.toString(cont) + ". Nombre: " + this.aplicacion.getTemporada().getJugadores().get(i).getNombre() + ", Posición: " + this.aplicacion.getTemporada().getJugadores().get(i).getPosicion() + ", Precio: " + Double.toString(this.aplicacion.getTemporada().getJugadores().get(i).getPrecio()));
+    		cont +=1;
     	}
     }
 

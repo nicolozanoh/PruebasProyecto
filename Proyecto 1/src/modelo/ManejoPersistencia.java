@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonMappingException; 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -55,7 +56,7 @@ public class ManejoPersistencia {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data/participantes.json").toFile(), lParticipantes);
+			writer.writeValue(Paths.get("data/usuarios/participantes.json").toFile(), lParticipantes);
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
