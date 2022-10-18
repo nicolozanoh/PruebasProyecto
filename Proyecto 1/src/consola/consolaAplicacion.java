@@ -60,7 +60,9 @@ public class consolaAplicacion {
     				if(opcionSeleccionada == 1){
     					ejecutarCrearEquipo();
     				}
-    				if(opcionSeleccionada == 2){}
+    				if(opcionSeleccionada == 2){
+    					ejecutarBorrarEquipo();
+    				}
     				if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
@@ -69,7 +71,9 @@ public class consolaAplicacion {
     		}
     	}
     }
-
+//    private void cargarEquipoParticipanteActivo() {
+//    	this.aplicacion.cargarEquipoParticipanteActivo();
+//    }
     private void cargarDataActual(){
         aplicacion.ejecutarCargarParticipantes();
         aplicacion.ejecutarCargarAdministrador();
@@ -125,6 +129,7 @@ public class consolaAplicacion {
     		int cont = 1;
         	for (int i = 0; i < ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().size(); i++) {
         		System.out.println(Integer.toString(cont) + ". Nombre: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getNombre() + ", Posición: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getPosicion());
+        		cont++;
         	}
         	System.out.println("Su nuevo saldo es de $"+((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto());
         	System.out.println("¿Desea guardar su equipo?");
@@ -135,7 +140,17 @@ public class consolaAplicacion {
         		aplicacion.guardarEquipo();
         	}
         	if(opcionSeleccionada == 2) {
-        		aplicacion.borrarEquipo();
+        		System.out.println("Está acción no se puede deshacer, ¿Está seguro de que desea continuar?");
+        		menuConfirmarBorrar();
+        		opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+        		if(opcionSeleccionada == 1) {
+	        		int respBorrar = aplicacion.borrarEquipo();
+	        		if (respBorrar== 0) {
+	        			System.out.println("Su equipo ha sido eliminado");
+	        		}else {
+	        			System.out.println("Hubo un error al eliminar su equipo, por favor vuelva a intentarlo.");
+	        		}
+        		}
         	}
     	}
     	else if(resp==1) {
@@ -160,6 +175,11 @@ public class consolaAplicacion {
     		System.out.println("Error: Debe seleccionar 15 jugadores para crear el equipo.");
     	}
     }
+    
+    private void ejecutarBorrarEquipo() {
+    	this.aplicacion.borrarEquipo();
+    }
+    
     private void menuAdmin(){
     	System.out.println("1) Cargar información temporada");
     	System.out.println("2) Cargar información jornada");
@@ -168,6 +188,11 @@ public class consolaAplicacion {
     
     private void menuParticipante() {
     	System.out.println("1) Crear equipo");
+    	System.out.println("2) Borrar equipo");
+    }
+    private void menuConfirmarBorrar() {
+    	System.out.println("1) Si");
+    	System.out.println("1) No");
     }
     
     public String input(String mensaje)
@@ -190,6 +215,7 @@ public class consolaAplicacion {
     	int cont = 1;
     	for (int i = 0; i < this.aplicacion.getTemporada().getJugadores().size(); i++) {
     		System.out.println(Integer.toString(cont) + ". Nombre: " + this.aplicacion.getTemporada().getJugadores().get(i).getNombre() + ", Posición: " + this.aplicacion.getTemporada().getJugadores().get(i).getPosicion() + ", Precio: " + Double.toString(this.aplicacion.getTemporada().getJugadores().get(i).getPrecio()));
+    		cont++;
     	}
     }
 

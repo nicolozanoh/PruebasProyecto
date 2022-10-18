@@ -77,6 +77,10 @@ public class Aplicacion {
 					if (this.participantes.get(i).getContraseña().equals(clave)) {
 						resp = 0;
 						this.usuarioActivo = this.participantes.get(i);
+						File archivoEquipo = new File ("data/equipos/"+this.usuarioActivo.getNombreUsuario()+".json");
+						if (archivoEquipo.exists()) {
+							cargarEquipoParticipanteActivo(archivoEquipo);
+						}
 					}
 				}
 			}
@@ -250,7 +254,13 @@ public class Aplicacion {
 		return 0;
 	}
 	public int borrarEquipo() {
-		return 0;
+		((Participante)this.usuarioActivo).borrarEquipo();
+		int resp = loader.borrarEquipo(this.usuarioActivo.getNombreUsuario());
+		return resp;
+	}
+	public void cargarEquipoParticipanteActivo(File archivoEquipo) {
+		((Participante)this.usuarioActivo).setEquipoFantasia(loader.cargarEquipoParticipanteActivo(archivoEquipo));
+		
 	}
 	
 }

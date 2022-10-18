@@ -13,6 +13,11 @@ public class EquipoFantasia {
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<Jugador> titulares;
 	private ArrayList<Jugador> suplentes;
+	public EquipoFantasia(){
+		this.jugadores = new ArrayList<Jugador>();
+		this.titulares = new ArrayList<Jugador>();
+		this.suplentes = new ArrayList<Jugador>();
+	}
 	public String getNombre() {
 		return nombre;
 	}

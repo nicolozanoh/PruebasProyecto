@@ -72,6 +72,32 @@ public class ManejoPersistencia {
 			System.out.println(ex.getMessage());
 		}
 	}
+
+	public int borrarEquipo(String nombreUsuario) {
+		File archivoEquipo = new File("data/equipos/" + nombreUsuario+".json");
+		int resp = 1;
+		if(archivoEquipo.exists()) {
+			if(archivoEquipo.delete()) {
+				resp= 0;
+			}
+		}else {
+			resp =0;
+		}
+		return resp;
+	}
+
+	public EquipoFantasia cargarEquipoParticipanteActivo(File archivoEquipo) {
+		EquipoFantasia equipoUsuario = new EquipoFantasia();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			equipoUsuario = mapper.readValue(archivoEquipo, EquipoFantasia.class);
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return equipoUsuario;
+	}
 	
 	
 }

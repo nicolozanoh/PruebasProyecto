@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true,
+					   value = {"equipo"})
 public class Participante extends Usuario{
 
 //	private String nombreUsuario;
@@ -43,8 +44,8 @@ public class Participante extends Usuario{
 	
 	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados) {
 		int resp = 0;
-		if (equipo != null) {
-			if (jugadoresSeleccionados.size() != 15){
+		if (equipo == null) {
+			if (jugadoresSeleccionados.size() == 15){
 				this.equipo = new EquipoFantasia();
 				for (int i = 0; i< jugadoresSeleccionados.size();i++) {
 					resp = comprarJugador(jugadoresSeleccionados.get(i));
@@ -132,5 +133,9 @@ public class Participante extends Usuario{
 	}
 	public double consultarPuntajeJugador(Jugador jugador) {
 		return jugador.getPuntosTotales();
+	}
+	public void setEquipoFantasia(EquipoFantasia equipo) {
+		this.equipo = equipo;
+		
 	}
 }
