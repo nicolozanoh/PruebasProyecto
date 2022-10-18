@@ -54,6 +54,9 @@ public class Participante extends Usuario{
 						break;
 					}
 				}
+				if(resp == 0) {
+					this.equipo.seleccionarAlineacionDefault();
+				}
 			}
 			else{
 				resp = 7;
@@ -136,6 +139,6 @@ public class Participante extends Usuario{
 	}
 	public void setEquipoFantasia(EquipoFantasia equipo) {
 		this.equipo = equipo;
-		
 	}
+
 }

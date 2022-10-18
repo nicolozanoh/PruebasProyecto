@@ -131,4 +131,37 @@ public class EquipoFantasia {
 		return respuesta;
 	}
 	
+	public void seleccionarAlineacionDefault() {
+		ArrayList<Jugador> copiaJugadores = new ArrayList<Jugador>(this.jugadores);
+		int defensas = 0;
+		int arqueros= 0;
+		int mediocampistas = 0;
+		int delanteros = 0;
+		
+		for (int i = 0; i<copiaJugadores.size();i++) {
+			if(copiaJugadores.get(i).getPosicion() == "defensa" && defensas <4) {
+				this.titulares.add(copiaJugadores.get(i));
+				defensas++;
+				copiaJugadores.remove(i);
+			}
+			if(copiaJugadores.get(i).getPosicion() == "arquero" && arqueros <1) {
+				this.titulares.add(copiaJugadores.get(i));
+				arqueros++;
+				copiaJugadores.remove(i);
+			}
+			if(copiaJugadores.get(i).getPosicion() == "arquero" && mediocampistas <4) {
+				this.titulares.add(copiaJugadores.get(i));
+				mediocampistas++;
+				copiaJugadores.remove(i);
+			}
+			if(copiaJugadores.get(i).getPosicion() == "delantero" && delanteros <1) {
+				this.titulares.add(copiaJugadores.get(i));
+				delanteros++;
+				copiaJugadores.remove(i);
+			}
+		}
+		
+		this.suplentes = copiaJugadores;
+	}
+	
 }
