@@ -9,7 +9,10 @@ import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import modelo.Administrador;
+import modelo.Jugador;
 import modelo.Participante;
 
 
@@ -63,6 +66,9 @@ public class consolaAplicacion {
     				if(opcionSeleccionada == 2){
     					ejecutarBorrarEquipo();
     				}
+    				if(opcionSeleccionada == 3){
+    					verAlineacionEquipo();
+    				}
     				if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
@@ -71,15 +77,18 @@ public class consolaAplicacion {
     		}
     	}
     }
-//    private void cargarEquipoParticipanteActivo() {
-//    	this.aplicacion.cargarEquipoParticipanteActivo();
-//    }
-    private void cargarDataActual(){
+    public void verAlineacionEquipo() {
+    	System.out.println("Titulares");
+    	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
+    	System.out.println("Suplentes");
+    	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getSuplentes());
+    }
+    public void cargarDataActual(){
         aplicacion.ejecutarCargarParticipantes();
         aplicacion.ejecutarCargarAdministrador();
         aplicacion.ejecutarCargarTemporadaActual();
     }
-    private int ejecutarIniciarSesion() {
+    public int ejecutarIniciarSesion() {
     	String nombreUsuario = input("Ingrese su nombre de usuario");
     	String contraseña = input("Ingrese su contraseña");
     	int resp = aplicacion.iniciarSesion(nombreUsuario, contraseña);
@@ -95,7 +104,7 @@ public class consolaAplicacion {
     	}
     	return resp;
     }
-    private int ejecutarCrearCuenta() {
+    public int ejecutarCrearCuenta() {
     	String nombreUsuario = input("Ingrese un nombre de usuario");
     	String contraseña = input("Ingrese una contraseña");
     	int resp = aplicacion.crearCuenta(nombreUsuario, contraseña);
@@ -108,17 +117,17 @@ public class consolaAplicacion {
     	}
     	return resp;
     }
-    private void ejecutarCerrarSesion() {
-    	
+    public void ejecutarCerrarSesion() {
+    	this.aplicacion.cerrarSesion();	
     }
-    private void menuInicio(){
+    public void menuInicio(){
     	System.out.println("1) Iniciar Sesión");
     	System.out.println("2) Crear Usuario");
     	System.out.println("0) Cerrar Aplicación");
     }
-    private void ejecutarCrearEquipo() {
+    public void ejecutarCrearEquipo() {
     	double presupuestoInicial = ((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto();
-    	mostrarJugadores();
+    	mostrarJugadores(this.aplicacion.getTemporada().getJugadores());
     	System.out.println("Seleccione los jugadores que quiere que hagan parte de su equipo./n Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	System.out.println("Recuerde, usted tiene un presupuesto de: " + presupuestoInicial);
     	String[] jugadoresSeleccionados = input("\nSeleccione el número de todos los jugadores que quiere agregar, separados por comas (',').").trim().split(",");
@@ -175,26 +184,29 @@ public class consolaAplicacion {
     		System.out.println("Error: Debe seleccionar 15 jugadores para crear el equipo.");
     	}
     }
-    
-    private void ejecutarBorrarEquipo() {
+    public void ejecutarBorrarEquipo() {
     	this.aplicacion.borrarEquipo();
     }
-    
-    private void menuAdmin(){
+    public void menuAdmin(){
     	System.out.println("1) Cargar información temporada");
     	System.out.println("2) Cargar información jornada");
     	System.out.println("0) Cerrar sesión");
     }
-    
-    private void menuParticipante() {
+    public void menuParticipante() {
     	System.out.println("1) Crear equipo");
     	System.out.println("2) Borrar equipo");
+    	System.out.println("3) Consultar alineación del equipo");
+    	System.out.println("4) Cambiar Alineación");
+    	System.out.println("5) Comprar Jugador");
+    	System.out.println("6) Vender Jugador");
+    	System.out.println("7) Ver estadísticas del equipo");
+    	System.out.println("8) Ver estadísticas de la temporada");
+    	System.out.println("0) Cerrar sesión");
     }
-    private void menuConfirmarBorrar() {
+    public void menuConfirmarBorrar() {
     	System.out.println("1) Si");
     	System.out.println("1) No");
     }
-    
     public String input(String mensaje)
 	{
 		try
@@ -210,15 +222,13 @@ public class consolaAplicacion {
 		}
 		return null;
 	}
-    
-    public void mostrarJugadores() {
+    public void mostrarJugadores(ArrayList<Jugador> jugadores) {
     	int cont = 1;
-    	for (int i = 0; i < this.aplicacion.getTemporada().getJugadores().size(); i++) {
-    		System.out.println(Integer.toString(cont) + ". Nombre: " + this.aplicacion.getTemporada().getJugadores().get(i).getNombre() + ", Posición: " + this.aplicacion.getTemporada().getJugadores().get(i).getPosicion() + ", Precio: " + Double.toString(this.aplicacion.getTemporada().getJugadores().get(i).getPrecio()));
+    	for (int i = 0; i < jugadores.size(); i++) {
+    		System.out.println(Integer.toString(cont) + ". Nombre: " + jugadores.get(i).getNombre() + ", Posición: " + jugadores.get(i).getPosicion() + ", Precio: " + Double.toString(jugadores.get(i).getPrecio()));
     		cont++;
     	}
     }
-
     public static void main(String[] args)
 	{
 		consolaAplicacion consola = new consolaAplicacion();

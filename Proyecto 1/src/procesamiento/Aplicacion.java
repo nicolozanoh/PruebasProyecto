@@ -110,7 +110,7 @@ public class Aplicacion {
 	
 
 	public void cerrarSesion() {
-		//TODO
+		this.usuarioActivo = null;
 	}
 
 //	public EquipoFantasia mejorEquipoFecha(int jornada) {
