@@ -11,7 +11,6 @@ public class Participante extends Usuario{
 //	private String contraseña;
 	private double presupuesto;
 	private EquipoFantasia equipo;
-	
 	public Participante() {
 		
 	}
