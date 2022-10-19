@@ -96,15 +96,6 @@ public class Participante extends Usuario{
 	}
 	public int modificarAlineacion(int nuevoTitular, int nuevoSuplente) {
 		int resp = this.equipo.cambiarAlineacion(nuevoTitular, nuevoSuplente);
-		if (resp== 0) {
-			System.out.println("Su equipo ha sido modificado exitosamente.");
-		}
-		if (resp== 1) {
-			System.out.println("Error: Los jugadores seleccionados no juegan en la misma posición.");
-		}
-		if (resp== 2) {
-			System.out.println("Error: Los números seleccionados no son validos.");
-		}
 		return resp;
 	}
 	public double consultarPuntajesEquipo() {
