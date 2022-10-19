@@ -73,17 +73,11 @@ public class ManejoPersistencia {
 		}
 	}
 
-	public int borrarEquipo(String nombreUsuario) {
+	public void borrarEquipo(String nombreUsuario) {
 		File archivoEquipo = new File("data/equipos/" + nombreUsuario+".json");
-		int resp = 1;
 		if(archivoEquipo.exists()) {
-			if(archivoEquipo.delete()) {
-				resp= 0;
-			}
-		}else {
-			resp =0;
+			archivoEquipo.delete();
 		}
-		return resp;
 	}
 
 	public EquipoFantasia cargarEquipoParticipanteActivo(File archivoEquipo) {

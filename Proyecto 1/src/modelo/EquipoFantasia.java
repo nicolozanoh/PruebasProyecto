@@ -119,16 +119,22 @@ public class EquipoFantasia {
 		return respuesta;
 	}
 
-	public String cambiarAlineacion(Jugador nuevoTitular, Jugador nuevoSuplente) {
-		String respuesta = "No se puede hacerel cambio porque los jugadores no tienen la misma posicion.";
-		if (nuevoTitular.getPosicion()== nuevoSuplente.getPosicion()) {
-			titulares.add(nuevoTitular);
-			titulares.remove(nuevoSuplente);
-			suplentes.add(nuevoTitular);
-			suplentes.remove(nuevoSuplente);
-			respuesta="El cambio se realozo exitosamente.";
+	public int cambiarAlineacion(int nuevoTitular, int nuevoSuplente) {
+		int resp = 1;
+		try {
+			Jugador jugadorTitular = this.suplentes.get(nuevoTitular - 1);
+			Jugador jugadorSuplente = this.titulares.get(nuevoSuplente -1);
+			if (jugadorTitular.getPosicion()== jugadorSuplente.getPosicion()) {
+				titulares.add(jugadorTitular);
+				titulares.remove(jugadorSuplente);
+				suplentes.add(jugadorSuplente);
+				suplentes.remove(jugadorTitular);
+				resp = 0;
+			}
+		}catch(Exception ex) {
+			resp = 2;
 		}
-		return respuesta;
+		return resp;
 	}
 	
 	public void seleccionarAlineacionDefault() {

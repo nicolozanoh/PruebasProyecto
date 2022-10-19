@@ -69,6 +69,9 @@ public class consolaAplicacion {
     				if(opcionSeleccionada == 3){
     					verAlineacionEquipo();
     				}
+    				if(opcionSeleccionada == 4){
+    					ejecutarCambiarAlineacion();
+    				}
     				if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
@@ -78,10 +81,26 @@ public class consolaAplicacion {
     	}
     }
     public void verAlineacionEquipo() {
-    	System.out.println("Titulares");
+    	System.out.println("Titulares:");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
-    	System.out.println("Suplentes");
+    	System.out.println("Suplentes:");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getSuplentes());
+    }
+    public void ejecutarCambiarAlineacion() {
+    	verAlineacionEquipo();
+    	System.out.println("Recuerse que para poder hacer el cambio, los jugadores deben jugar en la misma posicion.");
+    	int nuevoTitular = Integer.parseInt(input("Seleccione el suplente que desea agregar a la formación titular"));
+    	int nuevoSuplente = Integer.parseInt(input("Seleccione el titular que quiere poner de suplente"));
+    	int resp = this.aplicacion.cambiarAlineacion(nuevoTitular, nuevoSuplente);
+    	if (resp== 0) {
+			System.out.println("Su equipo ha sido modificado exitosamente.");
+		}
+		if (resp== 1) {
+			System.out.println("Error: Los jugadores seleccionados no juegan en la misma posición.");
+		}
+		if (resp== 2) {
+			System.out.println("Error: Los números seleccionados no son validos.");
+		}
     }
     public void cargarDataActual(){
         aplicacion.ejecutarCargarParticipantes();
@@ -119,6 +138,9 @@ public class consolaAplicacion {
     }
     public void ejecutarCerrarSesion() {
     	this.aplicacion.cerrarSesion();	
+    }
+    public void ejecutarComprarJugador() {
+    	
     }
     public void menuInicio(){
     	System.out.println("1) Iniciar Sesión");
@@ -185,7 +207,18 @@ public class consolaAplicacion {
     	}
     }
     public void ejecutarBorrarEquipo() {
-    	this.aplicacion.borrarEquipo();
+    	System.out.println("¿Está seguro de que quiere eliminar su equipo?");
+    	menuConfirmarBorrar();
+    	int opcion = Integer.parseInt(input(("Por favor seleccione una opción")));
+    	if (opcion == 1) {
+    		int resp = this.aplicacion.borrarEquipo();
+	    	if (resp == 0) {
+	    		System.out.println("El equipo ha sido eliminado");
+	    	}
+	    	if (resp == 1) {
+	    		System.out.println("Usted aun no ha creado ningún equipo, por favor cree uno.");
+	    	}
+    	}
     }
     public void menuAdmin(){
     	System.out.println("1) Cargar información temporada");

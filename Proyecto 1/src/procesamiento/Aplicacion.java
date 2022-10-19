@@ -15,7 +15,6 @@ public class Aplicacion {
 
 	private Administrador administrador;
 	private ArrayList<Participante> participantes;
-	private String tipoUsuarioActivo;
 	private Temporada temporadaActual;
 	private ManejoPersistencia loader;
 	private Usuario usuarioActivo;
@@ -26,13 +25,6 @@ public class Aplicacion {
 		temporadaActual = new Temporada();
 		loader = new ManejoPersistencia();
 		
-	}
-	public String getTipoUsuarioActivo() {
-		return tipoUsuarioActivo;
-	}
-
-	public void setTipoUsuarioActivo(String tipoUsuarioActivo) {
-		this.tipoUsuarioActivo = tipoUsuarioActivo;
 	}
 
 	public Administrador getAdministrador() {
@@ -180,8 +172,10 @@ public class Aplicacion {
 		return 0;
 	}
 
-	public void seleccionarTitular(Jugador nuevoTitular, Jugador nuevoSuplente) {
-		//TODO
+	public int cambiarAlineacion(int nuevoTitular, int nuevoSuplente) {
+		int resp = ((Participante)this.usuarioActivo).modificarAlineacion(nuevoTitular, nuevoSuplente);
+		loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), this.usuarioActivo.getNombreUsuario());
+		return resp;
 	}
 
 	public int consultarPuntajeEquipo(EquipoFantasia equipo) {
@@ -254,8 +248,8 @@ public class Aplicacion {
 		return 0;
 	}
 	public int borrarEquipo() {
-		((Participante)this.usuarioActivo).borrarEquipo();
-		int resp = loader.borrarEquipo(this.usuarioActivo.getNombreUsuario());
+		int resp = ((Participante)this.usuarioActivo).borrarEquipo();
+		loader.borrarEquipo(this.usuarioActivo.getNombreUsuario());
 		return resp;
 	}
 	public void cargarEquipoParticipanteActivo(File archivoEquipo) {
