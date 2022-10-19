@@ -2,9 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
-
 public class Temporada {
-
 	private ArrayList<Jornada> jornadas;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<EquipoFantasia> equiposFantasia;
@@ -36,33 +34,26 @@ public class Temporada {
 		this.jugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 		this.rankingJugadores = this.jugadores;
 	}
-	
 	public void agregarJugador(Jugador jugador) {
 		this.jugadores.add(jugador);
 	}
-	
 	public void agregarEquipoFantasia(EquipoFantasia equipoFantasia) {
 		this.equiposFantasia.add(equipoFantasia);
 	}
-	
 	public void actualizarRankingEquiposFantasia( ) {
 		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 	}
-	
 	public void actualizarRankingJugadores() {
 		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 	}
-	
 	public Jugador mejorJugadorTemporada() {
 		ArrayList<Jugador> ranking = this.getRankingJugadores();
 		Jugador respuesta = ranking.get(0);
 		return respuesta;
 	}
-	
 	public EquipoFantasia mejorEquipoFantasiaTemporada() {
 		ArrayList<EquipoFantasia> ranking = this.getRankingEquiposFantasia();
 		EquipoFantasia respuesta = ranking.get(0);
 		return respuesta;
 	}
-	
 }

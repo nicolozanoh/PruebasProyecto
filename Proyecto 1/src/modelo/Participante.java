@@ -6,13 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true,
 					   value = {"equipo"})
 public class Participante extends Usuario{
-
-//	private String nombreUsuario;
-//	private String contraseña;
 	private double presupuesto;
 	private EquipoFantasia equipo;
 	public Participante() {
-		
 	}
 	public Participante(String nombreUsuario, String contraseña, double presupuesto) {
 		this.nombreUsuario = nombreUsuario;
@@ -74,22 +70,33 @@ public class Participante extends Usuario{
 		}
 		return resp;
 	}
-	public String venderJugador(Jugador jugador) {
-		equipo.quitarJugador(jugador);
-		presupuesto+= 0.97*(jugador.getPrecio());
-		return "Se vendio exitosamente el jugador";
+	public int venderJugador(int numJugador) {
+		int resp;
+		try {
+			Jugador jugador = this.equipo.getJugadores().get(numJugador-1);
+			resp = equipo.quitarJugador(numJugador);
+			presupuesto+= 0.97*(jugador.getPrecio());
+		}catch(Exception ex) {
+			resp = 1;
+		}
+		return resp;
 	}
 	public int comprarJugador(Jugador jugador) {
-		int respuesta= 0;
+		int respuesta;
 		if (this.equipo.getNumeroJugadores() < 15)
 		{
-			respuesta = this.equipo.agregarJugador(jugador);
-			if (respuesta == 0) {
-				presupuesto+= -1*jugador.getPrecio();
+			if(presupuesto >= jugador.getPrecio()){
+				respuesta = this.equipo.agregarJugador(jugador);
+				if (respuesta == 0) {
+					presupuesto+= -1*jugador.getPrecio();
+				}
+			}
+			else {
+				respuesta = 6;
 			}
 		}
 		else {
-			respuesta = 1;
+			respuesta = 7;
 		}
 		return respuesta;
 	}
@@ -106,5 +113,4 @@ public class Participante extends Usuario{
 	public void setEquipoFantasia(EquipoFantasia equipo) {
 		this.equipo = equipo;
 	}
-
 }

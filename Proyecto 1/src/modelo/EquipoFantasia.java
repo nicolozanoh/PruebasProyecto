@@ -3,7 +3,6 @@ package modelo;
 import java.util.ArrayList;
 
 public class EquipoFantasia {
-
 	private String nombre;
 	private double puntosTotales;
 	private double precio;
@@ -78,11 +77,31 @@ public class EquipoFantasia {
 	public void setSuplentes(ArrayList<Jugador> suplentes) {
 		this.suplentes = suplentes;
 	}
-	public void quitarJugador (Jugador jugador) {
-		jugadores.remove(jugador);
+	public int quitarJugador (int numJugador) {
+		int resp = 2;
+		if (this.jugadores.size()== 15) {
+			Jugador jugador = this.jugadores.get(numJugador-1);
+			if (titulares.contains(jugador)) {
+				titulares.remove(jugador);
+				for (int i =0; i<suplentes.size();i++) {
+					if (jugador.getPosicion() == suplentes.get(i).getPosicion()) {
+						titulares.add(suplentes.get(i));
+						suplentes.remove(i);
+						break;
+					}
+				}
+			}
+			else if (suplentes.contains(jugador))
+			{
+				suplentes.remove(jugador);
+			}
+			jugadores.remove(jugador);
+			resp = 0;
+		}
+		return resp;
 	}
 	public int agregarJugador (Jugador jugador) {
-		int respuesta=1;
+		int respuesta=0;
 		if (jugadores.size()<15) {
 			String posicion = jugador.getPosicion();
 			int contador = 0;
@@ -111,14 +130,12 @@ public class EquipoFantasia {
 			}	
 			if (maximo>=contador) {
 				jugadores.add(jugador);
-				respuesta=0;
 			}	
 			else
 				respuesta=2;
 		}
 		return respuesta;
 	}
-
 	public int cambiarAlineacion(int nuevoTitular, int nuevoSuplente) {
 		int resp = 1;
 		try {
@@ -136,7 +153,6 @@ public class EquipoFantasia {
 		}
 		return resp;
 	}
-	
 	public void seleccionarAlineacionDefault() {
 		ArrayList<Jugador> copiaJugadores = new ArrayList<Jugador>(this.jugadores);
 		int defensas = 0;
@@ -169,5 +185,4 @@ public class EquipoFantasia {
 		
 		this.suplentes = copiaJugadores;
 	}
-	
 }

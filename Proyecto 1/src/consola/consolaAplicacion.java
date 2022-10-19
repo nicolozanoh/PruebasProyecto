@@ -1,24 +1,14 @@
 package consola;
 import procesamiento.Aplicacion;
-import com.fasterxml.jackson.core.JsonParseException;        
-import com.fasterxml.jackson.databind.JsonMappingException; 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;          
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import modelo.Administrador;
 import modelo.Jugador;
 import modelo.Participante;
 
-
 public class consolaAplicacion {
     private Aplicacion aplicacion;
-
     public void ejecutarAplicacion(){
     	int respInicioSesion;
     	int respCrearCuenta;
@@ -29,77 +19,95 @@ public class consolaAplicacion {
     	boolean sesionIniciada = false;
     	while(iniciarAplicacion) {
     		menuInicio();
-    		opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+    		opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
     		if (opcionSeleccionada == 1) {
     			respInicioSesion = ejecutarIniciarSesion();
     			if(respInicioSesion == 0) {
     				sesionIniciada = true;
     			}
     		}
-    		if (opcionSeleccionada == 2) {
+    		else if (opcionSeleccionada == 2) {
     			respCrearCuenta = ejecutarCrearCuenta();
     			if (respCrearCuenta == 0) {
     				sesionIniciada =true;
     			}
     		}
-    		if (opcionSeleccionada == 0) {
+    		else if (opcionSeleccionada == 0) {
     			
+    		}
+    		else {
+    			System.out.println("\nPor favor seleccione una opcion valida");
     		}
     		while(sesionIniciada) {
     			if (aplicacion.getUsuarioActivo().getClass().getName() == "modelo.Administrador") {
     				menuAdmin();
-    				opcionSeleccionada =Integer.parseInt(input("Por favor seleccione una opción"));
+    				opcionSeleccionada =Integer.parseInt(input("\nPor favor seleccione una opción"));
     				if(opcionSeleccionada == 1){}
-    				if(opcionSeleccionada == 2){}
-    				if(opcionSeleccionada == 0){
+    				else if(opcionSeleccionada == 2){}
+    				else if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
+    				}
+    				else {
+    					System.out.println("\nPor favor seleccione una opción valida.");
     				}
     			}
     			
     			if (aplicacion.getUsuarioActivo().getClass().getName() ==  "modelo.Participante") {
     				menuParticipante();
-    				opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+    				opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
     				if(opcionSeleccionada == 1){
     					ejecutarCrearEquipo();
     				}
-    				if(opcionSeleccionada == 2){
+    				else if(opcionSeleccionada == 2){
     					ejecutarBorrarEquipo();
     				}
-    				if(opcionSeleccionada == 3){
+    				else if(opcionSeleccionada == 3){
     					verAlineacionEquipo();
     				}
-    				if(opcionSeleccionada == 4){
+    				else if(opcionSeleccionada == 4){
     					ejecutarCambiarAlineacion();
     				}
-    				if(opcionSeleccionada == 0){
+    				else if(opcionSeleccionada == 5){
+    					ejecutarComprarJugador();
+    				}
+    				else if(opcionSeleccionada == 6){
+    					ejecutarVenderJugador();
+    				}
+    				else if(opcionSeleccionada == 9){
+    					ejecutarGuardarCambiosParticipante();
+    				}
+    				else if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
+    				}
+    				else {
+    					System.out.println("\nPor favor seleccione una opcion valida");
     				}
     			}
     		}
     	}
     }
     public void verAlineacionEquipo() {
-    	System.out.println("Titulares:");
+    	System.out.println("Titulares:\n");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
-    	System.out.println("Suplentes:");
+    	System.out.println("Suplentes:\n");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getSuplentes());
     }
     public void ejecutarCambiarAlineacion() {
     	verAlineacionEquipo();
-    	System.out.println("Recuerse que para poder hacer el cambio, los jugadores deben jugar en la misma posicion.");
-    	int nuevoTitular = Integer.parseInt(input("Seleccione el suplente que desea agregar a la formación titular"));
-    	int nuevoSuplente = Integer.parseInt(input("Seleccione el titular que quiere poner de suplente"));
+    	System.out.println("\nRecuerse que para poder hacer el cambio, los jugadores deben jugar en la misma posicion.");
+    	int nuevoTitular = Integer.parseInt(input("\nSeleccione el suplente que desea agregar a la formación titular"));
+    	int nuevoSuplente = Integer.parseInt(input("\nSeleccione el titular que quiere poner de suplente"));
     	int resp = this.aplicacion.cambiarAlineacion(nuevoTitular, nuevoSuplente);
     	if (resp== 0) {
-			System.out.println("Su equipo ha sido modificado exitosamente.");
+			System.out.println("\nSu equipo ha sido modificado exitosamente.");
 		}
 		if (resp== 1) {
-			System.out.println("Error: Los jugadores seleccionados no juegan en la misma posición.");
+			System.out.println("\nError: Los jugadores seleccionados no juegan en la misma posición.");
 		}
 		if (resp== 2) {
-			System.out.println("Error: Los números seleccionados no son validos.");
+			System.out.println("\nError: Los números seleccionados no son validos.");
 		}
     }
     public void cargarDataActual(){
@@ -108,31 +116,31 @@ public class consolaAplicacion {
         aplicacion.ejecutarCargarTemporadaActual();
     }
     public int ejecutarIniciarSesion() {
-    	String nombreUsuario = input("Ingrese su nombre de usuario");
-    	String contraseña = input("Ingrese su contraseña");
+    	String nombreUsuario = input("\nIngrese su nombre de usuario");
+    	String contraseña = input("\nIngrese su contraseña");
     	int resp = aplicacion.iniciarSesion(nombreUsuario, contraseña);
     	
     	if (resp == 0) {
-    		System.out.println("Inicio de sesión exitoso!\n" + "Bienvenido " + aplicacion.getUsuarioActivo().getNombreUsuario() + "!");	
+    		System.out.println("\nInicio de sesión exitoso!\n" + "\nBienvenido " + aplicacion.getUsuarioActivo().getNombreUsuario() + "!");	
     	}
     	if (resp == 2) {
-    		System.out.println("Error al iniciar sesión: El nombre de usuario no existe.");
+    		System.out.println("\nError al iniciar sesión: El nombre de usuario no existe.");
     	}
     	if (resp == 1) {
-    		System.out.println("Error al iniciar sesión: La contraseña no es correcta.");
+    		System.out.println("\nError al iniciar sesión: La contraseña no es correcta.");
     	}
     	return resp;
     }
     public int ejecutarCrearCuenta() {
-    	String nombreUsuario = input("Ingrese un nombre de usuario");
-    	String contraseña = input("Ingrese una contraseña");
+    	String nombreUsuario = input("\nIngrese un nombre de usuario");
+    	String contraseña = input("\nIngrese una contraseña");
     	int resp = aplicacion.crearCuenta(nombreUsuario, contraseña);
     	if(resp == 0) {
-    		System.out.println("Su usuario se ha creado exitosamente!");
+    		System.out.println("\nSu usuario se ha creado exitosamente!");
     		aplicacion.iniciarSesion(nombreUsuario, contraseña);
     	}
     	if(resp == 1) {
-    		System.out.println("El nombre de usuario seleccionado ya esta en uso, seleccione otro y vuelva a intentarlo");
+    		System.out.println("\nEl nombre de usuario seleccionado ya esta en uso, seleccione otro y vuelva a intentarlo");
     	}
     	return resp;
     }
@@ -140,93 +148,133 @@ public class consolaAplicacion {
     	this.aplicacion.cerrarSesion();	
     }
     public void ejecutarComprarJugador() {
-    	
+    	mostrarJugadores(this.aplicacion.getTemporada().getJugadores());
+    	int numJugador = Integer.parseInt(input("\nDigite el número del jugador que desea comprar"));
+    	int resp = this.aplicacion.comprarJugador(numJugador);
+    	if (resp == 0) {
+    		System.out.println("\nCompra exitosa, su nuevo saldo es: " + Double.toString(((Participante)this.aplicacion.getUsuarioActivo()).getPresupuesto()));
+    	}
+    	else if(resp==1) {
+    		System.out.println("\nError: El número digitado no corresponde a ningun jugadorr");
+    	}
+    	else if(resp==2) {
+    		System.out.println("\nError: Numero de arqueros. Recuerde: No pueden haber más de 2 arqueros");
+    	}
+    	else if(resp==3) {
+    		System.out.println("\nError: Numero de defensas. Recuerde: No pueden haber más de 5 defensores.");
+    	}
+    	else if(resp==4) {
+    		System.out.println("\nError: Numero de mediocampistas. Recuerde: No pueden haber más de 5 mediocampistas.");
+    	}
+    	else if(resp==5) {
+    		System.out.println("\nError: Numero de delanteros. Recuerde: No pueden haber más de 3 delanteros.");
+    	}
+    	else if(resp==6) {
+    		System.out.println("\nError: Saldo induficiente.");
+    	}
+    	else if(resp==7) {
+    		System.out.println("\nError: Su equipo está lleno, para comprar un nuevo jugador, primero venda otro.");
+    	}
     }
+    public void ejecutarVenderJugador() {
+    	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores());
+    	int numJugador = Integer.parseInt(input("\nDigite el número del jugador"));
+    	int resp = this.aplicacion.venderJugador(numJugador);
+    	if (resp == 0) {
+    		System.out.println("\nVenta exitosa, su nuevo saldo es: " + Double.toString(((Participante)this.aplicacion.getUsuarioActivo()).getPresupuesto()));
+    	}
+    	else if(resp==1) {
+    		System.out.println("\nError: El número digitado no corresponde a ningun jugador.");
+    	}
+    	else if(resp==2) {
+    		System.out.println("\nError: Su equipo ya tiene menos de 15 jugadores, para poder vender más su equipo debe estar completo.");
+    	}
+    }   
     public void menuInicio(){
-    	System.out.println("1) Iniciar Sesión");
+    	System.out.println("\n1) Iniciar Sesión");
     	System.out.println("2) Crear Usuario");
     	System.out.println("0) Cerrar Aplicación");
     }
     public void ejecutarCrearEquipo() {
     	double presupuestoInicial = ((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto();
     	mostrarJugadores(this.aplicacion.getTemporada().getJugadores());
-    	System.out.println("Seleccione los jugadores que quiere que hagan parte de su equipo./n Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
-    	System.out.println("Recuerde, usted tiene un presupuesto de: " + presupuestoInicial);
+    	System.out.println("\nSeleccione los jugadores que quiere que hagan parte de su equipo./n Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    	System.out.println("\nRecuerde, usted tiene un presupuesto de: " + presupuestoInicial);
     	String[] jugadoresSeleccionados = input("\nSeleccione el número de todos los jugadores que quiere agregar, separados por comas (',').").trim().split(",");
     	
     	int resp = aplicacion.crearEquipo(jugadoresSeleccionados);
     	if(resp==0) {
-    		System.out.println("Su equipo ha sido creado con los siguientes jugadores: ");
+    		System.out.println("\nSu equipo ha sido creado con los siguientes jugadores: ");
     		int cont = 1;
         	for (int i = 0; i < ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().size(); i++) {
         		System.out.println(Integer.toString(cont) + ". Nombre: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getNombre() + ", Posición: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores().get(i).getPosicion());
         		cont++;
         	}
-        	System.out.println("Su nuevo saldo es de $"+((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto());
-        	System.out.println("¿Desea guardar su equipo?");
+        	System.out.println("\nSu nuevo saldo es de $"+((Participante)(this.aplicacion.getUsuarioActivo())).getPresupuesto());
+        	System.out.println("\n¿Desea guardar su equipo?");
         	System.out.println("1) Si");
         	System.out.println("2) No");
-        	int opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+        	int opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
         	if (opcionSeleccionada == 1) {
         		aplicacion.guardarEquipo();
         	}
         	if(opcionSeleccionada == 2) {
-        		System.out.println("Está acción no se puede deshacer, ¿Está seguro de que desea continuar?");
+        		System.out.println("\nEstá acción no se puede deshacer, ¿Está seguro de que desea continuar?");
         		menuConfirmarBorrar();
-        		opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
+        		opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
         		if(opcionSeleccionada == 1) {
 	        		int respBorrar = aplicacion.borrarEquipo();
 	        		if (respBorrar== 0) {
-	        			System.out.println("Su equipo ha sido eliminado");
+	        			System.out.println("\nSu equipo ha sido eliminado");
 	        		}else {
-	        			System.out.println("Hubo un error al eliminar su equipo, por favor vuelva a intentarlo.");
+	        			System.out.println("\nHubo un error al eliminar su equipo, por favor vuelva a intentarlo.");
 	        		}
         		}
         	}
     	}
     	else if(resp==1) {
-    		System.out.println("Error: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
+    		System.out.println("\nError: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
     	}
     	else if(resp==2) {
-    		System.out.println("Error: Numero de arqueros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    		System.out.println("\nError: Numero de arqueros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	}
     	else if(resp==3) {
-    		System.out.println("Error: Numero de defensas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    		System.out.println("\nError: Numero de defensas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	}
     	else if(resp==4) {
-    		System.out.println("Error: Numero de mediocampistas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    		System.out.println("\nError: Numero de mediocampistas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	}
     	else if(resp==5) {
-    		System.out.println("Error: Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
+    		System.out.println("\nError: Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	}
     	else if(resp==6) {
-    		System.out.println("Error: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
+    		System.out.println("\nError: Ya existe un equipo, para crear un nuevo equipo, elimine el equipo anterior. También puede modificar el equipo existente.");
     	}
     	else if(resp==7) {
-    		System.out.println("Error: Debe seleccionar 15 jugadores para crear el equipo.");
+    		System.out.println("\nError: Debe seleccionar 15 jugadores para crear el equipo.");
     	}
     }
     public void ejecutarBorrarEquipo() {
-    	System.out.println("¿Está seguro de que quiere eliminar su equipo?");
+    	System.out.println("\n¿Está seguro de que quiere eliminar su equipo?");
     	menuConfirmarBorrar();
-    	int opcion = Integer.parseInt(input(("Por favor seleccione una opción")));
+    	int opcion = Integer.parseInt(input(("\nPor favor seleccione una opción")));
     	if (opcion == 1) {
     		int resp = this.aplicacion.borrarEquipo();
 	    	if (resp == 0) {
-	    		System.out.println("El equipo ha sido eliminado");
+	    		System.out.println("\nEl equipo ha sido eliminado");
 	    	}
 	    	if (resp == 1) {
-	    		System.out.println("Usted aun no ha creado ningún equipo, por favor cree uno.");
+	    		System.out.println("\nUsted aun no ha creado ningún equipo, por favor cree uno.");
 	    	}
     	}
     }
     public void menuAdmin(){
-    	System.out.println("1) Cargar información temporada");
+    	System.out.println("\n1) Cargar información temporada");
     	System.out.println("2) Cargar información jornada");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuParticipante() {
-    	System.out.println("1) Crear equipo");
+    	System.out.println("\n1) Crear equipo");
     	System.out.println("2) Borrar equipo");
     	System.out.println("3) Consultar alineación del equipo");
     	System.out.println("4) Cambiar Alineación");
@@ -234,11 +282,12 @@ public class consolaAplicacion {
     	System.out.println("6) Vender Jugador");
     	System.out.println("7) Ver estadísticas del equipo");
     	System.out.println("8) Ver estadísticas de la temporada");
+    	System.out.println("9) Ver estadísticas de la temporada");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuConfirmarBorrar() {
-    	System.out.println("1) Si");
-    	System.out.println("1) No");
+    	System.out.println("\n1) Si");
+    	System.out.println("2) No");
     }
     public String input(String mensaje)
 	{
@@ -250,7 +299,7 @@ public class consolaAplicacion {
 		}
 		catch (IOException e)
 		{
-			System.out.println("Error leyendo de la consola");
+			System.out.println("\nError leyendo de la consola");
 			e.printStackTrace();
 		}
 		return null;
@@ -260,6 +309,15 @@ public class consolaAplicacion {
     	for (int i = 0; i < jugadores.size(); i++) {
     		System.out.println(Integer.toString(cont) + ". Nombre: " + jugadores.get(i).getNombre() + ", Posición: " + jugadores.get(i).getPosicion() + ", Precio: " + Double.toString(jugadores.get(i).getPrecio()));
     		cont++;
+    	}
+    }
+    public void ejecutarGuardarCambiosParticipante() {
+    	int resp =this.aplicacion.guardarCambiosParticipante();
+    	if (resp == 1) {
+    		System.out.println("\nPara poder guardar el equipo debe tener 15 participantes. Por favor compre un nuevo jugador, de lo contrario los cambios no serán guardados.");
+    	}
+    	if (resp == 0) {
+    		System.out.println("\nSe ha guardado la información!");
     	}
     }
     public static void main(String[] args)

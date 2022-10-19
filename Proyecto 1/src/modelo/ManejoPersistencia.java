@@ -1,10 +1,7 @@
 package modelo;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.JsonMappingException; 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ManejoPersistencia {
-	
 	public ArrayList<Participante> cargarParticipantes(File archivoParticipantes){
 		ArrayList<Participante> participantes = new ArrayList<Participante>();
 		try {
@@ -24,7 +20,6 @@ public class ManejoPersistencia {
 		}
 		return participantes;
 	}
-	
 	public Administrador cargarAdministrador(File archivoAdministrador) {
 		Administrador administrador = new Administrador();
 		try {
@@ -36,7 +31,6 @@ public class ManejoPersistencia {
 		}
 		return administrador;
 	}
-	
 	public ArrayList<Jugador> cargarJugadores(File archivoJugadores) {
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		try {
@@ -48,8 +42,6 @@ public class ManejoPersistencia {
 		}
 		return jugadores;
 	}
-	
-	
 	public void guardarParticipantes(ArrayList<Participante> participantes){
 		List<Participante> lParticipantes = participantes;
 		try {
@@ -61,7 +53,6 @@ public class ManejoPersistencia {
 			System.out.println(ex.getMessage());
 		}
 	}
-	
 	public void guardarEquipo(EquipoFantasia equipo, String nombreUsuario) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -72,14 +63,12 @@ public class ManejoPersistencia {
 			System.out.println(ex.getMessage());
 		}
 	}
-
 	public void borrarEquipo(String nombreUsuario) {
 		File archivoEquipo = new File("data/equipos/" + nombreUsuario+".json");
 		if(archivoEquipo.exists()) {
 			archivoEquipo.delete();
 		}
 	}
-
 	public EquipoFantasia cargarEquipoParticipanteActivo(File archivoEquipo) {
 		EquipoFantasia equipoUsuario = new EquipoFantasia();
 		try {
@@ -92,6 +81,4 @@ public class ManejoPersistencia {
 		
 		return equipoUsuario;
 	}
-	
-	
 }

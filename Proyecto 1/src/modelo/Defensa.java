@@ -6,10 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Defensa extends Jugador{
-
 	private int golesRecibidos;
 	private ArrayList<Integer> golesRecibidosJornada;
-	
 	public int getGolesRecibidos() {
 		return golesRecibidos;
 	}
@@ -19,11 +17,8 @@ public class Defensa extends Jugador{
 			this.golesRecibidos+=d;
 		}
 	}
-	
 	public double calcularPuntaje(int numJornada) {
 		this.puntosJornada.add(numJornada-1, (double) 0);
-
-
 		this.puntosJornada.add(numJornada-1, 5 * (double) this.golesAnotadosJornada.get(numJornada-1));
 		this.puntosJornada.add(numJornada-1, 3 * (double) this.asistenciasJornada.get(numJornada-1));
 		this.puntosJornada.add(numJornada-1, -2 * (double) this.penaltisErradosJornada.get(numJornada-1));
@@ -40,9 +35,7 @@ public class Defensa extends Jugador{
 		if(this.minutosJugadosJornada.get(numJornada-1) > 60) {
 			this.puntosJornada.add(numJornada-1, (double) 2);
 		}
-		
 		this.actualizarPuntosTotales();
 		return this.puntosTotales;
 	}
-	
 }

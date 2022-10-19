@@ -6,37 +6,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Arquero extends Jugador{
-
 	private int golesRecibidos;
 	private int penaltisAtajados;
 	private ArrayList<Integer> golesRecibidosJornada;
 	private ArrayList<Integer> penaltisAtajadosJornada;
-	
-
 	public ArrayList<Integer> getGolesRecibidosJornada() {
 		return golesRecibidosJornada;
 	}
-
-
 	public void setGolesRecibidosJornada(ArrayList<Integer> golesRecibidosJornada) {
 		this.golesRecibidosJornada = golesRecibidosJornada;
 	}
-
-
 	public ArrayList<Integer> getPenaltisAtajadosJornada() {
 		return penaltisErradosJornada;
 	}
-
-
 	public void setPenaltiAtajadosJornada(ArrayList<Integer> penaltisErradosJornada) {
 		this.penaltisErradosJornada = penaltisErradosJornada;
 	}
-
-
 	public double calcularPuntaje(int numJornada) {
 		this.puntosJornada.add(numJornada-1, (double) 0);
-
-
 		this.puntosJornada.add(numJornada-1, 5 * (double) this.golesAnotadosJornada.get(numJornada-1));
 		this.puntosJornada.add(numJornada-1, 3 * (double) this.asistenciasJornada.get(numJornada-1));
 		this.puntosJornada.add(numJornada-1, -2 * (double) this.penaltisErradosJornada.get(numJornada-1));
@@ -55,12 +42,9 @@ public class Arquero extends Jugador{
 		if(this.minutosJugadosJornada.get(numJornada-1) > 60) {
 			this.puntosJornada.add(numJornada-1, (double) 2);
 		}
-		
 		this.actualizarPuntosTotales();
 		return this.puntosTotales;
 	}
-	
-	
 	public int getGolesRecibidos() {
 		return golesRecibidos;
 	}
@@ -79,5 +63,4 @@ public class Arquero extends Jugador{
 			this.penaltisAtajados+=d;
 		}
 	}
-
 }

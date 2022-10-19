@@ -3,11 +3,9 @@ package modelo;
 import java.util.ArrayList;
 
 public class EquipoReal {
-
 	private String nombre;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<String> resultadoPartido; // Puede tener como valor "SI" o "NO"
-	
 	public String getNombre() {
 		return nombre;
 	}
@@ -38,7 +36,5 @@ public class EquipoReal {
 				j.actualizarPuntosJornada(numJornada, 0);
 			}
 		}
-	}
-	
-	
+	}	
 }

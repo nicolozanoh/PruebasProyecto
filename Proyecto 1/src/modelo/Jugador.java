@@ -1,8 +1,6 @@
 package modelo;
 
-import java.sql.Time;
 import java.util.ArrayList;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -20,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	    @Type(value = Mediocampista.class, name = "mediocampista"),
 	    @Type(value = Delantero.class, name = "delantero")})
 public abstract class Jugador {
-
 	protected String nombre;
 	protected String posicion;
 	protected double precio;
@@ -219,7 +216,5 @@ public abstract class Jugador {
 		this.puntosJornada.add(numJornada-1, puntosJ+puntos);
 		actualizarPuntosTotales();
 	}
-	
 	abstract public double calcularPuntaje(int numJornada);
-	
 }

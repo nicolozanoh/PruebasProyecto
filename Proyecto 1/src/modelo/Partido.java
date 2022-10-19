@@ -3,13 +3,11 @@ package modelo;
 import java.util.Date;
 
 public class Partido {
-
 	private Date fecha;
 	private EquipoReal equipoLocal;
 	private EquipoReal equipoVisitante;
 	private int golesLocal;
 	private int golesVisitante;
-	
 	public Date getFecha() {
 		return fecha;
 	}
@@ -40,7 +38,6 @@ public class Partido {
 	public void setGolesVisitante(int golesVisitante) {
 		this.golesVisitante = golesVisitante;
 	}
-	
 	public void actualizarResultadoPartido(int numJornada) {
 		if (this.golesLocal > this.golesVisitante) {
 			this.equipoLocal.actualizarResultadoPartido(numJornada, "SI");
@@ -55,5 +52,4 @@ public class Partido {
 			this.equipoLocal.actualizarResultadoPartido(numJornada, "NO");
 		}
 	}
-	
 }
