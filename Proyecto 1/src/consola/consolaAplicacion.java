@@ -42,8 +42,18 @@ public class consolaAplicacion {
     			if (aplicacion.getUsuarioActivo().getClass().getName() == "modelo.Administrador") {
     				menuAdmin();
     				opcionSeleccionada =Integer.parseInt(input("\nPor favor seleccione una opción"));
-    				if(opcionSeleccionada == 1){}
-    				else if(opcionSeleccionada == 2){}
+    				if(opcionSeleccionada == 1){
+    					ejecutarCargarConfiguracionTemporada();
+    				}
+    				else if(opcionSeleccionada == 2){
+    					
+    				}
+    				else if(opcionSeleccionada == 3){
+    					
+    				}
+    				else if(opcionSeleccionada == 4){
+    					ejecutarBorrarInformacionTemporada();
+    				}
     				else if(opcionSeleccionada == 0){
     					ejecutarCerrarSesion();
     					sesionIniciada = false;
@@ -88,6 +98,14 @@ public class consolaAplicacion {
     		}
     	}
     }
+    public void ejecutarBorrarInformacionTemporada() {
+    	System.out.println("¿Está seguro que desea eliminar la configuración de la temporada?");
+    	menuConfirmarBorrar();
+    	int respuesta = Integer.parseInt(input("Por favor seleccione una opción"));
+    	if(respuesta == 1) {
+    		this.aplicacion.borrarArchivosTemporada();
+    	}
+    }
     public void verAlineacionEquipo() {
     	System.out.println("Titulares:\n");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
@@ -114,7 +132,20 @@ public class consolaAplicacion {
         aplicacion.cargarParticipantes();
         aplicacion.cargarAdministrador();
         aplicacion.cargarTemporadaActual();
-   
+    }
+    public void ejecutarCargarConfiguracionTemporada() {
+    	String rutaJugadores = input("Por favor ingrese la ruta del arcchivo con la información de los jugadores");
+    	String rutaPartidos = input("Por favor ingrese la ruta del archivo con la información de los partidos");
+    	int resp = this.aplicacion.cargarConfiguracionTemporada(rutaJugadores, rutaPartidos);
+    	if (resp == 3) {
+    		System.out.println("Error: Ya existe la informacion de una temporada, para configurar otra, por favor elimine temporada actual");
+    	}
+    	else if(resp == 2|| resp == 1) {
+    		System.out.println("Error: Los archivos seleccionados no existen, por favor revise que las rutas sean correctas");
+    	}
+    	else if (resp == 0) {
+    		System.out.println("La información se ha cargado exitosamente!");
+    	}
     }
     public int ejecutarIniciarSesion() {
     	String nombreUsuario = input("\nIngrese su nombre de usuario");
@@ -272,6 +303,8 @@ public class consolaAplicacion {
     public void menuAdmin(){
     	System.out.println("\n1) Cargar información temporada");
     	System.out.println("2) Cargar información jornada");
+    	System.out.println("3) Ver configuración temporada");
+    	System.out.println("4) Borrar información temporada");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuParticipante() {

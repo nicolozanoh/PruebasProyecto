@@ -9,6 +9,9 @@ public class EquipoReal {
 	private String nombre;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<String> resultadoPartido; // Puede tener como valor "SI" o "NO"
+	public EquipoReal() {
+		jugadores = new ArrayList<Jugador>();
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,0 +1,92 @@
+[
+	{
+		"numeroJornada": 1,
+		"fecha": "2022-08-06",
+		"equipoLocal":{
+			"nombre":"Junior"
+		},
+		"equipoVisitante":{
+			"nombre":"Nacional"
+		}
+	},
+	{
+		"numeroJornada": 1,
+		"fecha": "2022-08-07",
+		"equipoLocal":{
+			"nombre":"Millonarios"
+		},
+		"equipoVisitante":{
+			"nombre":"Santa Fe"
+		}
+	},
+	{
+		"numeroJornada": 1,
+		"fecha": "2022-08-08",
+		"equipoLocal":{
+			"nombre":"America"
+		},
+		"equipoVisitante":{
+			"nombre":"Deportivo Cali"
+		}
+	},
+	{
+		"numeroJornada": 2,
+		"fecha": "2022-09-11",
+		"equipoLocal":{
+			"nombre":"Nacional"
+		},
+		"equipoVisitante":{
+			"nombre":"Millonarios"
+		}
+	},
+	{
+		"numeroJornada": 2,
+		"fecha": "2022-09-10",
+		"equipoLocal":{
+			"nombre":"Santa Fe"
+		},
+		"equipoVisitante":{
+			"nombre":"America"
+		}
+	},
+	{
+		"numeroJornada": 2,
+		"fecha": "2022-09-05",
+		"equipoLocal":{
+			"nombre":"Deportivo Cali"
+		},
+		"equipoVisitante":{
+			"nombre":"Junior"
+		}
+	},
+	{
+		"numeroJornada": 3,
+		"fecha": "2022-10-07",
+		"equipoLocal":{
+			"nombre":"Millonarios"
+		},
+		"equipoVisitante":{
+			"nombre":"America"
+		}
+	},
+	{
+		"numeroJornada": 3,
+		"fecha": "2022-10-07",
+		"equipoLocal":{
+			"nombre":"Santa Fe"
+		},
+		"equipoVisitante":{
+			"nombre":"Junior"
+		}
+	},
+	{
+		"numeroJornada": 3,
+		"fecha": "2022-10-08",
+		"equipoLocal":{
+			"nombre":"Nacional"
+		},
+		"equipoVisitante":{
+			"nombre":"Deportivo Cali"
+		}
+	}
+]

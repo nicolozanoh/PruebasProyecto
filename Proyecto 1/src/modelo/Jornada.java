@@ -1,12 +1,17 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Jornada {
 	private ArrayList<Partido> partidos; 
 	private int numeroJornada;
 	private ArrayList<EquipoFantasia> rankingEquiposFantasia;
 	private ArrayList<Jugador> rankingJugadores;
+	private Date fechaPrimerPartido;
+	public Jornada () {
+		partidos = new ArrayList<Partido>();
+	}
 	public ArrayList<Partido> getPartidos() {
 		return partidos;
 	}

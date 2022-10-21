@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import modelo.ManejoPersistencia;
 import modelo.Administrador;
 import modelo.EquipoFantasia;
+import modelo.EquipoReal;
 import modelo.Jugador;
 import modelo.Participante;
 import modelo.Partido;
@@ -45,9 +46,9 @@ public class Aplicacion {
 	public int iniciarSesion(String nombreUsuario, String clave) {
 		int resp = 2;
 		if (this.administrador != null) {
-			if(this.administrador.getNombreUsuario() == nombreUsuario) {
+			if(this.administrador.getNombreUsuario().equals(nombreUsuario)) {
 				resp = 1;
-				if(this.administrador.getContraseña() == clave) {
+				if(this.administrador.getContraseña().equals(clave)) {
 					resp = 0;
 					this.usuarioActivo = administrador;
 				}
@@ -185,7 +186,7 @@ public class Aplicacion {
 		//TODO
 	}
 	public int cargarParticipantes() {
-		File archivoParticipantes = new File("data/usuarios/participantes.json");
+		File archivoParticipantes = new File("data\\usuarios\\participantes.json");
 		try {
 			if (archivoParticipantes.exists()) {
 				participantes = this.loader.cargarParticipantes(archivoParticipantes);
@@ -201,7 +202,7 @@ public class Aplicacion {
 	}
 	public int cargarAdministrador() {
 		
-		File archivoAdministrador = new File("data/usuarios/administrador.json");
+		File archivoAdministrador = new File("data\\usuarios\\administrador.json");
 		
 		if (archivoAdministrador.exists()) {
 			administrador = this.loader.cargarAdministrador(archivoAdministrador);
@@ -211,16 +212,15 @@ public class Aplicacion {
 		
 	}
 	public int cargarTemporadaActual() {
-		File archivoJugadores = new File("data/temporada/jugadores.json");
-		File archivoPartidos = new File("data/temporada/partidos.json");
-		ArrayList<Partido> partidos = new ArrayList<Partido>();
+		File archivoJugadores = new File("data\\temporada\\jugadores.json");
+		File archivoJornadas = new File("data\\temporada\\jornadas.json");
 		int resp = 2;
 		if (archivoJugadores.exists()) {
 			this.temporadaActual.setJugadores(this.loader.cargarJugadores(archivoJugadores));
 			resp--;
 		}
-		if (archivoPartidos.exists()) {
-			this.loader.cargarPartidos(archivoPartidos);
+		if (archivoJornadas.exists()) {
+			this.temporadaActual.setJornadas(this.loader.cargarJornadas(archivoJornadas));
 			resp--;
 		}
 		return resp;
@@ -248,5 +248,40 @@ public class Aplicacion {
 			loader.guardarParticipantes(participantes);
 		}
 		return resp;
+	}
+	public int cargarConfiguracionTemporada(String rutaJugadores, String rutaPartidos) {
+		File nuevoArchivoJugadores = new File(rutaJugadores);
+		File nuevoArchivoPartidos = new File(rutaPartidos);
+		File archivoJugadores = new File("data\\temporada\\jugadores.json");
+		File archivoJornadas = new File("data\\temporada\\jornadas.json");
+		ArrayList<Partido> partidos = new ArrayList<Partido>();
+		int resp = 3;
+		if(!(archivoJugadores.exists()|| archivoJornadas.exists())) {
+			resp = 2;
+			if (nuevoArchivoJugadores.exists()) {
+				this.temporadaActual.setJugadores(this.loader.cargarJugadores(nuevoArchivoJugadores));
+				resp = 1;
+			}
+			if (nuevoArchivoPartidos.exists()) {
+				partidos = this.loader.cargarPartidos(nuevoArchivoPartidos);
+				resp=0;
+			}
+			if (resp == 0) {
+				ArrayList<EquipoReal> equipos = new ArrayList<EquipoReal>();
+				equipos = this.loader.llenarEquiposReales(this.temporadaActual.getJugadores());
+				partidos = this.loader.llenarJugadoresPartidos(partidos, equipos);
+				this.temporadaActual.setJornadas(this.loader.llenarJornadas(partidos));
+				this.loader.guardarJornadas(this.temporadaActual.getJornadas());
+				this.loader.guardarJugadores(this.temporadaActual.getJugadores());
+			}
+			else {
+				this.temporadaActual.setJugadores(null);
+			}
+		}
+		return resp;
+		
+	}
+	public void borrarArchivosTemporada() {
+		this.loader.borrarArchivosTemporada();
 	}
 }

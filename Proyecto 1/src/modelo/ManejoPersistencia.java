@@ -50,7 +50,7 @@ public class ManejoPersistencia {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data/participantes.json").toFile(), lParticipantes);
+			writer.writeValue(Paths.get("data\\participantes.json").toFile(), lParticipantes);
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
@@ -60,14 +60,14 @@ public class ManejoPersistencia {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data/equipos/"+nombreUsuario+".json").toFile(), equipo);
+			writer.writeValue(Paths.get("data\\equipos\\"+nombreUsuario+".json").toFile(), equipo);
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
 	public void borrarEquipo(String nombreUsuario) {
-		File archivoEquipo = new File("data/equipos/" + nombreUsuario+".json");
+		File archivoEquipo = new File("data\\equipos\\" + nombreUsuario+".json");
 		if(archivoEquipo.exists()) {
 			archivoEquipo.delete();
 		}
@@ -100,7 +100,7 @@ public class ManejoPersistencia {
 		for (int i = 0; i<jugadores.size();i++) {
 			int coincidio = 0;
 			for (int j = 0; j< equipos.size();j++) {
-				if (jugadores.get(i).getNombreEquipo()==equipos.get(j).getNombre()) {
+				if (jugadores.get(i).getNombreEquipo().equals(equipos.get(j).getNombre())) {
 					coincidio ++;
 					equipos.get(j).getJugadores().add(jugadores.get(i));
 				}
@@ -108,6 +108,7 @@ public class ManejoPersistencia {
 			if(coincidio == 0) {
 				EquipoReal nuevoEquipo = new EquipoReal();
 				nuevoEquipo.getJugadores().add(jugadores.get(i));
+				nuevoEquipo.setNombre(jugadores.get(i).getNombreEquipo());
 				equipos.add(nuevoEquipo);
 			}
 		}
@@ -116,10 +117,10 @@ public class ManejoPersistencia {
 	public ArrayList<Partido> llenarJugadoresPartidos(ArrayList<Partido> partidos, ArrayList<EquipoReal> equipos){
 		for (int i = 0; i< equipos.size(); i++) {
 			for (int j = 0; j<partidos.size(); j++) {
-				if (partidos.get(j).getEquipoLocal().getNombre() == equipos.get(i).getNombre()) {
+				if (partidos.get(j).getEquipoLocal().getNombre().equals(equipos.get(i).getNombre())) {
 					partidos.get(j).setEquipoLocal(equipos.get(i));
 				}
-				if (partidos.get(j).getEquipoVisitante().getNombre() == equipos.get(i).getNombre()) {
+				if (partidos.get(j).getEquipoVisitante().getNombre().equals(equipos.get(i).getNombre())) {
 					partidos.get(j).setEquipoVisitante(equipos.get(i));
 				}
 			}
@@ -133,14 +134,59 @@ public class ManejoPersistencia {
 			for (int j = 0; j < jornadas.size(); j++) {
 				if(partidos.get(i).getNumeroJornada() == jornadas.get(j).getNumeroJornada()) {
 					jornadas.get(j).getPartidos().add(partidos.get(i));
+					coincidio++;
 				}
 			}
 			if(coincidio == 0) {
 				Jornada nuevaJornada = new Jornada();
 				nuevaJornada.setNumeroJornada(partidos.get(i).getNumeroJornada());
 				nuevaJornada.getPartidos().add(partidos.get(i));
+				jornadas.add(nuevaJornada);
 			}
 		}
 		return jornadas;
+	}
+	public void guardarJornadas(ArrayList<Jornada> jornadas) {
+		List<Jornada> ljornada = jornadas;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+			writer.writeValue(Paths.get("data\\temporada\\jornadas.json").toFile(), ljornada);
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	public void guardarJugadores(ArrayList<Jugador> jugadores) {
+		List<Jugador> ljugadores = jugadores;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+			writer.writeValue(Paths.get("data\\temporada\\jugadores.json").toFile(), ljugadores);
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	public ArrayList<Jornada> cargarJornadas(File archivoJornadas) {
+		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			jornadas =  new ArrayList<>(Arrays.asList(mapper.readValue(archivoJornadas, Jornada[].class)));
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return jornadas;
+	}
+	public void borrarArchivosTemporada() {
+		File archivoJugadores = new File("data\\temporada\\jugadores.json");
+		File archivoJornadas = new File("data\\temporada\\jornadas.json");
+		if(archivoJugadores.exists()) {
+			archivoJugadores.delete();
+		}
+		if(archivoJornadas.exists()) {
+			archivoJornadas.delete();
+		}
 	}
 }
