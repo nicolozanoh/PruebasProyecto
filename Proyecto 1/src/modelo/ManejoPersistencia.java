@@ -81,4 +81,15 @@ public class ManejoPersistencia {
 		
 		return equipoUsuario;
 	}
+	public ArrayList<Partido> cargarPartidos(File archivoPartidos) {
+		ArrayList<Partido> partidos = new ArrayList<Partido>();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			partidos =  new ArrayList<>(Arrays.asList(mapper.readValue(archivoPartidos, Partido[].class)));
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return partidos;
+	}
 }

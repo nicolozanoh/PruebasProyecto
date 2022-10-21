@@ -2,10 +2,14 @@ package modelo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Partido {
 	private Date fecha;
 	private EquipoReal equipoLocal;
 	private EquipoReal equipoVisitante;
+	private int numeroJornada;
 	private int golesLocal;
 	private int golesVisitante;
 	public Date getFecha() {

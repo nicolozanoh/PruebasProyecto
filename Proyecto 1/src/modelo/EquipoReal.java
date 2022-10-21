@@ -2,6 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EquipoReal {
 	private String nombre;
 	private ArrayList<Jugador> jugadores;

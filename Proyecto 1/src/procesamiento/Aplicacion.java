@@ -183,7 +183,7 @@ public class Aplicacion {
 	public void actualizarDatosPartido(File archivo) {
 		//TODO
 	}
-	public int ejecutarCargarParticipantes() {
+	public int cargarParticipantes() {
 		File archivoParticipantes = new File("data/usuarios/participantes.json");
 		try {
 			if (archivoParticipantes.exists()) {
@@ -198,7 +198,7 @@ public class Aplicacion {
 	public Usuario getUsuarioActivo() {
 		return this.usuarioActivo;
 	}
-	public int ejecutarCargarAdministrador() {
+	public int cargarAdministrador() {
 		
 		File archivoAdministrador = new File("data/usuarios/administrador.json");
 		
@@ -209,12 +209,19 @@ public class Aplicacion {
 		return 0;
 		
 	}
-	public int ejecutarCargarTemporadaActual() {
+	public int cargarTemporadaActual() {
 		File archivoJugadores = new File("data/temporada/jugadores.json");
+		File archivoPartidos = new File("data/temporada/partidos.json");
+		int resp = 2;
 		if (archivoJugadores.exists()) {
 			this.temporadaActual.setJugadores(this.loader.cargarJugadores(archivoJugadores));
+			resp--;
 		}
-		return 0;
+		if (archivoPartidos.exists()) {
+			this.loader.cargarPartidos();
+			resp--;
+		}
+		return resp;
 	}
 	public int guardarEquipo() {
 		loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), ((Participante)this.usuarioActivo).getNombreUsuario());

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class Jugador {
 	protected String nombre;
 	protected String posicion;
+	protected String nombreEquipo;
 	protected double precio;
 	protected double puntosTotales;
 	protected ArrayList<Double> puntosJornada;

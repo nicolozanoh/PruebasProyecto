@@ -111,9 +111,10 @@ public class consolaAplicacion {
 		}
     }
     public void cargarDataActual(){
-        aplicacion.ejecutarCargarParticipantes();
-        aplicacion.ejecutarCargarAdministrador();
-        aplicacion.ejecutarCargarTemporadaActual();
+        aplicacion.cargarParticipantes();
+        aplicacion.cargarAdministrador();
+        aplicacion.cargarTemporadaActual();
+   
     }
     public int ejecutarIniciarSesion() {
     	String nombreUsuario = input("\nIngrese su nombre de usuario");
