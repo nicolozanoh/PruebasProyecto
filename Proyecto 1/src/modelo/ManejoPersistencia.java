@@ -2,6 +2,9 @@ package modelo;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+
+//import modelo.EquipoReal;
+
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -91,5 +94,53 @@ public class ManejoPersistencia {
 			System.out.println(ex.getMessage());
 		}
 		return partidos;
+	}
+	public ArrayList<EquipoReal> llenarEquiposReales(ArrayList<Jugador> jugadores) {
+		ArrayList<EquipoReal> equipos = new ArrayList<EquipoReal>();
+		for (int i = 0; i<jugadores.size();i++) {
+			int coincidio = 0;
+			for (int j = 0; j< equipos.size();j++) {
+				if (jugadores.get(i).getNombreEquipo()==equipos.get(j).getNombre()) {
+					coincidio ++;
+					equipos.get(j).getJugadores().add(jugadores.get(i));
+				}
+			}
+			if(coincidio == 0) {
+				EquipoReal nuevoEquipo = new EquipoReal();
+				nuevoEquipo.getJugadores().add(jugadores.get(i));
+				equipos.add(nuevoEquipo);
+			}
+		}
+		return equipos;
+	}
+	public ArrayList<Partido> llenarJugadoresPartidos(ArrayList<Partido> partidos, ArrayList<EquipoReal> equipos){
+		for (int i = 0; i< equipos.size(); i++) {
+			for (int j = 0; j<partidos.size(); j++) {
+				if (partidos.get(j).getEquipoLocal().getNombre() == equipos.get(i).getNombre()) {
+					partidos.get(j).setEquipoLocal(equipos.get(i));
+				}
+				if (partidos.get(j).getEquipoVisitante().getNombre() == equipos.get(i).getNombre()) {
+					partidos.get(j).setEquipoVisitante(equipos.get(i));
+				}
+			}
+		}
+		return partidos;
+	}
+	public ArrayList<Jornada> llenarJornadas(ArrayList<Partido> partidos){
+		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
+		for (int i = 0; i < partidos.size(); i++) {
+			int coincidio = 0;
+			for (int j = 0; j < jornadas.size(); j++) {
+				if(partidos.get(i).getNumeroJornada() == jornadas.get(j).getNumeroJornada()) {
+					jornadas.get(j).getPartidos().add(partidos.get(i));
+				}
+			}
+			if(coincidio == 0) {
+				Jornada nuevaJornada = new Jornada();
+				nuevaJornada.setNumeroJornada(partidos.get(i).getNumeroJornada());
+				nuevaJornada.getPartidos().add(partidos.get(i));
+			}
+		}
+		return jornadas;
 	}
 }

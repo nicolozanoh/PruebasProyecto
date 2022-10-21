@@ -8,6 +8,7 @@ import modelo.Administrador;
 import modelo.EquipoFantasia;
 import modelo.Jugador;
 import modelo.Participante;
+import modelo.Partido;
 import modelo.Temporada;
 import modelo.Usuario;
 
@@ -212,17 +213,19 @@ public class Aplicacion {
 	public int cargarTemporadaActual() {
 		File archivoJugadores = new File("data/temporada/jugadores.json");
 		File archivoPartidos = new File("data/temporada/partidos.json");
+		ArrayList<Partido> partidos = new ArrayList<Partido>();
 		int resp = 2;
 		if (archivoJugadores.exists()) {
 			this.temporadaActual.setJugadores(this.loader.cargarJugadores(archivoJugadores));
 			resp--;
 		}
 		if (archivoPartidos.exists()) {
-			this.loader.cargarPartidos();
+			this.loader.cargarPartidos(archivoPartidos);
 			resp--;
 		}
 		return resp;
 	}
+	
 	public int guardarEquipo() {
 		loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), ((Participante)this.usuarioActivo).getNombreUsuario());
 		loader.guardarParticipantes(participantes);

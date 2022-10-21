@@ -1,102 +1,452 @@
 [
 	{
-		"nombre":"Nicolas Lozano",
-		"posicion":"defensa",
-		"precio":300000
+		"nombre":"Juan Daniel Espitia",
+		"posicion":"arquero",
+		"precio":300000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Manuel Perez",
-		"posicion":"delantero",
-		"precio":2000
+		"posicion":"arquero",
+		"precio":20000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Juan Esteban Lopez",
-		"posicion":"mediocampista",
-		"precio":100000
+		"posicion":"defensa",
+		"precio":100000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Lionel Messi",
-		"posicion":"delantero",
-		"precio":30000
+		"posicion":"defensa",
+		"precio":30000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Cristiano Ronaldo",
-		"posicion":"delantero",
-		"precio":43000
+		"posicion":"defensa",
+		"precio":43000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Pepe Perez",
-		"posicion":"arquero",
-		"precio":50000
+		"posicion":"defensa",
+		"precio":50000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Carlos Cadena",
-		"posicion":"mediocampista",
-		"precio":3000
+		"posicion":"defensa",
+		"precio":3000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Juan E. Lozano",
 		"posicion":"mediocampista",
-		"precio":500
+		"precio":500,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Tomas Perez",
-		"posicion":"arquero",
-		"precio":40000
+		"posicion":"mediocampista",
+		"precio":40000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Lucas Gonzalez",
-		"posicion":"defensa",
-		"precio":9000
+		"posicion":"mediocampista",
+		"precio":9000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Julian Ortega",
-		"posicion":"defensa",
-		"precio":4000
+		"posicion":"mediocampista",
+		"precio":4000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Santiago Fernandez",
-		"posicion":"delantero",
-		"precio":32000
+		"posicion":"mediocampista",
+		"precio":32000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Armando Manzanero",
-		"posicion":"defensa",
-		"precio":100000
+		"posicion":"delantero",
+		"precio":100000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Pablo Mejia",
-		"posicion":"mediocampista",
-		"precio":200
+		"posicion":"delantero",
+		"precio":200,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Alex Herrera",
-		"posicion":"arquero",
-		"precio":4000
+		"posicion":"delantero",
+		"precio":4000,
+		"equipo":"Nacional"
 	},
 	{
 		"nombre":"Juan Rodriguez",
-		"posicion":"defensa",
-		"precio":3000
+		"posicion":"arquero",
+		"precio":3000,
+		"equipo":"Santa Fe"
 	},
 	{
 		"nombre":"Fabio Fernandez",
-		"posicion":"mediocampista",
-		"precio":5000
+		"posicion":"arquero",
+		"precio":5000,
+		"equipo":"Santa Fe"
 	},
 	{
 		"nombre":"Sando Ortegon",
 		"posicion":"defensa",
-		"precio":3000
+		"precio":3000,
+		"equipo":"Santa Fe"
 	},
 	{
 		"nombre":"Luis Diaz",
-		"posicion":"mediocampista",
-		"precio":45000
+		"posicion":"defensa",
+		"precio":45000,
+		"equipo":"Santa Fe"
 	},
 	{
 		"nombre":"Rufino Ortega",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Kevin Duque",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Santiago Mejia",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Juan Hernandez",
+		"posicion":"mediocampista",
+		"precio":10000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Johan Hernandez",
+		"posicion":"mediocampista",
+		"precio":5000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Santiago Ramírez",
+		"posicion":"mediocampista",
+		"precio":30000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Sebastian Saenz",
+		"posicion":"mediocampista",
+		"precio":25000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Luis Ortega",
+		"posicion":"mediocampista",
+		"precio":70000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Michael Uribe",
 		"posicion":"delantero",
-		"precio":3500
+		"precio":9000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Juan Huertas",
+		"posicion":"delantero",
+		"precio":3000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Jose Pinzon",
+		"posicion":"delantero",
+		"precio":1000,
+		"equipo":"Santa Fe"
+	},
+	{
+		"nombre":"Raul Mendez",
+		"posicion":"arquero",
+		"precio":3000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Nicanor Martinez",
+		"posicion":"arquero",
+		"precio":5000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Aureliano Buendia",
+		"posicion":"defensa",
+		"precio":3000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Carlos Rodriguez",
+		"posicion":"defensa",
+		"precio":45000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Juan Cartagena",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Santiago Montoya",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Eduardo Andrade",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Andres Ortiz",
+		"posicion":"mediocampista",
+		"precio":10000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Lucas Buendia",
+		"posicion":"mediocampista",
+		"precio":38000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Mario Diaz",
+		"posicion":"mediocampista",
+		"precio":4500,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"John Caicedo",
+		"posicion":"mediocampista",
+		"precio":3000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Ian Melian",
+		"posicion":"mediocampista",
+		"precio":28000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Alvaro Cervantes",
+		"posicion":"delantero",
+		"precio":59000,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Luis Morera",
+		"posicion":"delantero",
+		"precio":34500,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Izan Guardiola",
+		"posicion":"delantero",
+		"precio":12900,
+		"equipo":"Millonarios"
+	},
+	{
+		"nombre":"Ramon Figueras",
+		"posicion":"arquero",
+		"precio":3000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Iñaki Pineda",
+		"posicion":"arquero",
+		"precio":5000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Zakaria Alcalde",
+		"posicion":"defensa",
+		"precio":3000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Manel Herranz",
+		"posicion":"defensa",
+		"precio":45000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Pedro Toledo",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Esteban Acedo",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Matias Bernabeu",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Victor Raya",
+		"posicion":"mediocampista",
+		"precio":10000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Manel Valera",
+		"posicion":"mediocampista",
+		"precio":4500,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Samuel Burgos",
+		"posicion":"mediocampista",
+		"precio":6000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Marcos Olmos",
+		"posicion":"mediocampista",
+		"precio":34000,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Gorka Fraga",
+		"posicion":"mediocampista",
+		"precio":12900,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Abdeslam Otero",
+		"posicion":"delantero",
+		"precio":23999,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Youssef Pinilla",
+		"posicion":"delantero",
+		"precio":13478,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Hamza Lorente",
+		"posicion":"delantero",
+		"precio":34679,
+		"equipo":"America"
+	},
+	{
+		"nombre":"Juan Torre",
+		"posicion":"arquero",
+		"precio":3000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Manel Luengo",
+		"posicion":"arquero",
+		"precio":5000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Oier Benavente",
+		"posicion":"defensa",
+		"precio":3000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Victorino Leal",
+		"posicion":"defensa",
+		"precio":45000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Ian Viera",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Antonio Costa",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Eliseo Berrocal",
+		"posicion":"defensa",
+		"precio":3500,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Anibal Llopis",
+		"posicion":"mediocampista",
+		"precio":10000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Cesar Barrera",
+		"posicion":"mediocampista",
+		"precio":24587,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Luis Castellanos",
+		"posicion":"mediocampista",
+		"precio":78900,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Mauro Barragan",
+		"posicion":"mediocampista",
+		"precio":34599,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Tomas Minguez",
+		"posicion":"mediocampista",
+		"precio":23000,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Luciano Valdivia",
+		"posicion":"delantero",
+		"precio":7629,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Dylan Puertas",
+		"posicion":"delantero",
+		"precio":24333,
+		"equipo":"Deportivo Cali"
+	},
+	{
+		"nombre":"Ahmed Rosell",
+		"posicion":"delantero",
+		"precio":1303,
+		"equipo":"Deportivo Cali"
 	}
 ]

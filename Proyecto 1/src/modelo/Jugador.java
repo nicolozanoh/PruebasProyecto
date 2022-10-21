@@ -217,5 +217,8 @@ public abstract class Jugador {
 		this.puntosJornada.add(numJornada-1, puntosJ+puntos);
 		actualizarPuntosTotales();
 	}
+	public String getNombreEquipo() {
+		return this.nombreEquipo;
+	}
 	abstract public double calcularPuntaje(int numJornada);
 }

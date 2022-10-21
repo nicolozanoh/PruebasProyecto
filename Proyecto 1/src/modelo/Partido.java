@@ -10,6 +10,7 @@ public class Partido {
 	private EquipoReal equipoLocal;
 	private EquipoReal equipoVisitante;
 	private int numeroJornada;
+	
 	private int golesLocal;
 	private int golesVisitante;
 	public Date getFecha() {
@@ -20,6 +21,9 @@ public class Partido {
 	}
 	public EquipoReal getEquipoLocal() {
 		return equipoLocal;
+	}
+	public int getNumeroJornada() {
+		return numeroJornada;
 	}
 	public void setEquipoLocal(EquipoReal equipoLocal) {
 		this.equipoLocal = equipoLocal;
