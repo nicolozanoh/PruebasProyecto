@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Temporada {
 	private ArrayList<Jornada> jornadas;
 	private ArrayList<Jugador> jugadores;
@@ -23,9 +25,9 @@ public class Temporada {
 	public ArrayList<EquipoFantasia> getRankingEquiposFantasia() {
 		return rankingEquiposFantasia;
 	}
-	public void setRankingEquiposFantasia() {
-		this.equiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
-		this.rankingEquiposFantasia = this.equiposFantasia;
+	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia>equipos) {
+		equipos.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		this.rankingEquiposFantasia = equipos;
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;

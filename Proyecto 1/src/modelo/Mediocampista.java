@@ -1,6 +1,19 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Mediocampista extends Jugador{
+	public Mediocampista() {
+		minutosJugadosJornada = new ArrayList<Integer>();
+		minutoInicioJornada= new ArrayList<Integer>();
+		minutoSustitucionJornada= new ArrayList<Integer>();
+		golesAnotadosJornada= new ArrayList<Integer>();
+		autogolesJornada= new ArrayList<Integer>();
+		asistenciasJornada= new ArrayList<Integer>();
+		penaltisErradosJornada= new ArrayList<Integer>();
+		amarillasJornada= new ArrayList<Integer>();
+		rojasJornada= new ArrayList<Integer>();
+	}
 	@Override
 	public double calcularPuntaje(int numJornada) {
 		double puntos = 0;

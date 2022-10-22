@@ -146,6 +146,7 @@ public class consolaAplicacion {
         aplicacion.cargarParticipantes();
         aplicacion.cargarAdministrador();
         int resp = aplicacion.cargarTemporadaActual();
+        aplicacion.actualizarReferencias();
         return resp;
     }
     public void ejecutarCargarConfiguracionTemporada() {
@@ -254,8 +255,8 @@ public class consolaAplicacion {
     	System.out.println("\nSeleccione los jugadores que quiere que hagan parte de su equipo./n Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)");
     	System.out.println("\nRecuerde, usted tiene un presupuesto de: " + presupuestoInicial);
     	String[] jugadoresSeleccionados = input("\nSeleccione el número de todos los jugadores que quiere agregar, separados por comas (',').").trim().split(",");
-    	
-    	int resp = aplicacion.crearEquipo(jugadoresSeleccionados);
+    	String nombreEquipo = input("\nEscriba un nombre para su equipo");
+    	int resp = aplicacion.crearEquipo(jugadoresSeleccionados, nombreEquipo);
     	if(resp==0) {
     		System.out.println("\nSu equipo ha sido creado con los siguientes jugadores: ");
     		int cont = 1;
@@ -324,8 +325,8 @@ public class consolaAplicacion {
     public void menuAdmin(){
     	System.out.println("\n1) Cargar información temporada");
     	System.out.println("2) Cargar resultados partido");
-    	System.out.println("3) Ver configuración temporada");
-    	System.out.println("4) Borrar información temporada");
+    	//System.out.println("3) Ver configuración temporada");
+    	System.out.println("3) Borrar información temporada");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuParticipante() {

@@ -7,11 +7,9 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ManejoPersistencia {
@@ -53,40 +51,34 @@ public class ManejoPersistencia {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data\\participantes.json").toFile(), lParticipantes);
+			writer.writeValue(Paths.get("data\\usuarios\\participantes.json").toFile(), lParticipantes);
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
-	public void guardarEquipo(EquipoFantasia equipo, String nombreUsuario) {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			writer.writeValue(Paths.get("data\\equipos\\"+nombreUsuario+".json").toFile(), equipo);
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-		}
-	}
+
+	/*
+	 * public void guardarEquipo(EquipoFantasia equipo, String nombreUsuario) { try
+	 * { ObjectMapper mapper = new ObjectMapper(); ObjectWriter writer =
+	 * mapper.writer(new DefaultPrettyPrinter());
+	 * writer.writeValue(Paths.get("data\\equipos\\"+nombreUsuario+".json").toFile()
+	 * , equipo); } catch(Exception ex) { System.out.println(ex.getMessage()); } }
+	 */
 	public void borrarEquipo(String nombreUsuario) {
 		File archivoEquipo = new File("data\\equipos\\" + nombreUsuario+".json");
 		if(archivoEquipo.exists()) {
 			archivoEquipo.delete();
 		}
-	}
-	public EquipoFantasia cargarEquipoParticipanteActivo(File archivoEquipo) {
-		EquipoFantasia equipoUsuario = new EquipoFantasia();
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			equipoUsuario = mapper.readValue(archivoEquipo, EquipoFantasia.class);
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-		}
-		
-		return equipoUsuario;
-	}
+	}/*
+		 * public EquipoFantasia cargarEquipoParticipanteActivo(File archivoEquipo) {
+		 * EquipoFantasia equipoUsuario = new EquipoFantasia(); try { ObjectMapper
+		 * mapper = new ObjectMapper(); equipoUsuario = mapper.readValue(archivoEquipo,
+		 * EquipoFantasia.class); } catch(Exception ex) {
+		 * System.out.println(ex.getMessage()); }
+		 * 
+		 * return equipoUsuario; }
+		 */
 	public ArrayList<Partido> cargarPartidos(File archivoPartidos) {
 		ArrayList<Partido> partidos = new ArrayList<Partido>();
 		try {

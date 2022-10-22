@@ -11,6 +11,7 @@ public class EquipoReal {
 	private ArrayList<Boolean> resultadoPartido;
 	public EquipoReal() {
 		jugadores = new ArrayList<Jugador>();
+		resultadoPartido = new ArrayList<Boolean>();
 	}
 	public String getNombre() {
 		return nombre;
@@ -31,8 +32,11 @@ public class EquipoReal {
 		this.resultadoPartido = resultadoPartido;
 	}
 	public void actualizarResultadoPartido(int numJornada, Boolean resultado) {
-		this.resultadoPartido.add(numJornada, resultado);
-		if(this.resultadoPartido.get(numJornada) == true) {
+		if(this.resultadoPartido == null) {
+			this.resultadoPartido = new ArrayList<Boolean>();
+		}
+		this.resultadoPartido.add(numJornada-1, resultado);
+		if(this.resultadoPartido.get(numJornada-1) == true) {
 			for(Jugador j: jugadores) {
 				j.actualizarPuntosJornada(numJornada, 1);
 			}

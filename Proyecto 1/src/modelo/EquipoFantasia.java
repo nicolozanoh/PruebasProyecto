@@ -6,7 +6,6 @@ public class EquipoFantasia {
 	private String nombre;
 	private double puntosTotales;
 	private double precio;
-	private double numeroJugadores;
 	private Jugador capitan;
 	private ArrayList<Double> puntosJornada;
 	private ArrayList<Jugador> jugadores;
@@ -26,9 +25,6 @@ public class EquipoFantasia {
 	public double getPuntosTotales() {
 		return puntosTotales;
 	}
-	public double getNumeroJugadores() {
-		return numeroJugadores;
-	}
 	public void setPuntosTotales(double puntosTotales) {
 		this.puntosTotales = puntosTotales;
 	}
@@ -47,17 +43,17 @@ public class EquipoFantasia {
 	public ArrayList<Double> getPuntosJornada() {
 		return puntosJornada;
 	}
-	public void actualizarPuntosJornada() {
+	public void actualizarPuntosJornada(int numJornada) {
 		double puntos=0;
 		for (Jugador j: titulares) {
 			if (j==capitan) {
-				puntos= puntos + (j.getPuntosJornada().get(-1))*2;
+				puntos= puntos + (j.getPuntosJornada().get(numJornada-1))*2;
 			}	
 			else {
-				puntos+=j.getPuntosJornada().get(-1);
+				puntos+=j.getPuntosJornada().get(numJornada-1);
 			}
 		}
-		
+		this.puntosTotales += puntos;
 	}
 	public ArrayList<Jugador> getJugadores() {
 		return jugadores;
@@ -84,7 +80,7 @@ public class EquipoFantasia {
 			if (titulares.contains(jugador)) {
 				titulares.remove(jugador);
 				for (int i =0; i<suplentes.size();i++) {
-					if (jugador.getPosicion() == suplentes.get(i).getPosicion()) {
+					if (jugador.getPosicion().equals((suplentes.get(i).getPosicion()))) {
 						titulares.add(suplentes.get(i));
 						suplentes.remove(i);
 						break;
@@ -141,7 +137,7 @@ public class EquipoFantasia {
 		try {
 			Jugador jugadorTitular = this.suplentes.get(nuevoTitular - 1);
 			Jugador jugadorSuplente = this.titulares.get(nuevoSuplente -1);
-			if (jugadorTitular.getPosicion()== jugadorSuplente.getPosicion()) {
+			if (jugadorTitular.getPosicion().equals(jugadorSuplente.getPosicion())) {
 				titulares.add(jugadorTitular);
 				titulares.remove(jugadorSuplente);
 				suplentes.add(jugadorSuplente);
@@ -161,28 +157,31 @@ public class EquipoFantasia {
 		int delanteros = 0;
 		
 		for (int i = 0; i<copiaJugadores.size();i++) {
-			if(copiaJugadores.get(i).getPosicion() == "defensa" && defensas <4) {
+			if(copiaJugadores.get(i).getPosicion().equals("defensa") && defensas <4) {
 				this.titulares.add(copiaJugadores.get(i));
 				defensas++;
-				copiaJugadores.remove(i);
+				copiaJugadores.set(i, null);
 			}
-			if(copiaJugadores.get(i).getPosicion() == "arquero" && arqueros <1) {
+			else if(copiaJugadores.get(i).getPosicion().equals("arquero") && arqueros <1) {
 				this.titulares.add(copiaJugadores.get(i));
 				arqueros++;
-				copiaJugadores.remove(i);
+				copiaJugadores.set(i, null);
 			}
-			if(copiaJugadores.get(i).getPosicion() == "arquero" && mediocampistas <4) {
+			else if(copiaJugadores.get(i).getPosicion().equals("mediocampista") && mediocampistas <4) {
 				this.titulares.add(copiaJugadores.get(i));
 				mediocampistas++;
-				copiaJugadores.remove(i);
+				copiaJugadores.set(i, null);
 			}
-			if(copiaJugadores.get(i).getPosicion() == "delantero" && delanteros <1) {
+			else if(copiaJugadores.get(i).getPosicion().equals("delantero") && delanteros <2) {
 				this.titulares.add(copiaJugadores.get(i));
 				delanteros++;
-				copiaJugadores.remove(i);
+				copiaJugadores.set(i, null);
 			}
 		}
-		
-		this.suplentes = copiaJugadores;
+		for (int i = 0; i<copiaJugadores.size();i++) {
+			if (copiaJugadores.get(i)!= null) {
+				this.suplentes.add(copiaJugadores.get(i));
+			}
+		}
 	}
 }

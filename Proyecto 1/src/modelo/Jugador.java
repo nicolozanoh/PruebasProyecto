@@ -42,7 +42,17 @@ public abstract class Jugador {
 	protected ArrayList<Integer> penaltisErradosJornada;
 	protected ArrayList<Integer> amarillasJornada;
 	protected ArrayList<Integer> rojasJornada;
-
+	public Jugador() {
+		minutosJugadosJornada = new ArrayList<Integer>();
+		minutoInicioJornada= new ArrayList<Integer>();
+		minutoSustitucionJornada= new ArrayList<Integer>();
+		golesAnotadosJornada= new ArrayList<Integer>();
+		autogolesJornada= new ArrayList<Integer>();
+		asistenciasJornada= new ArrayList<Integer>();
+		penaltisErradosJornada= new ArrayList<Integer>();
+		amarillasJornada= new ArrayList<Integer>();
+		rojasJornada= new ArrayList<Integer>();
+	}
 	public ArrayList<Integer> getMinutosJugadosJornada() {
 		return minutosJugadosJornada;
 	}
@@ -213,9 +223,35 @@ public abstract class Jugador {
 		this.puntosJornada = puntosJornada;
 	}
 	public void actualizarPuntosJornada(int numJornada, double puntos) {
-		double puntosJ = this.puntosJornada.get(numJornada-1);
-		this.puntosJornada.add(numJornada-1, puntosJ+puntos);
-		actualizarPuntosTotales();
+		if(minutosJugadosJornada==null) {
+			minutosJugadosJornada = new ArrayList<Integer>();
+		}
+		if(minutoInicioJornada==null) {
+			minutoInicioJornada= new ArrayList<Integer>();
+		}
+		if(minutoSustitucionJornada==null) {
+			minutoSustitucionJornada= new ArrayList<Integer>();
+		}
+		if(golesAnotadosJornada==null) {
+			golesAnotadosJornada= new ArrayList<Integer>();
+		}
+		if(autogolesJornada==null) {
+			autogolesJornada= new ArrayList<Integer>();
+		}
+		if(asistenciasJornada==null) {
+			asistenciasJornada= new ArrayList<Integer>();
+		}
+		if(penaltisErradosJornada==null) {
+			penaltisErradosJornada= new ArrayList<Integer>();
+		}
+		if(amarillasJornada==null) {
+			amarillasJornada= new ArrayList<Integer>();
+		}
+		if(rojasJornada==null) {
+			rojasJornada= new ArrayList<Integer>();
+		}
+		calcularPuntaje(numJornada);
+		
 	}
 	public String getNombreEquipo() {
 		return this.nombreEquipo;

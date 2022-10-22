@@ -35,11 +35,12 @@ public class Participante extends Usuario{
 	public EquipoFantasia getEquipo() {
 		return equipo;
 	}
-	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados) {
+	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo) {
 		int resp = 0;
 		if (equipo == null) {
 			if (jugadoresSeleccionados.size() == 15){
 				this.equipo = new EquipoFantasia();
+				this.equipo.setNombre(nombreEquipo);
 				for (int i = 0; i< jugadoresSeleccionados.size();i++) {
 					resp = comprarJugador(jugadoresSeleccionados.get(i));
 					if(resp != 0) {
@@ -65,6 +66,7 @@ public class Participante extends Usuario{
 		int resp = 1;
 		if(this.equipo != null) {
 			this.equipo = null;
+			this.presupuesto = 1000000;
 			resp = 0;
 		}
 		return resp;
@@ -82,7 +84,7 @@ public class Participante extends Usuario{
 	}
 	public int comprarJugador(Jugador jugador) {
 		int respuesta;
-		if (this.equipo.getNumeroJugadores() < 15)
+		if (this.equipo.getJugadores().size() < 15)
 		{
 			if(presupuesto >= jugador.getPrecio()){
 				respuesta = this.equipo.agregarJugador(jugador);

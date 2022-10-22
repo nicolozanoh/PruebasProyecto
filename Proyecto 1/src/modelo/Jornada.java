@@ -4,6 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;;
+
+//@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+						//value={"rankingEquiposFantasia","rankingJugadores"})
 public class Jornada {
 	private ArrayList<Partido> partidos; 
 	private int numeroJornada;
@@ -13,6 +20,8 @@ public class Jornada {
 	private String fechaUltimoPartido;
 	public Jornada () {
 		partidos = new ArrayList<Partido>();
+		this.rankingEquiposFantasia = new ArrayList<EquipoFantasia>();
+		this.rankingJugadores = new ArrayList<Jugador>();
 	}
 	public void setFechaPrimerPartido(String fecha) {
 		this.fechaPrimerPartido = fecha;
@@ -43,31 +52,14 @@ public class Jornada {
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
 		this.rankingEquiposFantasia = rankingEquiposFantasia;
-		sortEquipos();
-	}
-	public void sortEquipos() {
 		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1)));
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;
 	}
 	public void setRankingJugadores(ArrayList<Jugador> rankingJugadores) {
-		
+		this.rankingJugadores = rankingJugadores;
 		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada())));
-	}
-	public void agregarJugador(Jugador jugador) {
-		this.rankingJugadores.add(jugador);
-		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
-	}
-	public void agregarEquipoFantasia(EquipoFantasia equipoFantasia) {
-		this.rankingEquiposFantasia.add(equipoFantasia);
-		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada())));
-	}
-	public void actualizarRankingEquiposFantasia() {
-		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
-	}
-	public void actualizarRankingJugadores() {
-		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 	}
 	public Jugador mejorJugadorJornada() {
 		ArrayList<Jugador> ranking = this.getRankingJugadores();

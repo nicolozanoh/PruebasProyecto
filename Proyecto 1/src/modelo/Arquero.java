@@ -10,6 +10,19 @@ public class Arquero extends Jugador{
 	private int penaltisAtajados;
 	private ArrayList<Integer> golesRecibidosJornada;
 	private ArrayList<Integer> penaltisAtajadosJornada;
+	public Arquero() {
+		minutosJugadosJornada = new ArrayList<Integer>();
+		minutoInicioJornada= new ArrayList<Integer>();
+		minutoSustitucionJornada= new ArrayList<Integer>();
+		golesAnotadosJornada= new ArrayList<Integer>();
+		autogolesJornada= new ArrayList<Integer>();
+		asistenciasJornada= new ArrayList<Integer>();
+		penaltisErradosJornada= new ArrayList<Integer>();
+		amarillasJornada= new ArrayList<Integer>();
+		rojasJornada= new ArrayList<Integer>();
+		golesRecibidosJornada = new ArrayList<Integer>();
+		penaltisAtajadosJornada = new ArrayList<Integer>();
+	}
 	public ArrayList<Integer> getGolesRecibidosJornada() {
 		return golesRecibidosJornada;
 	}
@@ -17,7 +30,7 @@ public class Arquero extends Jugador{
 		this.golesRecibidosJornada = golesRecibidosJornada;
 	}
 	public ArrayList<Integer> getPenaltisAtajadosJornada() {
-		return penaltisErradosJornada;
+		return penaltisAtajadosJornada;
 	}
 	public void setPenaltiAtajadosJornada(ArrayList<Integer> penaltisErradosJornada) {
 		this.penaltisErradosJornada = penaltisErradosJornada;
@@ -57,7 +70,7 @@ public class Arquero extends Jugador{
 		}
 	}
 	public int getPenaltisAtajados() {
-		return penaltisAtajados;
+		return this.penaltisAtajados;
 	}
 	public void setPenaltisAtajados() {
 		this.penaltisAtajados = 0;

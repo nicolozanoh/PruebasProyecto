@@ -11,6 +11,18 @@ public class Defensa extends Jugador{
 	public ArrayList<Integer> getGolesRecibidosJornada() {
 		return golesRecibidosJornada;
 	}
+	public Defensa() {
+		minutosJugadosJornada = new ArrayList<Integer>();
+		minutoInicioJornada= new ArrayList<Integer>();
+		minutoSustitucionJornada= new ArrayList<Integer>();
+		golesAnotadosJornada= new ArrayList<Integer>();
+		autogolesJornada= new ArrayList<Integer>();
+		asistenciasJornada= new ArrayList<Integer>();
+		penaltisErradosJornada= new ArrayList<Integer>();
+		amarillasJornada= new ArrayList<Integer>();
+		rojasJornada= new ArrayList<Integer>();
+		golesRecibidosJornada = new ArrayList<Integer>();
+	}
 	public void setGolesRecibidosJornada(ArrayList<Integer> golesRecibidosJornada) {
 		this.golesRecibidosJornada = golesRecibidosJornada;
 	}
