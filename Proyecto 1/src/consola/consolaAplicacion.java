@@ -326,7 +326,7 @@ public class consolaAplicacion {
     	System.out.println("\n1) Cargar información temporada");
     	System.out.println("2) Cargar resultados partido");
     	//System.out.println("3) Ver configuración temporada");
-    	System.out.println("3) Borrar información temporada");
+    	System.out.println("4) Borrar información temporada");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuParticipante() {

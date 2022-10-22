@@ -54,6 +54,9 @@ public class Defensa extends Jugador{
 		if(this.minutosJugadosJornada.get(numJornada-1) > 60) {
 			puntos += 2;
 		}
+		if (this.puntosJornada == null) {
+			this.puntosJornada = new ArrayList<Double>();
+		}
 		this.puntosJornada.add(numJornada-1, puntos);
 		this.actualizarPuntosTotales();
 		return this.puntosTotales;

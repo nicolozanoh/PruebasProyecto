@@ -44,17 +44,20 @@ public class Arquero extends Jugador{
 		puntos += -3 * (double) this.rojasJornada.get(numJornada-1);
 		puntos += -2 * (double) this.autogolesJornada.get(numJornada-1);
 		
-		if(this.golesRecibidosJornada.get(numJornada-1) == 0) {
-			puntos += 4;
-		}
-		if(this.penaltisAtajadosJornada.get(numJornada-1) > 0) {
-			puntos += 5;
-		}
+		/*
+		 * if(this.golesRecibidosJornada.get(numJornada-1) == 0) { puntos += 4; }
+		 */
+		/*
+		 * if(this.penaltisAtajadosJornada.get(numJornada-1) > 0) { puntos += 5; }
+		 */
 		if(this.minutosJugadosJornada.get(numJornada-1) > 1 && this.minutosJugadosJornada.get(numJornada-1) <= 60) {
 			puntos += 1;
 		}
 		if(this.minutosJugadosJornada.get(numJornada-1) > 60) {
 			puntos += 2;
+		}
+		if (this.puntosJornada == null) {
+			this.puntosJornada = new ArrayList<Double>();
 		}
 		this.puntosJornada.add(numJornada-1, puntos);
 		this.actualizarPuntosTotales();

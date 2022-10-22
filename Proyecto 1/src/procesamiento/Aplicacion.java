@@ -419,6 +419,9 @@ public class Aplicacion {
 						Arquero arqueroResultado = (Arquero)jugadorResultado;
 						Arquero arqueroLista = (Arquero)jugadorLista;
 						arqueroLista.getGolesRecibidosJornada().add(numJornada-1, arqueroResultado.getGolesRecibidos());
+						if (arqueroLista.getPenaltisAtajadosJornada()== null) {
+							arqueroLista.setPenaltiAtajadosJornada(new ArrayList<Integer>());
+						}
 						arqueroLista.getPenaltisAtajadosJornada().add(numJornada-1, arqueroResultado.getPenaltisAtajados());
 						
 					}
