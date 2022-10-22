@@ -2,11 +2,15 @@ package procesamiento;
 
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import modelo.ManejoPersistencia;
 import modelo.Administrador;
+import modelo.Arquero;
+import modelo.Defensa;
 import modelo.EquipoFantasia;
 import modelo.EquipoReal;
+import modelo.Jornada;
 import modelo.Jugador;
 import modelo.Participante;
 import modelo.Partido;
@@ -148,26 +152,46 @@ public class Aplicacion {
 		return resp;
 	}
 	public int venderJugador(int numJugador) {
-		int resp = ((Participante)this.getUsuarioActivo()).venderJugador(numJugador);
+		boolean modificar = permitirModificar();
+		int resp;
+		if (modificar) {
+			resp = ((Participante)this.getUsuarioActivo()).venderJugador(numJugador);
+		}
+		else {
+			resp = 3;
+		}
 		return resp;
 	}
 	public int comprarJugador(int numJugador) {
 		int resp;
-		try {		
-			Jugador jugador = this.getTemporada().getJugadores().get(numJugador- 1);
-			resp = ((Participante)this.getUsuarioActivo()).comprarJugador(jugador);
-			if (resp == 0) {
-				guardarEquipo();
-				loader.guardarParticipantes(participantes);
+		boolean modificar = permitirModificar();
+		if(modificar) {
+			try {		
+				Jugador jugador = this.getTemporada().getJugadores().get(numJugador- 1);
+				resp = ((Participante)this.getUsuarioActivo()).comprarJugador(jugador);
+				if (resp == 0) {
+					guardarEquipo();
+					loader.guardarParticipantes(participantes);
+				}
+			}catch(Exception ex){
+				resp = 1;
 			}
-		}catch(Exception ex){
-			resp = 1;
+		}
+		else{
+			resp = 8;
 		}
 		return resp;
 	}
 	public int cambiarAlineacion(int nuevoTitular, int nuevoSuplente) {
-		int resp = ((Participante)this.usuarioActivo).modificarAlineacion(nuevoTitular, nuevoSuplente);
-		loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), this.usuarioActivo.getNombreUsuario());
+		boolean modificar = permitirModificar();
+		int resp;
+		if(modificar) {
+			resp = ((Participante)this.usuarioActivo).modificarAlineacion(nuevoTitular, nuevoSuplente);
+			loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), this.usuarioActivo.getNombreUsuario());
+		}
+		else {
+			resp = 3;
+		}
 		return resp;
 	}
 	public int consultarPuntajeEquipo(EquipoFantasia equipo) {
@@ -224,6 +248,71 @@ public class Aplicacion {
 			resp--;
 		}
 		return resp;
+	}
+	public void actualizarReferencias() {
+		Jugador jugador;
+		Participante participante;
+		String nombre;
+		String equipo;
+		String posicion;
+		Partido partido;
+		for(int i = 0; i<this.temporadaActual.getJugadores().size();i++) {
+			jugador = this.temporadaActual.getJugadores().get(i);
+			for(int j = 0; j<this.participantes.size();j++) {
+				participante = this.participantes.get(j);
+				for(int h = 0; h<participante.getEquipo().getJugadores().size(); h++) {
+					nombre =participante.getEquipo().getJugadores().get(h).getNombre();
+					equipo = participante.getEquipo().getJugadores().get(h).getNombreEquipo();
+					posicion = participante.getEquipo().getJugadores().get(h).getPosicion();
+					if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+						participante.getEquipo().getJugadores().set(h, jugador);
+						break;
+					}
+				}
+				for(int h = 0; h<participante.getEquipo().getTitulares().size(); h++) {
+					nombre =participante.getEquipo().getTitulares().get(h).getNombre();
+					equipo = participante.getEquipo().getTitulares().get(h).getNombreEquipo();
+					posicion = participante.getEquipo().getTitulares().get(h).getPosicion();
+					if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+						participante.getEquipo().getTitulares().set(h, jugador);
+						break;
+					}
+				}
+				for(int h = 0; h<participante.getEquipo().getSuplentes().size(); h++) {
+					nombre =participante.getEquipo().getSuplentes().get(h).getNombre();
+					equipo = participante.getEquipo().getSuplentes().get(h).getNombreEquipo();
+					posicion = participante.getEquipo().getSuplentes().get(h).getPosicion();
+					if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+						participante.getEquipo().getSuplentes().set(h, jugador);
+						break;
+					}
+				}
+			}
+			
+			for(int j = 0; j<this.temporadaActual.getJornadas().size();j++) {
+				for(int h = 0; h < this.temporadaActual.getJornadas().get(j).getPartidos().size();h++) {
+					partido = this.temporadaActual.getJornadas().get(j).getPartidos().get(h);
+					for (int k = 0; k<partido.getEquipoLocal().getJugadores().size();k++) {
+						nombre =partido.getEquipoLocal().getJugadores().get(k).getNombre();
+						equipo = partido.getEquipoLocal().getJugadores().get(k).getNombreEquipo();
+						posicion = partido.getEquipoLocal().getJugadores().get(k).getPosicion();
+						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+							this.temporadaActual.getJornadas().get(j).getPartidos().get(h).getEquipoLocal().getJugadores().set(k, jugador);
+							break;
+						}
+					}
+					for (int k = 0; k<partido.getEquipoVisitante().getJugadores().size();k++) {
+						nombre =partido.getEquipoVisitante().getJugadores().get(h).getNombre();
+						equipo = partido.getEquipoVisitante().getJugadores().get(h).getNombreEquipo();
+						posicion = partido.getEquipoVisitante().getJugadores().get(h).getPosicion();
+						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+							this.temporadaActual.getJornadas().get(j).getPartidos().get(h).getEquipoLocal().getJugadores().set(k, jugador);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	public int guardarEquipo() {
@@ -283,5 +372,80 @@ public class Aplicacion {
 	}
 	public void borrarArchivosTemporada() {
 		this.loader.borrarArchivosTemporada();
+	}
+	public boolean permitirModificar() {
+		LocalDateTime fechaActual = LocalDateTime.now();
+		LocalDateTime fechaPrimerPartido;
+		LocalDateTime fechaUltimoPartido;
+		LocalDateTime inicioJornada;
+		LocalDateTime finJornada;
+		boolean resp = true;
+		for (int i = 0; i<this.temporadaActual.getJornadas().size();i++) {
+			fechaPrimerPartido = LocalDateTime.parse(this.temporadaActual.getJornadas().get(i).getFechaPrimerPartido());
+			inicioJornada = LocalDateTime.of(fechaPrimerPartido.getYear(), fechaPrimerPartido.getMonth(), fechaPrimerPartido.getDayOfMonth(), 00, 00);
+			fechaUltimoPartido = LocalDateTime.parse(this.temporadaActual.getJornadas().get(i).getFechaUltimoPartido());
+			finJornada = LocalDateTime.of(fechaUltimoPartido.getYear(), fechaUltimoPartido.getMonth(), fechaUltimoPartido.getDayOfMonth(), 00, 00);
+			if (fechaActual.isAfter(inicioJornada)&&fechaActual.isBefore(finJornada)) {
+				resp = false;
+				break;
+			}
+		}
+		return resp;
+	}
+	public int cargarResultadoPartido(String rutaResultadoPartido) {
+		File resultadoPartido = new File(rutaResultadoPartido);
+		Partido datosPartido = this.loader.cargarResultadoPartido(resultadoPartido);
+		Jugador jugadorResultado;
+		Jugador jugadorLista;
+		int numJornada = datosPartido.getNumeroJornada();
+		for (int i = 0; i<datosPartido.getEquipoLocal().getJugadores().size();i++) {
+			jugadorResultado = datosPartido.getEquipoLocal().getJugadores().get(i);
+			for (int j = 0; j<this.temporadaActual.getJugadores().size();j++) {
+				jugadorLista = this.temporadaActual.getJugadores().get(j);
+				if(jugadorLista.getNombre().equals(jugadorResultado.getNombre())&&jugadorLista.getPosicion().equals(jugadorResultado.getPosicion())&&jugadorLista.getNombreEquipo().equals(jugadorResultado.getNombreEquipo())) {
+					jugadorLista.getMinutosJugadosJornada().add(numJornada-1, jugadorResultado.getMinutosJugados());
+					jugadorLista.getMinutoInicioJornada().add(numJornada-1, jugadorResultado.getMinutoInicio());
+					jugadorLista.getMinutoSustitucionJornada().add(numJornada-1, jugadorResultado.getMinutoSustitucion());
+					jugadorLista.getGolesAnotadosJornada().add(numJornada-1, jugadorResultado.getGolesAnotados());
+					jugadorLista.getAutogolesJornada().add(numJornada-1, jugadorResultado.getAutogoles());
+					jugadorLista.getAsistenciasJornada().add(numJornada-1, jugadorResultado.getAsistencias());
+					jugadorLista.getPenaltisErradosJornada().add(numJornada-1, jugadorResultado.getPenaltisErrados());
+					jugadorLista.getAmarillasJornada().add(numJornada-1, jugadorResultado.getAmarillas());
+					jugadorLista.getRojasJornada().add(numJornada-1, jugadorResultado.getRojas());
+					if(jugadorResultado.getPosicion().equals("arquero")) {
+						Arquero arqueroResultado = (Arquero)jugadorResultado;
+						Arquero arqueroLista = (Arquero)jugadorLista;
+						arqueroLista.getGolesRecibidosJornada().add(numJornada-1, arqueroResultado.getGolesRecibidos());
+						arqueroLista.getPenaltisAtajadosJornada().add(numJornada-1, arqueroResultado.getPenaltisAtajados());
+					}
+					if(jugadorResultado.getPosicion().equals("defensa")) {
+						Defensa defensaResultado = (Defensa)jugadorResultado;
+						Defensa defensaLista = (Defensa)jugadorLista;
+						defensaLista.getGolesRecibidosJornada().add(numJornada-1, defensaResultado.getGolesRecibidos());
+					}
+				}
+			} 
+		}
+		for (int i = 0; i<datosPartido.getEquipoVisitante().getJugadores().size();i++) {
+			jugadorResultado = datosPartido.getEquipoVisitante().getJugadores().get(i);
+			for (int j = 0; j<this.temporadaActual.getJugadores().size();j++) {
+				jugadorLista = this.temporadaActual.getJugadores().get(j);
+				if(jugadorLista.getNombre().equals(jugadorResultado.getNombre())&&jugadorLista.getPosicion().equals(jugadorResultado.getPosicion())&&jugadorLista.getNombreEquipo().equals(jugadorResultado.getNombreEquipo())) {
+					jugadorLista.getMinutosJugadosJornada().add(numJornada-1, jugadorResultado.getMinutosJugados());
+					jugadorLista.getMinutoInicioJornada().add(numJornada-1, jugadorResultado.getMinutoInicio());
+					jugadorLista.getMinutoSustitucionJornada().add(numJornada-1, jugadorResultado.getMinutoSustitucion());
+					jugadorLista.getGolesAnotadosJornada().add(numJornada-1, jugadorResultado.getGolesAnotados());
+					jugadorLista.getAutogolesJornada().add(numJornada-1, jugadorResultado.getAutogoles());
+					jugadorLista.getAsistenciasJornada().add(numJornada-1, jugadorResultado.getAsistencias());
+					jugadorLista.getPenaltisErradosJornada().add(numJornada-1, jugadorResultado.getPenaltisErrados());
+					jugadorLista.getAmarillasJornada().add(numJornada-1, jugadorResultado.getAmarillas());
+					jugadorLista.getRojasJornada().add(numJornada-1, jugadorResultado.getRojas());
+				}
+			} 
+		}
+		Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
+		//for(int i = 0; i<this.)
+		
+		return 0;
 	}
 }

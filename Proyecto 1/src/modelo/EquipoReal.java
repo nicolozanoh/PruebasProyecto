@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class EquipoReal {
 	private String nombre;
 	private ArrayList<Jugador> jugadores;
-	private ArrayList<String> resultadoPartido; // Puede tener como valor "SI" o "NO"
+	private ArrayList<Boolean> resultadoPartido;
 	public EquipoReal() {
 		jugadores = new ArrayList<Jugador>();
 	}
@@ -24,20 +24,20 @@ public class EquipoReal {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
-	public ArrayList<String> getResultadoPartido() {
+	public ArrayList<Boolean> getResultadoPartido() {
 		return resultadoPartido;
 	}
-	public void setResultadoPartido(ArrayList<String> resultadoPartido) {
+	public void setResultadoPartido(ArrayList<Boolean> resultadoPartido) {
 		this.resultadoPartido = resultadoPartido;
 	}
-	public void actualizarResultadoPartido(int numJornada, String resultado) {
+	public void actualizarResultadoPartido(int numJornada, Boolean resultado) {
 		this.resultadoPartido.add(numJornada, resultado);
-		if(this.resultadoPartido.get(numJornada) == "SI") {
+		if(this.resultadoPartido.get(numJornada) == true) {
 			for(Jugador j: jugadores) {
 				j.actualizarPuntosJornada(numJornada, 1);
 			}
 		}
-		else if (this.resultadoPartido.get(numJornada) == "NO") {
+		else if (this.resultadoPartido.get(numJornada) == false) {
 			for(Jugador j: jugadores) {
 				j.actualizarPuntosJornada(numJornada, 0);
 			}

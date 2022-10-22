@@ -1,22 +1,22 @@
 package modelo;
 
 import java.util.Date;
-
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Partido {
-	private Date fecha;
+	private String fecha;
 	private EquipoReal equipoLocal;
 	private EquipoReal equipoVisitante;
 	private int numeroJornada;
-	
 	private int golesLocal;
 	private int golesVisitante;
-	public Date getFecha() {
+	
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public EquipoReal getEquipoLocal() {
@@ -48,16 +48,16 @@ public class Partido {
 	}
 	public void actualizarResultadoPartido(int numJornada) {
 		if (this.golesLocal > this.golesVisitante) {
-			this.equipoLocal.actualizarResultadoPartido(numJornada, "SI");
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, "NO");
+			this.equipoLocal.actualizarResultadoPartido(numJornada, true);
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, false);
 		}
 		else if (this.golesLocal < this.golesVisitante) {
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, "SI");
-			this.equipoLocal.actualizarResultadoPartido(numJornada, "NO");
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, true);
+			this.equipoLocal.actualizarResultadoPartido(numJornada, false);
 		}
 		else {
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, "NO");
-			this.equipoLocal.actualizarResultadoPartido(numJornada, "NO");
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, false);
+			this.equipoLocal.actualizarResultadoPartido(numJornada, false);
 		}
 	}
 }

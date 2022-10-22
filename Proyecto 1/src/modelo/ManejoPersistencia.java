@@ -7,9 +7,12 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ManejoPersistencia {
 	public ArrayList<Participante> cargarParticipantes(File archivoParticipantes){
@@ -129,10 +132,18 @@ public class ManejoPersistencia {
 	}
 	public ArrayList<Jornada> llenarJornadas(ArrayList<Partido> partidos){
 		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
+		LocalDateTime fechaPartido;
 		for (int i = 0; i < partidos.size(); i++) {
 			int coincidio = 0;
 			for (int j = 0; j < jornadas.size(); j++) {
 				if(partidos.get(i).getNumeroJornada() == jornadas.get(j).getNumeroJornada()) {
+					fechaPartido = LocalDateTime.parse(partidos.get(i).getFecha());
+					if (LocalDateTime.parse(jornadas.get(j).getFechaPrimerPartido()).isAfter(fechaPartido)) {
+						jornadas.get(j).setFechaPrimerPartido(fechaPartido.toString());
+					}
+					if (LocalDateTime.parse(jornadas.get(j).getFechaUltimoPartido()).isBefore(fechaPartido)) {
+						jornadas.get(j).setFechaUltimoPartido(fechaPartido.toString());
+					}
 					jornadas.get(j).getPartidos().add(partidos.get(i));
 					coincidio++;
 				}
@@ -141,6 +152,8 @@ public class ManejoPersistencia {
 				Jornada nuevaJornada = new Jornada();
 				nuevaJornada.setNumeroJornada(partidos.get(i).getNumeroJornada());
 				nuevaJornada.getPartidos().add(partidos.get(i));
+				nuevaJornada.setFechaPrimerPartido(partidos.get(i).getFecha());
+				nuevaJornada.setFechaUltimoPartido(partidos.get(i).getFecha());
 				jornadas.add(nuevaJornada);
 			}
 		}
@@ -189,4 +202,17 @@ public class ManejoPersistencia {
 			archivoJornadas.delete();
 		}
 	}
+	public Partido cargarResultadoPartido(File resultadoPartido) {
+		Partido partido = new Partido();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			partido = mapper.readValue(resultadoPartido, Partido.class);
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return partido;
+	}
+	
 }

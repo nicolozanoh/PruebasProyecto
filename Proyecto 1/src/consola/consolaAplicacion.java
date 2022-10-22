@@ -14,7 +14,7 @@ public class consolaAplicacion {
     	int respCrearCuenta;
     	int opcionSeleccionada;
     	aplicacion = new Aplicacion();
-    	cargarDataActual();
+    	int respCargarData = cargarDataActual();
     	boolean iniciarAplicacion = true;
     	boolean sesionIniciada = false;
     	while(iniciarAplicacion) {
@@ -46,7 +46,7 @@ public class consolaAplicacion {
     					ejecutarCargarConfiguracionTemporada();
     				}
     				else if(opcionSeleccionada == 2){
-    					
+    					ejecutarCargarResultadosPartido();
     				}
     				else if(opcionSeleccionada == 3){
     					
@@ -64,8 +64,14 @@ public class consolaAplicacion {
     			}
     			
     			if (aplicacion.getUsuarioActivo().getClass().getName() ==  "modelo.Participante") {
-    				menuParticipante();
-    				opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
+    				if (respCargarData == 0) {
+    					menuParticipante();
+    					opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
+    				}
+    				else {
+    					System.out.println("Aún no se ha cargado la configuración de la temporada. Por favor vuelva más tarde.");
+    					opcionSeleccionada = 0;
+    				}
     				if(opcionSeleccionada == 1){
     					ejecutarCrearEquipo();
     				}
@@ -98,7 +104,12 @@ public class consolaAplicacion {
     		}
     	}
     }
-    public void ejecutarBorrarInformacionTemporada() {
+    private void ejecutarCargarResultadosPartido() {
+    	String rutaResultadoPartido = input("Por favor ingrese la ruta del archivo con el resultado del partido que desea cargar");
+    	int resp = this.aplicacion.cargarResultadoPartido(rutaResultadoPartido);
+		
+	}
+	public void ejecutarBorrarInformacionTemporada() {
     	System.out.println("¿Está seguro que desea eliminar la configuración de la temporada?");
     	menuConfirmarBorrar();
     	int respuesta = Integer.parseInt(input("Por favor seleccione una opción"));
@@ -121,17 +132,21 @@ public class consolaAplicacion {
     	if (resp== 0) {
 			System.out.println("\nSu equipo ha sido modificado exitosamente.");
 		}
-		if (resp== 1) {
+    	else if (resp== 1) {
 			System.out.println("\nError: Los jugadores seleccionados no juegan en la misma posición.");
 		}
-		if (resp== 2) {
+    	else if (resp== 2) {
 			System.out.println("\nError: Los números seleccionados no son validos.");
 		}
+    	else if (resp== 3) {
+			System.out.println("\nError: No sé puede modificar el equipo mientras en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.");
+		}
     }
-    public void cargarDataActual(){
+    public int cargarDataActual(){
         aplicacion.cargarParticipantes();
         aplicacion.cargarAdministrador();
-        aplicacion.cargarTemporadaActual();
+        int resp = aplicacion.cargarTemporadaActual();
+        return resp;
     }
     public void ejecutarCargarConfiguracionTemporada() {
     	String rutaJugadores = input("Por favor ingrese la ruta del arcchivo con la información de los jugadores");
@@ -207,6 +222,9 @@ public class consolaAplicacion {
     	else if(resp==7) {
     		System.out.println("\nError: Su equipo está lleno, para comprar un nuevo jugador, primero venda otro.");
     	}
+    	else if (resp== 8) {
+			System.out.println("\nError: No sé puede modificar el equipo mientras en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.");
+		}
     }
     public void ejecutarVenderJugador() {
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getJugadores());
@@ -221,6 +239,9 @@ public class consolaAplicacion {
     	else if(resp==2) {
     		System.out.println("\nError: Su equipo ya tiene menos de 15 jugadores, para poder vender más su equipo debe estar completo.");
     	}
+    	if (resp== 3) {
+			System.out.println("\nError: No sé puede modificar el equipo mientras en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.");
+		}
     }   
     public void menuInicio(){
     	System.out.println("\n1) Iniciar Sesión");
@@ -302,7 +323,7 @@ public class consolaAplicacion {
     }
     public void menuAdmin(){
     	System.out.println("\n1) Cargar información temporada");
-    	System.out.println("2) Cargar información jornada");
+    	System.out.println("2) Cargar resultados partido");
     	System.out.println("3) Ver configuración temporada");
     	System.out.println("4) Borrar información temporada");
     	System.out.println("0) Cerrar sesión");

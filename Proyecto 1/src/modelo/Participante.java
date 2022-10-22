@@ -3,8 +3,7 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true,
-					   value = {"equipo"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Participante extends Usuario{
 	private double presupuesto;
 	private EquipoFantasia equipo;

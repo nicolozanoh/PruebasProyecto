@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,9 +9,22 @@ public class Jornada {
 	private int numeroJornada;
 	private ArrayList<EquipoFantasia> rankingEquiposFantasia;
 	private ArrayList<Jugador> rankingJugadores;
-	private Date fechaPrimerPartido;
+	private String fechaPrimerPartido;
+	private String fechaUltimoPartido;
 	public Jornada () {
 		partidos = new ArrayList<Partido>();
+	}
+	public void setFechaPrimerPartido(String fecha) {
+		this.fechaPrimerPartido = fecha;
+	}
+	public String getFechaPrimerPartido() {
+		return this.fechaPrimerPartido;
+	}
+	public String getFechaUltimoPartido() {
+		return fechaUltimoPartido;
+	}
+	public void setFechaUltimoPartido(String fechaUltimoPartido) {
+		this.fechaUltimoPartido = fechaUltimoPartido;
 	}
 	public ArrayList<Partido> getPartidos() {
 		return partidos;
@@ -28,8 +42,11 @@ public class Jornada {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
-
-		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada())));
+		this.rankingEquiposFantasia = rankingEquiposFantasia;
+		sortEquipos();
+	}
+	public void sortEquipos() {
+		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1)));
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;
