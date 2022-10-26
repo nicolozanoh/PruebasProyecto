@@ -419,9 +419,6 @@ public class Aplicacion {
 						Arquero arqueroResultado = (Arquero)jugadorResultado;
 						Arquero arqueroLista = (Arquero)jugadorLista;
 						arqueroLista.getGolesRecibidosJornada().add(numJornada-1, arqueroResultado.getGolesRecibidos());
-						if (arqueroLista.getPenaltisAtajadosJornada()== null) {
-							arqueroLista.setPenaltiAtajadosJornada(new ArrayList<Integer>());
-						}
 						arqueroLista.getPenaltisAtajadosJornada().add(numJornada-1, arqueroResultado.getPenaltisAtajados());
 						
 					}
@@ -447,6 +444,18 @@ public class Aplicacion {
 					jugadorLista.getPenaltisErradosJornada().add(numJornada-1, jugadorResultado.getPenaltisErrados());
 					jugadorLista.getAmarillasJornada().add(numJornada-1, jugadorResultado.getAmarillas());
 					jugadorLista.getRojasJornada().add(numJornada-1, jugadorResultado.getRojas());
+					if(jugadorResultado.getPosicion().equals("arquero")) {
+						Arquero arqueroResultado = (Arquero)jugadorResultado;
+						Arquero arqueroLista = (Arquero)jugadorLista;
+						arqueroLista.getGolesRecibidosJornada().add(numJornada-1, arqueroResultado.getGolesRecibidos());
+						arqueroLista.getPenaltisAtajadosJornada().add(numJornada-1, arqueroResultado.getPenaltisAtajados());
+						
+					}
+					if(jugadorResultado.getPosicion().equals("defensa")) {
+						Defensa defensaResultado = (Defensa)jugadorResultado;
+						Defensa defensaLista = (Defensa)jugadorLista;
+						defensaLista.getGolesRecibidosJornada().add(numJornada-1, defensaResultado.getGolesRecibidos());
+					}
 				}
 			} 
 		}
@@ -520,4 +529,12 @@ public class Aplicacion {
 		}
 		return equipos;
 	}
+	/*
+	 * public ArrayList<EquipoReal> crearArrayEquiposReales(){
+	 * ArrayList<EquipoFantasia> equipos = new ArrayList<EquipoFantasia>();
+	 * EquipoFantasia equipo = new EquipoFantasia(); for (int i = 0;
+	 * i<this.participantes.size();i++) { equipo =
+	 * this.participantes.get(i).getEquipo(); equipos.add(equipo); } return equipos;
+	 * }
+	 */
 }

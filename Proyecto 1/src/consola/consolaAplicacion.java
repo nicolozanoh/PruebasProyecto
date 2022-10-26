@@ -146,7 +146,9 @@ public class consolaAplicacion {
         aplicacion.cargarParticipantes();
         aplicacion.cargarAdministrador();
         int resp = aplicacion.cargarTemporadaActual();
-        aplicacion.actualizarReferencias();
+        if (resp == 0) {
+        	aplicacion.actualizarReferencias();
+        }
         return resp;
     }
     public void ejecutarCargarConfiguracionTemporada() {

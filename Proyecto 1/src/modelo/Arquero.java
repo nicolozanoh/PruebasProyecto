@@ -37,6 +37,7 @@ public class Arquero extends Jugador{
 	}
 	public double calcularPuntaje(int numJornada) {
 		double puntos = 0;
+		System.out.println(this.getNombre());
 		puntos += 5 * (double) this.golesAnotadosJornada.get(numJornada-1);
 		puntos += 3 * (double) this.asistenciasJornada.get(numJornada-1);
 		puntos += -2 * (double) this.penaltisErradosJornada.get(numJornada-1);
@@ -44,12 +45,15 @@ public class Arquero extends Jugador{
 		puntos += -3 * (double) this.rojasJornada.get(numJornada-1);
 		puntos += -2 * (double) this.autogolesJornada.get(numJornada-1);
 		
-		/*
-		 * if(this.golesRecibidosJornada.get(numJornada-1) == 0) { puntos += 4; }
-		 */
-		/*
-		 * if(this.penaltisAtajadosJornada.get(numJornada-1) > 0) { puntos += 5; }
-		 */
+		if(this.golesRecibidosJornada.get(numJornada-1) == 0) { 
+			  	puntos += 4; 
+		}
+		 
+		
+		if(this.penaltisAtajadosJornada.get(numJornada-1) > 0) { 
+			  puntos += 5; 
+		}
+		 
 		if(this.minutosJugadosJornada.get(numJornada-1) > 1 && this.minutosJugadosJornada.get(numJornada-1) <= 60) {
 			puntos += 1;
 		}
