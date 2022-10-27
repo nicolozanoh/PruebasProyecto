@@ -121,6 +121,25 @@ public class consolaAplicacion {
     private void verEstadisticasTemporada() {
     	Jugador mejorJugador = this.aplicacion.mejorJugadorActual();
     	EquipoFantasia mejorEquipo = this.aplicacion.mejorEquipoActual();
+    	String sPuntos = Double.toString(mejorEquipo.getPuntosJornada().get(0));
+    	for (int i = 1; i<mejorEquipo.getPuntosJornada().size();i++) {
+			sPuntos += ", " + Double.toString(mejorEquipo.getPuntosJornada().get(i));
+		}
+    	System.out.println("El mejor equipo de la temporada es: ");
+		System.out.println("Nombre: "+mejorEquipo.getNombre());
+		System.out.println("Puntos totales: "+ Double.toString(mejorEquipo.getPuntosTotales()));
+		System.out.println("Puntos jornada: "+ sPuntos);
+		
+		sPuntos = Double.toString(mejorJugador.getPuntosJornada().get(0));
+		for (int i = 1; i<mejorJugador.getPuntosJornada().size();i++) {
+			sPuntos += ", " + Double.toString(mejorJugador.getPuntosJornada().get(i));
+		}
+		System.out.println("\nEl mejor jugador de la temporada es: ");
+		System.out.println("Nombre: "+mejorJugador.getNombre());
+		System.out.println("Puntos totales: "+ Double.toString(mejorJugador.getPuntosTotales()));
+		System.out.println("Equipo: "+ mejorJugador.getNombreEquipo());
+		System.out.println("Puntos jornada: "+ sPuntos);
+		
 	}
 	private void verEstadisticasJornada() {
 		int numJornada = Integer.parseInt(input("Ingrese el numero de la jornada de la que quiere consultar la información"));
