@@ -486,6 +486,10 @@ public class Aplicacion {
 		actualizarRankingEquipos();
 		actualizarRankingJugadores();
 		
+		loader.guardarJornadas(this.temporadaActual.getJornadas());
+		loader.guardarJugadores(this.temporadaActual.getJugadores());
+		loader.guardarParticipantes(this.participantes);
+		
 		return 0;
 	}
 	public void actualizarPuntosEquipos(int numJornada) {
@@ -545,5 +549,9 @@ public class Aplicacion {
 	 */
 	public void cambiarCapitan(int nuevoCapitan) {
 		((Participante)this.usuarioActivo).cambiarCapitan(nuevoCapitan);
+	}
+	public int encontrarPosicion() {
+		return this.temporadaActual.getRankingEquiposFantasia().indexOf(((Participante)usuarioActivo).getEquipo());
+		
 	}
 }

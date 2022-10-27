@@ -93,6 +93,15 @@ public class consolaAplicacion {
     				else if(opcionSeleccionada == 7){
     					ejecutarVenderJugador();
     				}
+    				else if(opcionSeleccionada == 8){
+    					verEstadisticasEquipo();
+    				}
+    				else if(opcionSeleccionada == 9){
+    					verEstadisticasJornada();
+    				}
+    				else if(opcionSeleccionada == 10){
+    					verEstadisticasTemporada();
+    				}
     				else if(opcionSeleccionada == 11){
     					ejecutarGuardarCambiosParticipante();
     				}
@@ -107,7 +116,28 @@ public class consolaAplicacion {
     		}
     	}
     }
-    private void ejecutarCambiarCapitan() {
+    private void verEstadisticasTemporada() {
+    	
+		
+	}
+	private void verEstadisticasJornada() {
+		
+		
+	}
+	private void verEstadisticasEquipo() {
+    	ArrayList<Double> puntosJornada = ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getPuntosJornada();
+    	String sPuntos = Double.toString(puntosJornada.get(0));
+    	int posicionActual = this.aplicacion.encontrarPosicion();
+		System.out.println("Nombre: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getNombre());
+		System.out.println("Posicion Actual: " + Integer.toString(posicionActual));
+		System.out.println("Puntos totales: "+Double.toString(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getPuntosTotales()));
+		
+		for (int i = 1; i<puntosJornada.size();i++) {
+			sPuntos += ", " + Double.toString(puntosJornada.get(i));
+		}
+		System.out.println("Puntos por jornada: " + sPuntos);
+	}
+	private void ejecutarCambiarCapitan() {
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
     	int nuevoCapitan = Integer.parseInt(input("\nSeleccione el jugador titular que quiere que sea el capitan."));
     	this.aplicacion.cambiarCapitan(nuevoCapitan);
@@ -126,6 +156,7 @@ public class consolaAplicacion {
     	}
     }
     public void verAlineacionEquipo() {
+    	System.out.println("Capitan: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getCapitan().getNombre());
     	System.out.println("Titulares:\n");
     	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
     	System.out.println("Suplentes:\n");
