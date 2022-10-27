@@ -257,5 +257,10 @@ public abstract class Jugador {
 	public String getNombreEquipo() {
 		return this.nombreEquipo;
 	}
+	public void iniciarPuntosJornada(int numJornadas) {
+		for (int i = 0; i<numJornadas;i++) {
+			this.puntosJornada.add(0.00);
+		}
+	}
 	abstract public double calcularPuntaje(int numJornada);
 }

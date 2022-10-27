@@ -15,6 +15,7 @@ public class EquipoFantasia {
 		this.jugadores = new ArrayList<Jugador>();
 		this.titulares = new ArrayList<Jugador>();
 		this.suplentes = new ArrayList<Jugador>();
+		this.puntosJornada = new ArrayList<>();
 	}
 	public String getNombre() {
 		return nombre;
@@ -183,5 +184,15 @@ public class EquipoFantasia {
 				this.suplentes.add(copiaJugadores.get(i));
 			}
 		}
+		this.capitan = this.titulares.get(0);
+	}
+	public void iniciarPuntosJornada(int numJornada) {
+		for (int i = 0; i<numJornada;i++) {
+			this.puntosJornada.add(0.00);
+		}
+	}
+	public void cambiarEquipo(int nuevoCapitan) {
+		this.capitan = this.titulares.get(nuevoCapitan-1);
+		
 	}
 }

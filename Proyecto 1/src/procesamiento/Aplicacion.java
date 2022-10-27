@@ -145,11 +145,12 @@ public class Aplicacion {
 	}
 	public int crearEquipo(String[] jugadoresSeleccionados, String nombreEquipo) {
 		int resp = 0;
+	
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		for (int i = 0; i<jugadoresSeleccionados.length;i++) {
 			jugadores.add(this.temporadaActual.getJugadores().get(Integer.parseInt(jugadoresSeleccionados[i])-1));
 		}
-		resp = ((Participante) usuarioActivo).crearEquipo(jugadores, nombreEquipo);
+		resp = ((Participante) usuarioActivo).crearEquipo(jugadores, nombreEquipo, this.temporadaActual.getJornadas().size());
 		return resp;
 	}
 	public int venderJugador(int numJugador) {
@@ -350,13 +351,13 @@ public class Aplicacion {
 		int resp = 3;
 		if(!(archivoJugadores.exists()|| archivoJornadas.exists())) {
 			resp = 2;
-			if (nuevoArchivoJugadores.exists()) {
-				this.temporadaActual.setJugadores(this.loader.cargarJugadores(nuevoArchivoJugadores));
-				resp = 1;
-			}
 			if (nuevoArchivoPartidos.exists()) {
 				partidos = this.loader.cargarPartidos(nuevoArchivoPartidos);
-				resp=0;
+				resp=1;
+			}
+			if (nuevoArchivoJugadores.exists()) {
+				this.temporadaActual.setJugadores(this.loader.cargarJugadores(nuevoArchivoJugadores));
+				resp = 0;
 			}
 			if (resp == 0) {
 				ArrayList<EquipoReal> equipos = new ArrayList<EquipoReal>();
@@ -364,6 +365,9 @@ public class Aplicacion {
 				partidos = this.loader.llenarJugadoresPartidos(partidos, equipos);
 				this.temporadaActual.setJornadas(this.loader.llenarJornadas(partidos));
 				this.loader.guardarJornadas(this.temporadaActual.getJornadas());
+				for (int i = 0; i<this.temporadaActual.getJugadores().size();i++) {
+					this.temporadaActual.getJugadores().get(i).iniciarPuntosJornada(this.temporadaActual.getJornadas().size());
+				}
 				this.loader.guardarJugadores(this.temporadaActual.getJugadores());
 			}
 			else {
@@ -489,7 +493,9 @@ public class Aplicacion {
 		EquipoFantasia equipo = new EquipoFantasia();
 		for (int i = 0; i < equipos.size();i++) {
 			equipo = equipos.get(i);
-			equipo.actualizarPuntosJornada(numJornada);
+			if (equipo!=null) {
+				equipo.actualizarPuntosJornada(numJornada);
+			}
 		}
 	}
 	public void actualizarRankingEquiposJornada(int numJornada) {
@@ -537,4 +543,7 @@ public class Aplicacion {
 	 * this.participantes.get(i).getEquipo(); equipos.add(equipo); } return equipos;
 	 * }
 	 */
+	public void cambiarCapitan(int nuevoCapitan) {
+		((Participante)this.usuarioActivo).cambiarCapitan(nuevoCapitan);
+	}
 }

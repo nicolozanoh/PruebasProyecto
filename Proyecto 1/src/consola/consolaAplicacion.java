@@ -81,16 +81,19 @@ public class consolaAplicacion {
     				else if(opcionSeleccionada == 3){
     					verAlineacionEquipo();
     				}
+    				else if(opcionSeleccionada == 5){
+    					ejecutarCambiarCapitan();
+    				}
     				else if(opcionSeleccionada == 4){
     					ejecutarCambiarAlineacion();
     				}
-    				else if(opcionSeleccionada == 5){
+    				else if(opcionSeleccionada == 6){
     					ejecutarComprarJugador();
     				}
-    				else if(opcionSeleccionada == 6){
+    				else if(opcionSeleccionada == 7){
     					ejecutarVenderJugador();
     				}
-    				else if(opcionSeleccionada == 9){
+    				else if(opcionSeleccionada == 11){
     					ejecutarGuardarCambiosParticipante();
     				}
     				else if(opcionSeleccionada == 0){
@@ -104,10 +107,15 @@ public class consolaAplicacion {
     		}
     	}
     }
-    private void ejecutarCargarResultadosPartido() {
+    private void ejecutarCambiarCapitan() {
+    	mostrarJugadores(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getTitulares());
+    	int nuevoCapitan = Integer.parseInt(input("\nSeleccione el jugador titular que quiere que sea el capitan."));
+    	this.aplicacion.cambiarCapitan(nuevoCapitan);
+	}
+	private void ejecutarCargarResultadosPartido() {
     	String rutaResultadoPartido = input("Por favor ingrese la ruta del archivo con el resultado del partido que desea cargar");
     	int resp = this.aplicacion.cargarResultadoPartido(rutaResultadoPartido);
-		
+		System.out.println(Integer.toString(resp));
 	}
 	public void ejecutarBorrarInformacionTemporada() {
     	System.out.println("¿Está seguro que desea eliminar la configuración de la temporada?");
@@ -336,11 +344,13 @@ public class consolaAplicacion {
     	System.out.println("2) Borrar equipo");
     	System.out.println("3) Consultar alineación del equipo");
     	System.out.println("4) Cambiar Alineación");
-    	System.out.println("5) Comprar Jugador");
-    	System.out.println("6) Vender Jugador");
-    	System.out.println("7) Ver estadísticas del equipo");
-    	System.out.println("8) Ver estadísticas de la temporada");
+    	System.out.println("5) Cambiar Capitan");
+    	System.out.println("6) Comprar Jugador");
+    	System.out.println("7) Vender Jugador");
+    	System.out.println("8) Ver estadísticas del equipo");
     	System.out.println("9) Ver estadísticas de la temporada");
+    	System.out.println("10) Ver estadísticas de la temporada");
+    	System.out.println("11) Guardar Cambios");
     	System.out.println("0) Cerrar sesión");
     }
     public void menuConfirmarBorrar() {

@@ -1,13 +1,7 @@
 package modelo;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;;
-
 //@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 						//value={"rankingEquiposFantasia","rankingJugadores"})
@@ -53,6 +47,7 @@ public class Jornada {
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
 		this.rankingEquiposFantasia = rankingEquiposFantasia;
 		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1)));
+		
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;

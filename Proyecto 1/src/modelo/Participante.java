@@ -35,7 +35,7 @@ public class Participante extends Usuario{
 	public EquipoFantasia getEquipo() {
 		return equipo;
 	}
-	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo) {
+	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo, int numJornadas) {
 		int resp = 0;
 		if (equipo == null) {
 			if (jugadoresSeleccionados.size() == 15){
@@ -49,6 +49,7 @@ public class Participante extends Usuario{
 					}
 				}
 				if(resp == 0) {
+					this.equipo.iniciarPuntosJornada(numJornadas);
 					this.equipo.seleccionarAlineacionDefault();
 				}
 			}
@@ -113,5 +114,8 @@ public class Participante extends Usuario{
 	}
 	public void setEquipoFantasia(EquipoFantasia equipo) {
 		this.equipo = equipo;
+	}
+	public void cambiarCapitan(int nuevoCapitan) {
+		this.equipo.cambiarEquipo(nuevoCapitan);
 	}
 }
