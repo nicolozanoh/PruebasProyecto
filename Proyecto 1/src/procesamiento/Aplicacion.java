@@ -301,11 +301,11 @@ public class Aplicacion {
 						}
 					}
 					for (int k = 0; k<partido.getEquipoVisitante().getJugadores().size();k++) {
-						nombre =partido.getEquipoVisitante().getJugadores().get(h).getNombre();
-						equipo = partido.getEquipoVisitante().getJugadores().get(h).getNombreEquipo();
-						posicion = partido.getEquipoVisitante().getJugadores().get(h).getPosicion();
+						nombre =partido.getEquipoVisitante().getJugadores().get(k).getNombre();
+						equipo = partido.getEquipoVisitante().getJugadores().get(k).getNombreEquipo();
+						posicion = partido.getEquipoVisitante().getJugadores().get(k).getPosicion();
 						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
-							this.temporadaActual.getJornadas().get(j).getPartidos().get(h).getEquipoLocal().getJugadores().set(k, jugador);
+							this.temporadaActual.getJornadas().get(j).getPartidos().get(h).getEquipoVisitante().getJugadores().set(k, jugador);
 							break;
 						}
 					}

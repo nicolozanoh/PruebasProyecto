@@ -52,6 +52,7 @@ public abstract class Jugador {
 		penaltisErradosJornada= new ArrayList<Integer>();
 		amarillasJornada= new ArrayList<Integer>();
 		rojasJornada= new ArrayList<Integer>();
+		puntosJornada = new ArrayList<Double>();
 	}
 	public ArrayList<Integer> getMinutosJugadosJornada() {
 		return minutosJugadosJornada;
