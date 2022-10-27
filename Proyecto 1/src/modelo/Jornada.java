@@ -46,7 +46,7 @@ public class Jornada {
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
 		this.rankingEquiposFantasia = rankingEquiposFantasia;
-		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1)));
+		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1))));
 		
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
@@ -54,7 +54,7 @@ public class Jornada {
 	}
 	public void setRankingJugadores(ArrayList<Jugador> rankingJugadores) {
 		this.rankingJugadores = rankingJugadores;
-		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada())));
+		this.rankingJugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada()))));
 	}
 	public Jugador mejorJugadorJornada() {
 		ArrayList<Jugador> ranking = this.getRankingJugadores();
