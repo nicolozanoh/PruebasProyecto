@@ -37,7 +37,6 @@ public class Arquero extends Jugador{
 	}
 	public double calcularPuntaje(int numJornada) {
 		double puntos = 0;
-		System.out.println(this.getNombre());
 		puntos += 5 * (double) this.golesAnotadosJornada.get(numJornada-1);
 		puntos += 3 * (double) this.asistenciasJornada.get(numJornada-1);
 		puntos += -2 * (double) this.penaltisErradosJornada.get(numJornada-1);

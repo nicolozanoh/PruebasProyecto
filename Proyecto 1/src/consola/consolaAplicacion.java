@@ -129,7 +129,7 @@ public class consolaAplicacion {
     	String sPuntos = Double.toString(puntosJornada.get(0));
     	int posicionActual = this.aplicacion.encontrarPosicion();
 		System.out.println("Nombre: " + ((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getNombre());
-		System.out.println("Posicion Actual: " + Integer.toString(posicionActual));
+		System.out.println("Posicion Actual: " + Integer.toString(posicionActual+1));
 		System.out.println("Puntos totales: "+Double.toString(((Participante)this.aplicacion.getUsuarioActivo()).getEquipo().getPuntosTotales()));
 		
 		for (int i = 1; i<puntosJornada.size();i++) {
@@ -187,6 +187,8 @@ public class consolaAplicacion {
         int resp = aplicacion.cargarTemporadaActual();
         if (resp == 0) {
         	aplicacion.actualizarReferencias();
+        	aplicacion.actualizarRankingEquipos();
+        	aplicacion.actualizarRankingJugadores();
         }
         return resp;
     }

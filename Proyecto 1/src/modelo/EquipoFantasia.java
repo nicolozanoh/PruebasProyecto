@@ -55,6 +55,7 @@ public class EquipoFantasia {
 			}
 		}
 		this.puntosTotales += puntos;
+		this.puntosJornada.set(numJornada-1, puntos);
 	}
 	public ArrayList<Jugador> getJugadores() {
 		return jugadores;
