@@ -26,14 +26,14 @@ public class Temporada {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia>equipos) {
-		equipos.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		equipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		this.rankingEquiposFantasia = equipos;
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;
 	}
 	public void setRankingJugadores() {
-		this.jugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		this.rankingJugadores = this.jugadores;
 	}
 	public void agregarJugador(Jugador jugador) {

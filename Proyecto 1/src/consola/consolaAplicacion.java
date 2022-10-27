@@ -63,7 +63,7 @@ public class consolaAplicacion {
     				}
     			}
     			
-    			if (aplicacion.getUsuarioActivo().getClass().getName() ==  "modelo.Participante") {
+    			else if (aplicacion.getUsuarioActivo().getClass().getName() ==  "modelo.Participante") {
     				if (respCargarData == 0) {
     					menuParticipante();
     					opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opción"));
