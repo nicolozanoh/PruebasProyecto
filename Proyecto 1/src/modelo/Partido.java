@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.Date;
-import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
