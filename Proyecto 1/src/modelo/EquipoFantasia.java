@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class EquipoFantasia {
 	private String nombre;
 	private double puntosTotales;
-	private double precio;
 	private Jugador capitan;
 	private ArrayList<Double> puntosJornada;
 	private ArrayList<Jugador> jugadores;
@@ -28,12 +27,6 @@ public class EquipoFantasia {
 	}
 	public void setPuntosTotales(double puntosTotales) {
 		this.puntosTotales = puntosTotales;
-	}
-	public double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
 	}
 	public Jugador getCapitan() {
 		return capitan;

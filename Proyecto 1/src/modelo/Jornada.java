@@ -57,14 +57,10 @@ public class Jornada {
 		this.rankingJugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada()))));
 	}
 	public Jugador mejorJugadorJornada() {
-		ArrayList<Jugador> ranking = this.getRankingJugadores();
-		Jugador respuesta = ranking.get(0);
-		return respuesta;
+		return this.rankingJugadores.get(0);
 	}
 	public EquipoFantasia mejorEquipoFantasiaJornada() {
-		ArrayList<EquipoFantasia> ranking = this.getRankingEquiposFantasia();
-		EquipoFantasia respuesta = ranking.get(0);
-		return respuesta;
+		return this.rankingEquiposFantasia.get(0);
 	}
 	public void actualizarResultadosJornada() {
 		for(Partido p: this.partidos) {

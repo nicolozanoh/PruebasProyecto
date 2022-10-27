@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import modelo.EquipoFantasia;
 import modelo.Jugador;
 import modelo.Participante;
 
@@ -117,11 +119,24 @@ public class consolaAplicacion {
     	}
     }
     private void verEstadisticasTemporada() {
-    	
-		
+    	Jugador mejorJugador = this.aplicacion.mejorJugadorActual();
+    	EquipoFantasia mejorEquipo = this.aplicacion.mejorEquipoActual();
 	}
 	private void verEstadisticasJornada() {
+		int numJornada = Integer.parseInt(input("Ingrese el numero de la jornada de la que quiere consultar la información"));
+		Jugador mejorJugador = this.aplicacion.mejorJugadorFecha(numJornada);
+		EquipoFantasia mejorEquipo = this.aplicacion.mejorEquipoFecha(numJornada);
 		
+		System.out.println("El mejor equipo de la jornada "+ Integer.toString(numJornada) + " fue: ");
+		System.out.println("Nombre: "+mejorEquipo.getNombre());
+		System.out.println("Puntos totales hasta la jornada: "+ Double.toString(mejorEquipo.getPuntosTotales()));
+		System.out.println("Puntos jornada: "+ Double.toString(mejorEquipo.getPuntosJornada().get(numJornada-1)));
+		
+		System.out.println("\nEl mejor jugador de la jornada "+ Integer.toString(numJornada) + " fue: ");
+		System.out.println("Nombre: "+mejorJugador.getNombre());
+		System.out.println("Puntos totales hasta la jornada: "+ Double.toString(mejorJugador.getPuntosTotales()));
+		System.out.println("Puntos jornada: "+ Double.toString(mejorJugador.getPuntosJornada().get(numJornada-1)));
+		System.out.println("Equipo: "+ mejorJugador.getNombreEquipo());
 		
 	}
 	private void verEstadisticasEquipo() {
@@ -382,7 +397,7 @@ public class consolaAplicacion {
     	System.out.println("7) Vender Jugador");
     	System.out.println("8) Ver estadísticas del equipo");
     	System.out.println("9) Ver estadísticas de la temporada");
-    	System.out.println("10) Ver estadísticas de la temporada");
+    	System.out.println("10) Ver estadísticas por jornada temporada");
     	System.out.println("11) Guardar Cambios");
     	System.out.println("0) Cerrar sesión");
     }

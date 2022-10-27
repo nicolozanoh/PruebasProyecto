@@ -49,13 +49,9 @@ public class Temporada {
 		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 	}
 	public Jugador mejorJugadorTemporada() {
-		ArrayList<Jugador> ranking = this.getRankingJugadores();
-		Jugador respuesta = ranking.get(0);
-		return respuesta;
+		return this.rankingJugadores.get(0);
 	}
 	public EquipoFantasia mejorEquipoFantasiaTemporada() {
-		ArrayList<EquipoFantasia> ranking = this.getRankingEquiposFantasia();
-		EquipoFantasia respuesta = ranking.get(0);
-		return respuesta;
+		return this.rankingEquiposFantasia.get(0);
 	}
 }

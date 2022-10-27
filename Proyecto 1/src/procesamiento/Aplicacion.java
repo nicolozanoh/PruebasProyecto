@@ -98,33 +98,13 @@ public class Aplicacion {
 	public void cerrarSesion() {
 		this.usuarioActivo = null;
 	}
-	public EquipoFantasia mejorEquipoFecha(int jornada) {
-		ArrayList<EquipoFantasia> equiposFecha=new ArrayList<EquipoFantasia>();
-		EquipoFantasia mejorEquipo=null;
-		for (int i=0; i<participantes.size();i++) {
-			equiposFecha.add(participantes.get(i).getEquipo());
-		}
-		for (int i=0; i<equiposFecha.size();i++) {
-			if (equiposFecha.get(i).getPuntosJornada().get(jornada-1)>mejorEquipo.getPuntosJornada().get(jornada-1)) {
-				mejorEquipo=equiposFecha.get(i);
-			}
-		}
-		return mejorEquipo;
+	public EquipoFantasia mejorEquipoFecha(int numJornada) {
+		Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
+		return jornada.mejorEquipoFantasiaJornada();
 	}
-	public Jugador mejorJugadorFecha() {
-		//TODO
-		//Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal
-		ArrayList<EquipoFantasia> equiposTemporadaActual=new ArrayList<EquipoFantasia>();
-		EquipoFantasia mejorEquipo=null;
-		for (int i=0; i<participantes.size();i++) {
-			equiposTemporadaActual.add(participantes.get(i).getEquipo());
-		}
-		for (int i=0; i<equiposTemporadaActual.size();i++) {
-			if (equiposTemporadaActual.get(i).getPuntosTotales()>mejorEquipo.getPuntosTotales()) {
-				mejorEquipo=equiposTemporadaActual.get(i);
-			}
-		}
-		return null;
+	public Jugador mejorJugadorFecha(int numJornada) {
+		Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
+		return jornada.mejorJugadorJornada();
 	}
 	public EquipoFantasia mejorEquipoActual() { //Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal
 		  ArrayList<EquipoFantasia> equiposTemporadaActual=new ArrayList<EquipoFantasia>(); 
@@ -140,8 +120,8 @@ public class Aplicacion {
 		  return mejorEquipo; 
 	  }
 	public Jugador mejorJugadorActual() {
-		//TODO
-		return null;
+		
+		return this.temporadaActual.mejorJugadorTemporada();
 	}
 	public int crearEquipo(String[] jugadoresSeleccionados, String nombreEquipo) {
 		int resp = 0;
