@@ -15,7 +15,7 @@ public class VentanaUsuario extends JFrame{
 		//setTitle("Fantasy Football");
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(700, 700));
+		setSize(new Dimension(1000, 800));
 		setResizable(false);
 		setVisible(true);
 	}
