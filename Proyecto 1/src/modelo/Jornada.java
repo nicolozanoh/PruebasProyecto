@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -46,7 +48,9 @@ public class Jornada {
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia> rankingEquiposFantasia) {
 		this.rankingEquiposFantasia = rankingEquiposFantasia;
-		if (this.rankingEquiposFantasia!=null && this.rankingEquiposFantasia.size()>2) {
+		ArrayList<EquipoFantasia>cRank = new ArrayList<EquipoFantasia>(rankingEquiposFantasia);
+		cRank.removeAll(Collections.singleton(null));
+		if (this.rankingEquiposFantasia!=null && cRank.size()>2) {
 			this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosJornada().get(getNumeroJornada()-1), b.getPuntosJornada().get(getNumeroJornada()-1))));
 		}
 	}
@@ -55,7 +59,9 @@ public class Jornada {
 	}
 	public void setRankingJugadores(ArrayList<Jugador> rankingJugadores) {
 		this.rankingJugadores = rankingJugadores;
-		if (this.rankingJugadores!=null && this.rankingJugadores.size()>=2) {
+		ArrayList<Jugador>cRank = new ArrayList<Jugador>(rankingJugadores);
+		cRank.removeAll(Collections.singleton(null));
+		if (this.rankingJugadores!=null && cRank.size()>=2) {
 			this.rankingJugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosJornada().get(getNumeroJornada()), b.getPuntosJornada().get(getNumeroJornada()))));
 		}
 	}

@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,7 +27,9 @@ public class Temporada {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia>equipos) {
-		if (equipos!=null && equipos.size()>2) {
+		ArrayList<EquipoFantasia>cEquipos = new ArrayList<EquipoFantasia>(equipos);
+		cEquipos.removeAll(Collections.singleton(null));
+		if (equipos!=null && cEquipos.size()>=2) {
 			equipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		}
 		this.rankingEquiposFantasia = equipos;
@@ -35,7 +38,9 @@ public class Temporada {
 		return rankingJugadores;
 	}
 	public void setRankingJugadores() {
-		if (this.jugadores!=null && this.jugadores.size()>2) {
+		ArrayList<Jugador>cJugadores = new ArrayList<Jugador>(this.jugadores);
+		cJugadores.removeAll(Collections.singleton(null));
+		if (this.jugadores!=null && cJugadores.size()>=2) {
 			this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		}
 		this.rankingJugadores = this.jugadores;
@@ -47,12 +52,16 @@ public class Temporada {
 		this.equiposFantasia.add(equipoFantasia);
 	}
 	public void actualizarRankingEquiposFantasia( ) {
-		if (this.rankingEquiposFantasia!=null && this.rankingEquiposFantasia.size()>2) {
+		ArrayList<EquipoFantasia>cRank = new ArrayList<EquipoFantasia>(this.rankingEquiposFantasia);
+		cRank.removeAll(Collections.singleton(null));
+		if (this.rankingEquiposFantasia!=null && cRank.size()>=2) {
 			this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 		}
 	}
 	public void actualizarRankingJugadores() {
-		if (this.rankingJugadores!=null && this.rankingJugadores.size()>2) {
+		ArrayList<Jugador>cRank = new ArrayList<Jugador>(this.rankingJugadores);
+		cRank.removeAll(Collections.singleton(null));
+		if (this.rankingJugadores!=null && cRank.size()>=2) {
 			this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
 		}
 	}
