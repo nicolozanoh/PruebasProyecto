@@ -92,6 +92,7 @@ public class Aplicacion {
 			Participante nuevo = new Participante(nombreUsuario, clave, 1000000);
 			this.participantes.add(nuevo);
 			loader.guardarParticipantes(this.participantes);
+			this.iniciarSesion(nombreUsuario, clave);
 		}
 		return resp;
 	}

@@ -26,14 +26,18 @@ public class Temporada {
 		return rankingEquiposFantasia;
 	}
 	public void setRankingEquiposFantasia(ArrayList<EquipoFantasia>equipos) {
-		equipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+		if (equipos!=null && equipos.size()>2) {
+			equipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+		}
 		this.rankingEquiposFantasia = equipos;
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;
 	}
 	public void setRankingJugadores() {
-		this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+		if (this.jugadores!=null && this.jugadores.size()>2) {
+			this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+		}
 		this.rankingJugadores = this.jugadores;
 	}
 	public void agregarJugador(Jugador jugador) {
@@ -43,10 +47,14 @@ public class Temporada {
 		this.equiposFantasia.add(equipoFantasia);
 	}
 	public void actualizarRankingEquiposFantasia( ) {
-		this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		if (this.rankingEquiposFantasia!=null && this.rankingEquiposFantasia.size()>2) {
+			this.rankingEquiposFantasia.sort((EquipoFantasia a , EquipoFantasia b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		}
 	}
 	public void actualizarRankingJugadores() {
-		this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		if (this.rankingJugadores!=null && this.rankingJugadores.size()>2) {
+			this.rankingJugadores.sort((Jugador a , Jugador b) -> Double.compare(a.getPuntosTotales(), b.getPuntosTotales()));
+		}
 	}
 	public Jugador mejorJugadorTemporada() {
 		return this.rankingJugadores.get(0);
