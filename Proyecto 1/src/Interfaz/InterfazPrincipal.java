@@ -54,7 +54,7 @@ public class InterfazPrincipal extends JFrame{
 				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
-				VentanaUsuario vUsuario = new VentanaUsuario(this);
+				VentanaAdmin vUsuario = new VentanaAdmin(this);
 			}
 		}
 		
