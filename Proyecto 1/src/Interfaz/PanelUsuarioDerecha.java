@@ -21,9 +21,9 @@ public class PanelUsuarioDerecha extends JPanel{
 		
 		padre = papa;
 		
-		presupuesto = new JLabel("Presupuesto");
-		presupuesto.setPreferredSize(new Dimension(70,50));
-		capitan = new JLabel("Capitan");
+		presupuesto = new JLabel("                  Presupuesto");
+		presupuesto.setPreferredSize(new Dimension(200,50));
+		capitan = new JLabel("                      Capitan");
 		capitan.setPreferredSize(new Dimension(70,50));
 		
 		campoPresupuesto = new JTextField();

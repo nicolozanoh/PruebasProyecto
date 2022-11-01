@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import procesamiento.Aplicacion;
+import modelo.Participante;
 
 public class InterfazPrincipal extends JFrame{
 	
@@ -45,7 +46,12 @@ public class InterfazPrincipal extends JFrame{
 		
 		if(resp == 0) {
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Participante")) {
-				VentanaUsuario vUsuario = new VentanaUsuario(this);
+				if(((Participante)this.app.getUsuarioActivo()).getEquipo()!=null) {
+					VentanaUsuario vUsuario = new VentanaUsuario(this);
+				}
+				else {
+					VentanaCrearEquipo vCrear = new VentanaCrearEquipo(this);
+				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
 				VentanaUsuario vUsuario = new VentanaUsuario(this);
@@ -61,7 +67,7 @@ public class InterfazPrincipal extends JFrame{
 			JOptionPane.showMessageDialog(this, "El nombre de usuario ya existe, seleccione otro","Error",JOptionPane.WARNING_MESSAGE);
 		}
 		if (resp == 0){
-			VentanaUsuario vUsuario = new VentanaUsuario(this);
+			iniciarSesion(usuario, contrasena);
 		}
 		return resp;
 	}

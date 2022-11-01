@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 public class VentanaInicio extends JFrame{
 	private PanelInicio panelInicio;
-	//private Aplicacion app;
 	private InterfazPrincipal padre;
 
 	public VentanaInicio(InterfazPrincipal papa) {

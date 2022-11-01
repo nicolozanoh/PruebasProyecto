@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -18,7 +19,7 @@ public class PanelInicio extends JPanel implements ActionListener{
 	private JLabel contrasena;
 	
 	private JTextField campoUsuario;
-	private JTextField campoContrasena;
+	private JPasswordField campoContrasena;
 	
 	private JButton btnIniciarSesion;
 	private JButton btnCrearEquipo;
@@ -36,7 +37,7 @@ public class PanelInicio extends JPanel implements ActionListener{
 		
 		campoUsuario = new JTextField();
 		campoUsuario.setPreferredSize(new Dimension(170,30));
-		campoContrasena= new JTextField();
+		campoContrasena= new JPasswordField();
 		campoContrasena.setPreferredSize(new Dimension(170,30));
 		
 		btnIniciarSesion = new JButton("Iniciar Sesion");
