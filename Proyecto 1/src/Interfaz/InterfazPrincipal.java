@@ -4,7 +4,6 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import procesamiento.Aplicacion;
 
 public class InterfazPrincipal extends JFrame{
@@ -33,13 +32,17 @@ public class InterfazPrincipal extends JFrame{
 	}
 
 	public int iniciarSesion(String usuario, String contrasena) {
+		
 		int resp = app.iniciarSesion(usuario, contrasena);
+		
 		if (resp == 1) {
 			JOptionPane.showMessageDialog(this,"La contraseña no es correcta", "Error", JOptionPane.WARNING_MESSAGE);
 		}
+		
 		if (resp == 2) {
 			JOptionPane.showMessageDialog(this, "El nombre de usuario no existe","Error",JOptionPane.WARNING_MESSAGE);
 		}
+		
 		if(resp == 0) {
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Participante")) {
 				VentanaUsuario vUsuario = new VentanaUsuario(this);
