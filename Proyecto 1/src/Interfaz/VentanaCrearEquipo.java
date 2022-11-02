@@ -19,7 +19,7 @@ public class VentanaCrearEquipo extends JFrame{
 		panelCrearEquipo.setSize(700,200);
 		setLayout(new BorderLayout());
 		add(panelCrearEquipo, BorderLayout.NORTH);
-		add(panelInferiorCrearEquipo, BorderLayout.SOUTH);
+		add(panelInferiorCrearEquipo, BorderLayout.CENTER);
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(900, 680));

@@ -11,13 +11,16 @@ public class VentanaAdmin extends JFrame{
 	
 	public VentanaAdmin(InterfazPrincipal papa) {
 		padre = papa;
-		panelAdmin = new PanelAdmin(this);
-		add(panelAdmin);
+		this.panelAdmin = new PanelAdmin(this);
+		
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(700, 700));
+		setSize(new Dimension(1300, 800));
 		setResizable(false);
 		setVisible(true);
+		
+		setLayout(new BorderLayout());
+		add(panelAdmin, BorderLayout.NORTH);
 	}
 	public InterfazPrincipal getInterfaz() {
 		return this.padre;
