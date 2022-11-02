@@ -352,8 +352,8 @@ public class PanelInferiorCrearEquipo extends JPanel implements ActionListener{
 			equipo.add((Jugador)mediocampista4.getSelectedItem());
 			equipo.add((Jugador)mediocampista5.getSelectedItem());
 			equipo.add((Jugador)delantero1.getSelectedItem());
-			equipo.add((Jugador)delantero1.getSelectedItem());
-			equipo.add((Jugador)delantero1.getSelectedItem());
+			equipo.add((Jugador)delantero2.getSelectedItem());
+			equipo.add((Jugador)delantero3.getSelectedItem());
 		}
 		return equipo;
 	}

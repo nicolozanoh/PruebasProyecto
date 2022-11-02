@@ -263,7 +263,7 @@ public abstract class Jugador {
 		}
 	}
 	public String toString() {
-		return this.nombre + ": " + Double.toString(this.precio);
+		return this.nombre + ", $" + Double.toString(this.precio)+", "+this.posicion;
 	}
 	abstract public double calcularPuntaje(int numJornada);
 }
