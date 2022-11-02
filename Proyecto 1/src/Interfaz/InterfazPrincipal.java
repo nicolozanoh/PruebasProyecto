@@ -99,7 +99,7 @@ public class InterfazPrincipal extends JFrame{
     		JOptionPane.showMessageDialog(this, "Error: Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
     	}
     	else if(resp==6) {
-    		JOptionPane.showMessageDialog(this, "Error: Ya existe un equipo, para crear un nuevo equipo, elimine el anterior","Error",JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "Error: Saldo insuficiente","Error",JOptionPane.ERROR_MESSAGE);
     	}
     	else if(resp==7||resp == 9) {
     		JOptionPane.showMessageDialog(this, "Error: Debe seleccionar 15 jugadores para crear el equipo.","Error",JOptionPane.ERROR_MESSAGE);	

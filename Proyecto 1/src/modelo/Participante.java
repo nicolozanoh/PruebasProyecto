@@ -37,6 +37,7 @@ public class Participante extends Usuario{
 	}
 	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo, int numJornadas) {
 		int resp = 0;
+		double presupuestoInicial = presupuesto;
 		if (equipo == null) {
 			if (jugadoresSeleccionados.size() == 15){
 				this.equipo = new EquipoFantasia();
@@ -45,6 +46,7 @@ public class Participante extends Usuario{
 					resp = comprarJugador(jugadoresSeleccionados.get(i));
 					if(resp != 0) {
 						this.equipo = null;
+						presupuesto = presupuestoInicial;
 						break;
 					}
 				}
