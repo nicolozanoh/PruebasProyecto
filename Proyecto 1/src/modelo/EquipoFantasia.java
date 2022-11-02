@@ -100,30 +100,34 @@ public class EquipoFantasia {
 			for (int i=0; i<jugadores.size(); i++) {
 				String posicionComparar = jugadores.get(i).getPosicion();
 				if (posicionComparar==posicion) { 
+					if(jugador.getNombre().equals(jugadores.get(i).getNombre())) {
+						respuesta = 11;
+					}
 					contador++;
 				}
 			}
-			if (posicion=="arquero") {
-				maximo=2;
-				respuesta = 2;
+			if (respuesta != 11) {
+				if (posicion.equals("arquero")) {
+					maximo=2;
+					respuesta = 2;
+					}
+				else if (posicion.equals("defensa")) {
+					maximo=5;
+					respuesta = 3;
 				}
-			else if (posicion=="defensa") {
-				maximo=5;
-				respuesta = 3;
+				else if (posicion.equals("mediocampista")) {
+					maximo=5;
+					respuesta = 4;
+				}
+				else if (posicion.equals("delantero")) {
+					maximo=3;
+					respuesta = 5;
+				}	
+				if (maximo>=contador) {
+					jugadores.add(jugador);
+					respuesta = 0;
+				}
 			}
-			else if (posicion=="mediocampista") {
-				maximo=5;
-				respuesta = 4;
-			}
-			else if (posicion=="delantero") {
-				maximo=3;
-				respuesta = 5;
-			}	
-			if (maximo>=contador) {
-				jugadores.add(jugador);
-			}	
-			else
-				respuesta=2;
 		}
 		return respuesta;
 	}

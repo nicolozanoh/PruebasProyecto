@@ -1,6 +1,5 @@
 package procesamiento;
 
-
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -533,5 +532,18 @@ public class Aplicacion {
 	public int encontrarPosicion() {
 		return this.temporadaActual.getRankingEquiposFantasia().indexOf(((Participante)usuarioActivo).getEquipo());
 		
+	}
+	public int crearEquipoV2(ArrayList<Jugador> equipo, String nombre) {
+		int resp = 10;
+		if (!(nombre.equals(""))&& nombre!=null) {
+			resp = 9;
+			if (equipo != null) {
+				resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
+				if (resp == 0) {
+					this.loader.guardarParticipantes(participantes);
+				}
+			}
+		}
+		return resp;
 	}
 }

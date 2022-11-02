@@ -30,9 +30,9 @@ public class Temporada {
 		ArrayList<EquipoFantasia>cEquipos = new ArrayList<EquipoFantasia>(equipos);
 		cEquipos.removeAll(Collections.singleton(null));
 		if (equipos!=null && cEquipos.size()>=2) {
-			equipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+			cEquipos.sort((EquipoFantasia a , EquipoFantasia b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		}
-		this.rankingEquiposFantasia = equipos;
+		this.rankingEquiposFantasia = cEquipos;
 	}
 	public ArrayList<Jugador> getRankingJugadores() {
 		return rankingJugadores;

@@ -52,6 +52,9 @@ public class Participante extends Usuario{
 					this.equipo.iniciarPuntosJornada(numJornadas);
 					this.equipo.seleccionarAlineacionDefault();
 				}
+				else {
+					this.equipo =null;
+				}
 			}
 			else{
 				resp = 7;

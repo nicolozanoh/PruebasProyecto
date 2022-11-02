@@ -1,7 +1,9 @@
 package Interfaz;
 
 import java.awt.BorderLayout;
+import modelo.Jugador;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -20,9 +22,12 @@ public class VentanaCrearEquipo extends JFrame{
 		add(panelInferiorCrearEquipo, BorderLayout.SOUTH);
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(900, 600));
+		setSize(new Dimension(900, 680));
 		setResizable(false);
 		setVisible(true);
+	}
+	public void crearEquipo(ArrayList<Jugador> equipo, String nombreEquipo) {
+		this.padre.crearEquipo(equipo, nombreEquipo);
 	}
 	public InterfazPrincipal getInterfaz() {
 		return this.padre;

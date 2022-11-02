@@ -1,10 +1,12 @@
 package Interfaz;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import procesamiento.Aplicacion;
+import modelo.Jugador;
 import modelo.Participante;
 
 public class InterfazPrincipal extends JFrame{
@@ -73,6 +75,41 @@ public class InterfazPrincipal extends JFrame{
 	}
 	public Aplicacion getAplicacion() {
 		return this.app;
+	}
+
+	public void crearEquipo(ArrayList<Jugador>equipo, String nombreEquipo) {
+		int resp = app.crearEquipoV2(equipo, nombreEquipo);
+		if (resp == 0) {
+			JOptionPane.showMessageDialog(this, "Su equipo se ha creado exitosamente, su nuevo saldo es de: $" + ((Participante)this.app.getUsuarioActivo()).getPresupuesto(),"",JOptionPane.INFORMATION_MESSAGE);
+			VentanaUsuario vUsuario = new VentanaUsuario(this);
+		}
+		else if(resp==1) {
+			JOptionPane.showMessageDialog(this, "Error: Ya existe un equipo, para crear un nuevo equipo, elimine el anterior","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==2) {
+    		JOptionPane.showMessageDialog(this, "Error: Numero de arqueros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==3) {
+    		JOptionPane.showMessageDialog(this, "Error: Numero de defensas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==4) {
+    		JOptionPane.showMessageDialog(this, "Error: Numero de mediocampistas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==5) {
+    		JOptionPane.showMessageDialog(this, "Error: Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==6) {
+    		JOptionPane.showMessageDialog(this, "Error: Ya existe un equipo, para crear un nuevo equipo, elimine el anterior","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==7||resp == 9) {
+    		JOptionPane.showMessageDialog(this, "Error: Debe seleccionar 15 jugadores para crear el equipo.","Error",JOptionPane.ERROR_MESSAGE);	
+    	}
+    	else if(resp == 10) {
+    		JOptionPane.showMessageDialog(this, "Debe ingresar un nombre para su equipo","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp == 11) {
+    		JOptionPane.showMessageDialog(this, "Debe seleccionar 15 jugadores diferentes","Error",JOptionPane.ERROR_MESSAGE);
+    	}
 	}
 
 }
