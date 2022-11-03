@@ -138,5 +138,19 @@ public class InterfazPrincipal extends JFrame{
 		}
 		return resp;
 	}
+	
+	public int cargarConfiguracionTemp(String rutaJugadores, String rutaPartidos) {
+		//falta verficar los casos de los enteros de la respuesta
+		
+		int resp = this.app.cargarConfiguracionTemporada(rutaJugadores, rutaPartidos);
+		return resp;
+	}
+	
+	public int cargarResulPartido(String rutaPartido) {
+		//falta verficar los casos de los enteros de la respuesta
+		
+		int resp = this.app.cargarResultadoPartido(rutaPartido);
+		return resp;
+	}
 
 }
