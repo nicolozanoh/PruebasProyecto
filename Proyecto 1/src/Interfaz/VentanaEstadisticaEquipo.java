@@ -23,8 +23,8 @@ public class VentanaEstadisticaEquipo extends JFrame{
 		setVisible(true);
 		
 		setLayout(new GridLayout(1,2));
-		add(panelEquipo,  BorderLayout.EAST);
-		add(panelJugador, BorderLayout.WEST);
+		add(panelEquipo);
+		add(panelJugador);
 	}
 	public InterfazPrincipal getInterfaz() {
 		return this.padre;

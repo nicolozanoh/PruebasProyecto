@@ -122,7 +122,6 @@ public class Aplicacion {
 		  return mejorEquipo; 
 	  }
 	public Jugador mejorJugadorActual() {
-		
 		return this.temporadaActual.mejorJugadorTemporada();
 	}
 	public int crearEquipo(String[] jugadoresSeleccionados, String nombreEquipo) {
