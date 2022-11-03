@@ -63,4 +63,14 @@ public class VentanaUsuario extends JFrame{
 			this.panelUsuario.borrarSelecciones();
 		}
 	}
+
+	public void venderJugador() {
+		ArrayList<String> seleccion = this.panelUsuario.getElementosSeleccionados();
+		int resp = this.padre.venderJugador(seleccion);
+		if(resp == 0) {
+			this.panelUsuario.actualizarAlineacion();
+			this.panelUsuario.borrarSelecciones();
+			this.panelUsuarioDerecha.actualizarPresupuesto();
+		}
+	}
 }

@@ -560,5 +560,10 @@ public class Aplicacion {
 		}
 		return resp;
 	}
+	public int venderJugadorV2(ArrayList<String>seleccion) {
+		int resp = ((Participante)this.usuarioActivo).venderJugadorV2(seleccion);
+		
+		return resp;
+	}
 	
 }

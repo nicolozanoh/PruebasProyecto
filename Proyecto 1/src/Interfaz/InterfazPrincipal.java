@@ -153,4 +153,18 @@ public class InterfazPrincipal extends JFrame{
 		return resp;
 	}
 
+	public int venderJugador(ArrayList<String>seleccion) {
+		int resp = this.app.venderJugadorV2(seleccion);
+		if(resp == 1) {
+			JOptionPane.showMessageDialog(this, "Su equipo tiene menos de 15 jugadores, para vender más jugadores, compre un jugador antes","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if(resp == 2||resp == 3) {
+			JOptionPane.showMessageDialog(this, "Debe seleccionar 1 jugador","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if (resp == 0) {
+			JOptionPane.showMessageDialog(this, "El jugador se ha vendido, recuerde que para poder guardar los cambios realizados, debe comprar un jugador.","",JOptionPane.INFORMATION_MESSAGE);
+		}
+		return resp;
+	}
+
 }

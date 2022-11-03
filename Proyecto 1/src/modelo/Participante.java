@@ -131,4 +131,12 @@ public class Participante extends Usuario{
 		int resp = this.equipo.cambiarCapitanV2(nuevoCapitan);
 		return resp;
 	}
+	public int venderJugadorV2(ArrayList<String> seleccion) {
+		int resp = this.equipo.quitarJugadorV2(seleccion);
+		if (resp == 0) {
+			Double precio = Double.parseDouble((seleccion.get(0).split(","))[2].trim());
+			this.presupuesto += (0.97*(precio)); 
+		}
+		return resp;
+	}
 }

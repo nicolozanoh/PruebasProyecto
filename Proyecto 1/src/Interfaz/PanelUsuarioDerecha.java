@@ -51,5 +51,10 @@ public class PanelUsuarioDerecha extends JPanel{
 		this.campoCapitan.setText(this.padre.getUsuario().getEquipo().getCapitan().getNombre());
 		
 	}
+
+	public void actualizarPresupuesto() {
+		this.campoPresupuesto.setText(Double.toString(this.padre.getUsuario().getPresupuesto()));
+		
+	}
 	
 }

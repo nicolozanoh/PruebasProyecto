@@ -6,11 +6,11 @@
     "nombre" : "NICOLAS",
     "puntosTotales" : 0.0,
     "capitan" : {
-      "posicion" : "arquero",
-      "nombre" : "Juan Daniel Espitia",
-      "posicion" : "arquero",
+      "posicion" : "defensa",
+      "nombre" : "Lionel Messi",
+      "posicion" : "defensa",
       "nombreEquipo" : "Nacional",
-      "precio" : 300000.0,
+      "precio" : 30000.0,
       "puntosTotales" : 0.0,
       "puntosJornada" : [ 0.0, 0.0, 0.0 ],
       "minutosJugados" : 0,
@@ -32,9 +32,7 @@
       "amarillasJornada" : [ ],
       "rojasJornada" : [ ],
       "golesRecibidos" : 0,
-      "penaltisAtajados" : 0,
-      "golesRecibidosJornada" : [ ],
-      "penaltisAtajadosJornada" : [ ]
+      "golesRecibidosJornada" : [ ]
     },
     "puntosJornada" : [ 0.0, 0.0, 0.0 ],
     "jugadores" : [ {

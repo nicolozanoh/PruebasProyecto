@@ -259,4 +259,42 @@ public class EquipoFantasia {
 		}
 		return resp;
 	}
+	public int quitarJugadorV2(ArrayList<String> seleccion) {
+		int resp = 1;
+		Jugador jugadorVender = null;
+		if (this.jugadores.size()== 15) {
+			if(seleccion.size() == 1) {
+				resp = 2;
+				String nombre=((seleccion.get(0).split(","))[0]).trim();
+				String posicion=((seleccion.get(0).split(","))[1]).trim();
+				int coincidencias = 0;
+				for (int i = 0; i<jugadores.size(); i ++) {
+					if(jugadores.get(i).getNombre().equals(nombre)&&jugadores.get(i).getPosicion().equals(posicion)) {
+						coincidencias += 1;
+						jugadorVender = jugadores.get(i);
+					}
+				}
+				if (coincidencias == 1) {
+					resp = 3;
+					if (titulares.contains(jugadorVender)) {
+						titulares.remove(jugadorVender);
+						for (int i =0; i<suplentes.size();i++) {
+							if (jugadorVender.getPosicion().equals((suplentes.get(i).getPosicion()))) {
+								titulares.add(suplentes.get(i));
+								suplentes.remove(i);
+								break;
+							}
+						}
+					}
+					else if (suplentes.contains(jugadorVender))
+					{
+						suplentes.remove(jugadorVender);
+					}
+					jugadores.remove(jugadorVender);
+					resp = 0;
+				}
+			}
+		}
+		return resp;
+	}
 }
