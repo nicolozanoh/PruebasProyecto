@@ -26,9 +26,9 @@ public class PanelAdminCentro extends JPanel {
 	public PanelAdminCentro(VentanaAdmin papa) {
 		padre = papa;
 		
-		tfArchivoPartidos = new JTextField();
-		tfArchivoInfoJugadores= new JTextField();
-		tfArchivoDatosPartido= new JTextField();
+		tfArchivoPartidos = new JTextField("");
+		tfArchivoInfoJugadores= new JTextField("");
+		tfArchivoDatosPartido= new JTextField("");
 		
 		etiquetaArchivoPartidos= new JLabel("Ingrese el filePath de los partidos de la temporada:");
 		etiquetaArchivoInfoJugadores= new JLabel("Ingrese el filePath con la informacion de los "
@@ -47,14 +47,12 @@ public class PanelAdminCentro extends JPanel {
 		add(etiquetaEspacio);
 		
 		add(etiquetaConfigurarTemporada);
-		
 		add(etiquetaArchivoPartidos);
 		add(tfArchivoPartidos);
-		
 		add(etiquetaArchivoInfoJugadores);
 		add(tfArchivoInfoJugadores);
 		
-		add(etiquetaEspacio2);
+		//add(etiquetaEspacio2);
 		
 		
 	}

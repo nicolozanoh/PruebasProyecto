@@ -18,7 +18,7 @@ public class VentanaAdmin extends JFrame{
 		
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(1300, 800));
+		setSize(new Dimension(700, 300));
 		setResizable(false);
 		setVisible(true);
 		

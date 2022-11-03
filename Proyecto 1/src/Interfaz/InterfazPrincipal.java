@@ -71,7 +71,7 @@ public class InterfazPrincipal extends JFrame{
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(this, "La temporada aún no se ha configurado, por favor vuelva más tarde","Error",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Su usuario se ha creado, pero la temporada aún no se ha configurado, por favor vuelva más tarde","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
@@ -160,9 +160,20 @@ public class InterfazPrincipal extends JFrame{
 	}
 	
 	public int cargarConfiguracionTemp(String rutaJugadores, String rutaPartidos) {
-		//falta verficar los casos de los enteros de la respuesta
-		
 		int resp = this.app.cargarConfiguracionTemporada(rutaJugadores, rutaPartidos);
+		if (resp == 3) {
+			JOptionPane.showMessageDialog(this, "Ya existe la informacion de una temporada, para configurar otra, por favor elimine temporada actual","Error",JOptionPane.ERROR_MESSAGE);
+    		
+    	}
+    	else if(resp == 2|| resp == 1) {
+    		
+    		JOptionPane.showMessageDialog(this, "Los archivos seleccionados no existen, por favor revise que las rutas sean correctas","Error",JOptionPane.ERROR_MESSAGE);
+    		
+    	}
+    	else if (resp == 0) {
+    		JOptionPane.showMessageDialog(this, "La información se ha cargado exitosamente!","",JOptionPane.INFORMATION_MESSAGE);
+    		
+    	}
 		return resp;
 	}
 	
