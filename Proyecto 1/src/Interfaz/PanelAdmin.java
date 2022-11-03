@@ -45,10 +45,10 @@ public class PanelAdmin extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String evento = e.getActionCommand();
 		if (evento.equals(CTEMPORADA)) {
-			//this.padre.configurarTemporada();
+			this.padre.configurarTemporada();
 		}
 		if (evento.equals(CPARTIDO)) {
-			//padre.carg
+			padre.configurarResultadosPartido();
 		}
 		
 	}
