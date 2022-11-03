@@ -77,6 +77,9 @@ public class Aplicacion {
 	}
 	public int crearCuenta(String nombreUsuario, String clave) {
 		int resp = 0;
+		if(nombreUsuario.equals("")||clave.equals("")) {
+			resp = 1;
+		}
 		if (this.participantes != null) {
 			for(int i = 0; i<this.participantes.size(); i++) {
 				if(this.participantes.get(i).getNombreUsuario() == nombreUsuario){

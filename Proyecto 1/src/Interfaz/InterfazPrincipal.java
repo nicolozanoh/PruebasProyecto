@@ -21,6 +21,8 @@ public class InterfazPrincipal extends JFrame{
 	private VentanaEstadisticaEquipo vEstEquipo;
 	private VentanaEstadisticaJornada vEstJornada;
 	private VentanaEstadisticaTemporada vEstadisticaTemporada;
+	
+	boolean temporadaConfigurada;
 
 	public InterfazPrincipal() {
 		app = new Aplicacion();
@@ -38,8 +40,12 @@ public class InterfazPrincipal extends JFrame{
         	app.actualizarReferencias();
         	app.actualizarRankingEquipos();
         	app.actualizarRankingJugadores();
-        	vInicio = new VentanaInicio(this);
+        	temporadaConfigurada = true;
         }
+        else {
+        	temporadaConfigurada = false;
+        }
+        vInicio = new VentanaInicio(this);
 	}
 
 	public int iniciarSesion(String usuario, String contrasena) {
@@ -47,20 +53,25 @@ public class InterfazPrincipal extends JFrame{
 		int resp = app.iniciarSesion(usuario, contrasena);
 		
 		if (resp == 1) {
-			JOptionPane.showMessageDialog(this,"La contraseña no es correcta", "Error", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this,"La contraseña no es correcta", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		if (resp == 2) {
-			JOptionPane.showMessageDialog(this, "El nombre de usuario no existe","Error",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, "El nombre de usuario no existe","Error",JOptionPane.ERROR_MESSAGE);
 		}
 		
 		if(resp == 0) {
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Participante")) {
-				if(((Participante)this.app.getUsuarioActivo()).getEquipo()!=null) {
-					vUsuario = new VentanaUsuario(this);
+				if(temporadaConfigurada) {
+					if(((Participante)this.app.getUsuarioActivo()).getEquipo()!=null) {
+						vUsuario = new VentanaUsuario(this);
+					}
+					else {
+						vCrear = new VentanaCrearEquipo(this);
+					}
 				}
 				else {
-					vCrear = new VentanaCrearEquipo(this);
+					JOptionPane.showMessageDialog(this, "La temporada aún no se ha configurado, por favor vuelva más tarde","Error",JOptionPane.WARNING_MESSAGE);
 				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
@@ -74,7 +85,7 @@ public class InterfazPrincipal extends JFrame{
 	public int crearUsuario(String usuario, String contrasena) {
 		int resp = app.crearCuenta(usuario, contrasena);
 		if (resp == 1){
-			JOptionPane.showMessageDialog(this, "El nombre de usuario ya existe, seleccione otro","Error",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña no validos, seleccione otro","Error",JOptionPane.WARNING_MESSAGE);
 		}
 		if (resp == 0){
 			iniciarSesion(usuario, contrasena);
