@@ -123,4 +123,12 @@ public class Participante extends Usuario{
 	public void cambiarCapitan(int nuevoCapitan) {
 		this.equipo.cambiarEquipo(nuevoCapitan);
 	}
+	public int modificarAlineacionV2(ArrayList<String> jugadoresCambiar) {
+		int resp = this.equipo.cambiarAlineacionV2(jugadoresCambiar);
+		return resp;
+	}
+	public int cambiarCapitanV2(ArrayList<String> nuevoCapitan) {
+		int resp = this.equipo.cambiarCapitanV2(nuevoCapitan);
+		return resp;
+	}
 }

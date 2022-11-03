@@ -546,4 +546,19 @@ public class Aplicacion {
 		}
 		return resp;
 	}
+	public int cambiarAlineacionV2(ArrayList<String> jugadoresCambiar) {
+		int resp = ((Participante)this.getUsuarioActivo()).modificarAlineacionV2(jugadoresCambiar);
+		if (resp == 0) {
+			this.loader.guardarParticipantes(participantes);
+		}
+		return resp;
+	}
+	public int cambiarCapitanV2(ArrayList<String> seleccion) {
+		int resp = ((Participante)this.getUsuarioActivo()).cambiarCapitanV2(seleccion);
+		if (resp == 0) {
+			this.loader.guardarParticipantes(participantes);
+		}
+		return resp;
+	}
+	
 }

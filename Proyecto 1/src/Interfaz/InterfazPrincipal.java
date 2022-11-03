@@ -111,4 +111,32 @@ public class InterfazPrincipal extends JFrame{
     	}
 	}
 
+	public int CambiarAlineacion(ArrayList<String> seleccion) {
+		int resp = this.app.cambiarAlineacionV2(seleccion);
+		if(resp == 1||resp == 3) {
+			JOptionPane.showMessageDialog(this, "Debe seleccionar un titular y un suplente para hacer el cambio","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if(resp == 2) {
+			JOptionPane.showMessageDialog(this, "Los jugadores deben jugar en la misma posición","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if (resp == 0) {
+			JOptionPane.showMessageDialog(this, "Se ha realizado el cambio","",JOptionPane.INFORMATION_MESSAGE);
+		}
+		return resp;
+	}
+
+	public int cambiarCapitan(ArrayList<String> seleccion) {
+		int resp = this.app.cambiarCapitanV2(seleccion);
+		if(resp == 1) {
+			JOptionPane.showMessageDialog(this, "Seleccione solo 1 jugador","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if(resp == 2) {
+			JOptionPane.showMessageDialog(this, "El jugador debe ser parte de la nomina titular.","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		if (resp == 0) {
+			JOptionPane.showMessageDialog(this, "Se ha realizado el cambio","",JOptionPane.INFORMATION_MESSAGE);
+		}
+		return resp;
+	}
+
 }

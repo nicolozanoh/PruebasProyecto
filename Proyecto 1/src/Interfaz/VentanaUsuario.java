@@ -2,18 +2,23 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import modelo.Participante;
+
 public class VentanaUsuario extends JFrame{
+	
 	private PanelUsuario panelUsuario;
 	private PanelUsuarioDerecha panelUsuarioDerecha;
 	private PanelUsuarioSuperior panelUsuarioSuperior;
 	private PanelUsuarioIzquierda panelUsuarioIzquierda;
 	private InterfazPrincipal padre;
-	
+	private Participante usuario;
 	public VentanaUsuario(InterfazPrincipal papa) {
 		padre = papa;
+		usuario = (Participante)padre.getAplicacion().getUsuarioActivo();
 		this.panelUsuario = new PanelUsuario(this);
 		this.panelUsuarioDerecha = new PanelUsuarioDerecha(this);
 		this.panelUsuarioIzquierda = new PanelUsuarioIzquierda(this);
@@ -36,5 +41,26 @@ public class VentanaUsuario extends JFrame{
 	public InterfazPrincipal getInterfaz() {
 		return this.padre;
 		
+	}
+	public Participante getUsuario () {
+		return this.usuario;
+	}
+
+	public void CambiarAlineacion() {
+		ArrayList<String> seleccion = this.panelUsuario.getElementosSeleccionados();
+		int resp = this.padre.CambiarAlineacion(seleccion);
+		if (resp == 0) {
+			this.panelUsuario.actualizarAlineacion();
+			this.panelUsuario.borrarSelecciones();
+		}
+	}
+
+	public void CambiarCapitan() {
+		ArrayList<String> seleccion = this.panelUsuario.getElementosSeleccionados();
+		int resp = this.padre.cambiarCapitan(seleccion);
+		if (resp == 0) {
+			this.panelUsuarioDerecha.actualizarCapitan();
+			this.panelUsuario.borrarSelecciones();
+		}
 	}
 }

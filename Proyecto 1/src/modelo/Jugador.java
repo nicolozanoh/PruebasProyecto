@@ -54,6 +54,10 @@ public abstract class Jugador {
 		rojasJornada= new ArrayList<Integer>();
 		puntosJornada = new ArrayList<Double>();
 	}
+	public Jugador(String nombre, String posicion) {
+		this.nombre = nombre;
+		this.posicion = posicion;
+	}
 	public ArrayList<Integer> getMinutosJugadosJornada() {
 		return minutosJugadosJornada;
 	}
@@ -263,7 +267,7 @@ public abstract class Jugador {
 		}
 	}
 	public String toString() {
-		return this.nombre + ", $" + Double.toString(this.precio)+", "+this.posicion;
+		return this.nombre + ", "+this.posicion +", $" + Double.toString(this.precio);
 	}
 	abstract public double calcularPuntaje(int numJornada);
 }

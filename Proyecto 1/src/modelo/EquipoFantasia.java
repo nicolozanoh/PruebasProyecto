@@ -99,7 +99,7 @@ public class EquipoFantasia {
 			int maximo =0;
 			for (int i=0; i<jugadores.size(); i++) {
 				String posicionComparar = jugadores.get(i).getPosicion();
-				if (posicionComparar==posicion) { 
+				if (posicionComparar.equals(posicion)) { 
 					if(jugador.getNombre().equals(jugadores.get(i).getNombre())) {
 						respuesta = 11;
 					}
@@ -192,5 +192,71 @@ public class EquipoFantasia {
 	public void cambiarEquipo(int nuevoCapitan) {
 		this.capitan = this.titulares.get(nuevoCapitan-1);
 		
+	}
+	public int cambiarAlineacionV2(ArrayList<String> jugadoresCambiar) {
+		int resp = 1;
+		Jugador nuevoSuplente = this.titulares.get(0);
+		Jugador nuevoTitular=this.titulares.get(0);
+		
+		if(jugadoresCambiar.size()==2) {
+			String nombre1=((jugadoresCambiar.get(0).split(","))[0]).trim();
+			String posicion1=((jugadoresCambiar.get(0).split(","))[1]).trim();
+			String nombre2=((jugadoresCambiar.get(1).split(","))[0]).trim();
+			String posicion2=((jugadoresCambiar.get(1).split(","))[1]).trim();
+			resp = 2;
+			if (posicion1.equals(posicion2)) {
+				resp =3;
+				int coincidenciasTitular = 0;
+				int coincidenciasSuplentes = 0;
+				for (int i = 0 ; i < this.titulares.size(); i++) {
+					if (this.titulares.get(i).getNombre().equals(nombre1)) {
+						coincidenciasTitular +=1;
+						nuevoSuplente = this.titulares.get(i);
+					}
+					if (this.titulares.get(i).getNombre().equals(nombre2)) {
+						coincidenciasTitular +=1;
+						nuevoSuplente = this.titulares.get(i);
+					}
+				}
+				for (int i = 0 ; i < this.suplentes.size(); i++) {
+					if (this.suplentes.get(i).getNombre().equals(nombre1)) {
+						coincidenciasSuplentes +=1;
+						nuevoTitular = this.suplentes.get(i);
+					}
+					if (this.suplentes.get(i).getNombre().equals(nombre2)) {
+						coincidenciasSuplentes +=1;
+						nuevoTitular = this.suplentes.get(i);
+					}
+				}
+				if (coincidenciasTitular == 1&&coincidenciasSuplentes == 1) {
+					resp = 0;
+					titulares.add(nuevoTitular);
+					titulares.remove(nuevoSuplente);
+					
+					suplentes.add(nuevoSuplente);
+					suplentes.remove(nuevoTitular);
+				}
+			}
+		}
+		return resp;
+	}
+	public int cambiarCapitanV2(ArrayList<String> nuevoCapitan) {
+		int resp = 1;
+		if(nuevoCapitan.size() == 1) {
+			resp = 2;
+			String nombre=((nuevoCapitan.get(0).split(","))[0]).trim();
+			//String posicion=((nuevoCapitan.get(0).split(","))[1]).trim();
+			int coincidencias = 0;
+			for(int i = 0; i<this.titulares.size();i++) {
+				if (nombre.equals(this.titulares.get(i).getNombre())) {
+					this.capitan = this.titulares.get(i);
+					coincidencias +=1;
+				}
+			}
+			if(coincidencias == 1) {
+				resp = 0;
+			}
+		}
+		return resp;
 	}
 }
