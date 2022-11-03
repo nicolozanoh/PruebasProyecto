@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -291,70 +292,23 @@ public class PanelInferiorCrearEquipo extends JPanel implements ActionListener{
 	}
 	private ArrayList<Jugador> listaEquipo(){
 		ArrayList<Jugador>equipo = null;
-		int resp = 0;
-		if (arquero1.getSelectedItem()== null) {	
-			resp =1;
-		}
-		else if (arquero2.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (defensa1.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (defensa2.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (defensa3.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (defensa4.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (defensa5.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (mediocampista1.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (mediocampista2.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (mediocampista3.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (mediocampista4.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (mediocampista5.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (delantero1.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (delantero2.getSelectedItem()== null) {
-			resp =1;
-		}
-		else if (delantero3.getSelectedItem()== null) {
-			resp =1;
-		}
-		if (resp== 0) {
-			equipo = new ArrayList<Jugador>();
-			equipo.add((Jugador)arquero1.getSelectedItem());
-			equipo.add((Jugador)arquero2.getSelectedItem());
-			equipo.add((Jugador)defensa1.getSelectedItem());
-			equipo.add((Jugador)defensa2.getSelectedItem());
-			equipo.add((Jugador)defensa3.getSelectedItem());
-			equipo.add((Jugador)defensa4.getSelectedItem());
-			equipo.add((Jugador)defensa5.getSelectedItem());
-			equipo.add((Jugador)mediocampista1.getSelectedItem());
-			equipo.add((Jugador)mediocampista2.getSelectedItem());
-			equipo.add((Jugador)mediocampista3.getSelectedItem());
-			equipo.add((Jugador)mediocampista4.getSelectedItem());
-			equipo.add((Jugador)mediocampista5.getSelectedItem());
-			equipo.add((Jugador)delantero1.getSelectedItem());
-			equipo.add((Jugador)delantero2.getSelectedItem());
-			equipo.add((Jugador)delantero3.getSelectedItem());
-		}
+		equipo = new ArrayList<Jugador>();
+		equipo.add((Jugador)arquero1.getSelectedItem());
+		equipo.add((Jugador)arquero2.getSelectedItem());
+		equipo.add((Jugador)defensa1.getSelectedItem());
+		equipo.add((Jugador)defensa2.getSelectedItem());
+		equipo.add((Jugador)defensa3.getSelectedItem());
+		equipo.add((Jugador)defensa4.getSelectedItem());
+		equipo.add((Jugador)defensa5.getSelectedItem());
+		equipo.add((Jugador)mediocampista1.getSelectedItem());
+		equipo.add((Jugador)mediocampista2.getSelectedItem());
+		equipo.add((Jugador)mediocampista3.getSelectedItem());
+		equipo.add((Jugador)mediocampista4.getSelectedItem());
+		equipo.add((Jugador)mediocampista5.getSelectedItem());
+		equipo.add((Jugador)delantero1.getSelectedItem());
+		equipo.add((Jugador)delantero2.getSelectedItem());
+		equipo.add((Jugador)delantero3.getSelectedItem());
+		equipo.removeAll(Collections.singleton(null));
 		return equipo;
 	}
 	

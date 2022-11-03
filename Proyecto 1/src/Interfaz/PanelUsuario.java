@@ -65,8 +65,12 @@ public class PanelUsuario extends JPanel{
 		suplente1 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(0).toString());
 		suplente2 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(1).toString());
 		suplente3 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(2).toString());
-		suplente4 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(3).toString());
-		
+		if (padre.getUsuario().getEquipo().getSuplentes().size()==4) {
+			suplente4 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(3).toString());
+		}
+		else {
+			suplente4 = new JCheckBox();
+		}
 		setLayout(new GridLayout(15,1));
 		
 		add(titulares);
@@ -134,7 +138,9 @@ public class PanelUsuario extends JPanel{
 			seleccionados.add(suplente3.getText());
 		}
 		if (suplente4.isSelected()) {
-			seleccionados.add(suplente4.getText());
+			if(!(suplente4.getText().equals(""))) {
+				seleccionados.add(suplente4.getText());
+			}
 		}
 		return seleccionados;
 	}
@@ -159,7 +165,10 @@ public class PanelUsuario extends JPanel{
 		suplente1.setText(padre.getUsuario().getEquipo().getSuplentes().get(0).toString());
 		suplente2.setText(padre.getUsuario().getEquipo().getSuplentes().get(1).toString());
 		suplente3.setText(padre.getUsuario().getEquipo().getSuplentes().get(2).toString());
-		suplente4.setText(padre.getUsuario().getEquipo().getSuplentes().get(3).toString());
+		suplente4.setText("");
+		if (padre.getUsuario().getEquipo().getSuplentes().size()==4) {
+			suplente4.setText(padre.getUsuario().getEquipo().getSuplentes().get(3).toString());	
+		}
 			
 	}
 	public void borrarSelecciones() {

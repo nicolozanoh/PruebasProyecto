@@ -537,7 +537,7 @@ public class Aplicacion {
 		int resp = 10;
 		if (!(nombre.equals(""))&& nombre!=null) {
 			resp = 9;
-			if (equipo != null) {
+			if (equipo != null && equipo.size() == 15) {
 				resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
 				if (resp == 0) {
 					this.loader.guardarParticipantes(participantes);
@@ -548,14 +548,14 @@ public class Aplicacion {
 	}
 	public int cambiarAlineacionV2(ArrayList<String> jugadoresCambiar) {
 		int resp = ((Participante)this.getUsuarioActivo()).modificarAlineacionV2(jugadoresCambiar);
-		if (resp == 0) {
+		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
 	}
 	public int cambiarCapitanV2(ArrayList<String> seleccion) {
 		int resp = ((Participante)this.getUsuarioActivo()).cambiarCapitanV2(seleccion);
-		if (resp == 0) {
+		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
@@ -563,6 +563,21 @@ public class Aplicacion {
 	public int venderJugadorV2(ArrayList<String>seleccion) {
 		int resp = ((Participante)this.usuarioActivo).venderJugadorV2(seleccion);
 		
+		return resp;
+	}
+	public int comprarJugadorV2(ArrayList<Jugador> jugadoresComprar) {
+		int resp = 9;
+		if(jugadoresComprar.size()==1) {
+			resp = 8;
+			boolean modificar = permitirModificar();
+			if (modificar) {
+				resp = ((Participante)this.getUsuarioActivo()).comprarJugador(jugadoresComprar.get(0));	
+				if(resp == 0) {
+					((Participante)this.getUsuarioActivo()).getEquipo().getSuplentes().add(jugadoresComprar.get(0));
+					loader.guardarParticipantes(participantes);
+				}
+			}
+		}
 		return resp;
 	}
 	

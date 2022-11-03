@@ -19,7 +19,7 @@ public class VentanaInicio extends JFrame{
 		//Configuracion de la ventana
 		setTitle("Fantasy Football");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(300, 200));
+		setSize(new Dimension(300, 150));
 		setResizable(false);
 		setVisible(true);
 	}

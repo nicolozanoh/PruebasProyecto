@@ -16,6 +16,7 @@ public class VentanaUsuario extends JFrame{
 	private PanelUsuarioIzquierda panelUsuarioIzquierda;
 	private InterfazPrincipal padre;
 	private Participante usuario;
+	private VentanaComprar vComprar;
 	public VentanaUsuario(InterfazPrincipal papa) {
 		padre = papa;
 		usuario = (Participante)padre.getAplicacion().getUsuarioActivo();
@@ -72,5 +73,19 @@ public class VentanaUsuario extends JFrame{
 			this.panelUsuario.borrarSelecciones();
 			this.panelUsuarioDerecha.actualizarPresupuesto();
 		}
+	}
+	public void actualizarVentana() {
+		this.panelUsuario.actualizarAlineacion();
+		this.panelUsuarioDerecha.actualizarPresupuesto();
+	}
+	public void comprarJugador() {
+		this.padre.abrirComprarJugador();
+		//vComprar = new VentanaComprar(this);
+	}
+
+	public void verEstadisticas() {
+		// TODO Auto-generated method stub
+		this.padre.verEtadisticas();
+		
 	}
 }

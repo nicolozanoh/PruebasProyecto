@@ -1,6 +1,7 @@
 package Interfaz;
 
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,7 +12,15 @@ import modelo.Participante;
 public class InterfazPrincipal extends JFrame{
 	
 	private Aplicacion app;
-	
+	private VentanaAdmin vAdministrador;
+	private VentanaUsuario vUsuario;
+	private VentanaComprar vComprar;
+	private VentanaInicio vInicio;
+	private VentanaCrearEquipo vCrear;
+	private VentanaEstadisticas vEstadisticas;
+	private VentanaEstadisticaEquipo vEstEquipo;
+	private VentanaEstadisticaJornada vEstJornada;
+	private VentanaEstadisticaTemporada vEstadisticaTemporada;
 
 	public InterfazPrincipal() {
 		app = new Aplicacion();
@@ -29,7 +38,7 @@ public class InterfazPrincipal extends JFrame{
         	app.actualizarReferencias();
         	app.actualizarRankingEquipos();
         	app.actualizarRankingJugadores();
-        	VentanaInicio vInicio = new VentanaInicio(this);
+        	vInicio = new VentanaInicio(this);
         }
 	}
 
@@ -48,14 +57,14 @@ public class InterfazPrincipal extends JFrame{
 		if(resp == 0) {
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Participante")) {
 				if(((Participante)this.app.getUsuarioActivo()).getEquipo()!=null) {
-					VentanaUsuario vUsuario = new VentanaUsuario(this);
+					vUsuario = new VentanaUsuario(this);
 				}
 				else {
-					VentanaCrearEquipo vCrear = new VentanaCrearEquipo(this);
+					vCrear = new VentanaCrearEquipo(this);
 				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
-				VentanaAdmin vUsuario = new VentanaAdmin(this);
+				vAdministrador= new VentanaAdmin(this);
 			}
 		}
 		
@@ -80,7 +89,7 @@ public class InterfazPrincipal extends JFrame{
 		int resp = app.crearEquipoV2(equipo, nombreEquipo);
 		if (resp == 0) {
 			JOptionPane.showMessageDialog(this, "Su equipo se ha creado exitosamente, su nuevo saldo es de: $" + ((Participante)this.app.getUsuarioActivo()).getPresupuesto(),"",JOptionPane.INFORMATION_MESSAGE);
-			VentanaUsuario vUsuario = new VentanaUsuario(this);
+			vUsuario = new VentanaUsuario(this);
 		}
 		else if(resp==1) {
 			JOptionPane.showMessageDialog(this, "Error: Ya existe un equipo, para crear un nuevo equipo, elimine el anterior","Error",JOptionPane.ERROR_MESSAGE);
@@ -165,6 +174,54 @@ public class InterfazPrincipal extends JFrame{
 			JOptionPane.showMessageDialog(this, "El jugador se ha vendido, recuerde que para poder guardar los cambios realizados, debe comprar un jugador.","",JOptionPane.INFORMATION_MESSAGE);
 		}
 		return resp;
+	}
+
+	public void abrirComprarJugador() {
+		vComprar = new VentanaComprar(this);
+	}
+
+	public void verEtadisticas() {
+		vEstadisticas = new VentanaEstadisticas(this);
+	}
+
+	public void comprarJugador(ArrayList<Jugador> jugadoresComprar) {
+		int resp = this.app.comprarJugadorV2(jugadoresComprar);
+		if (resp == 0) {
+			JOptionPane.showMessageDialog(this, "Compra exitosa, su nuevo saldo es: " + Double.toString(((Participante)this.app.getUsuarioActivo()).getPresupuesto()),"",JOptionPane.INFORMATION_MESSAGE);
+			this.vComprar.dispatchEvent(new WindowEvent(vComprar, WindowEvent.WINDOW_CLOSING));
+			this.vUsuario.actualizarVentana();
+		}
+    	else if(resp==1) {
+    		System.out.println("\nError: El número digitado no corresponde a ningun jugadorr");
+    	}
+    	else if(resp==1) {
+			JOptionPane.showMessageDialog(this, "Ya existe un equipo, para crear un nuevo equipo, elimine el anterior","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==2) {
+    		JOptionPane.showMessageDialog(this, "Numero de arqueros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==3) {
+    		JOptionPane.showMessageDialog(this, "Numero de defensas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==4) {
+    		JOptionPane.showMessageDialog(this, "Numero de mediocampistas. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==5) {
+    		JOptionPane.showMessageDialog(this, "Numero de delanteros. Recuerde: Debe seleccionar 15 jugadores (2 arqueros, 5 defensores, 5 mediocampistas y 3 delanteros)","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==6) {
+    		JOptionPane.showMessageDialog(this, "Saldo insuficiente","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if(resp==7) {
+    		
+    		JOptionPane.showMessageDialog(this, "Su equipo está lleno, para comprar un nuevo jugador, primero venda otro.","Error",JOptionPane.ERROR_MESSAGE);
+    	}
+    	else if (resp== 8) {
+    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo mientras en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
+		}
+    	else if (resp== 11) {
+    		JOptionPane.showMessageDialog(this, "El Jugador seleccionado ya hace parte de su equipo, por favor seleccione otro","Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }
