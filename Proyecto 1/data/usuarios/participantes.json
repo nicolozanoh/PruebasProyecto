@@ -1720,4 +1720,9 @@
       "penaltisAtajadosJornada" : [ ]
     } ]
   }
+}, {
+  "nombreUsuario" : "nicolozanoh",
+  "contraseña" : "1234",
+  "presupuesto" : 1000000.0,
+  "equipo" : null
 } ]
