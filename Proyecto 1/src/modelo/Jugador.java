@@ -269,5 +269,12 @@ public abstract class Jugador {
 	public String toString() {
 		return this.nombre + ", "+this.posicion +", " + Double.toString(this.precio);
 	}
+	public String puntosJornadaToString() {
+		String puntosJornada = Double.toString(this.puntosJornada.get(0));
+		for(int i = 1; i<this.puntosJornada.size();i++) {
+			puntosJornada += ", " +Double.toString(this.puntosJornada.get(i));
+		}
+		return puntosJornada;
+	}
 	abstract public double calcularPuntaje(int numJornada);
 }

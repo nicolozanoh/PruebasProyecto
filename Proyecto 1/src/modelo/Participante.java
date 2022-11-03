@@ -139,4 +139,7 @@ public class Participante extends Usuario{
 		}
 		return resp;
 	}
+	public void organizarJugadores() {
+		this.equipo.organizarJugadores();
+	}
 }

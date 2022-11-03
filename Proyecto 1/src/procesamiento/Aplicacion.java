@@ -594,5 +594,9 @@ public class Aplicacion {
 		}
 		return resp;
 	}
+	public void organizarJugadoresEquipo() {
+		((Participante)this.usuarioActivo).organizarJugadores();
+		
+	}
 	
 }

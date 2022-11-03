@@ -64,6 +64,7 @@ public class InterfazPrincipal extends JFrame{
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Participante")) {
 				if(temporadaConfigurada) {
 					if(((Participante)this.app.getUsuarioActivo()).getEquipo()!=null) {
+						this.app.organizarJugadoresEquipo();
 						vUsuario = new VentanaUsuario(this);
 					}
 					else {
@@ -253,6 +254,21 @@ public class InterfazPrincipal extends JFrame{
     	else if (resp== 11) {
     		JOptionPane.showMessageDialog(this, "El Jugador seleccionado ya hace parte de su equipo, por favor seleccione otro","Error",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	public void mostrarEstadisticasEquipo() {
+		this.vEstEquipo = new VentanaEstadisticaEquipo(this);
+		
+	}
+
+	public void mostrarEstadisticasJornada() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mostrarEstadisticasTemporada() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -17,6 +17,7 @@ public class PanelEstadisticas extends JPanel implements ActionListener{
 	private VentanaEstadisticas padre;
 	public PanelEstadisticas(VentanaEstadisticas papa) {
 		padre = papa;
+		
 		btnEstEquipo = new JButton("Resultados del equipo");
 		btnEstEquipo.setActionCommand(EQUIPO);
 		btnEstEquipo.addActionListener(this);
@@ -28,6 +29,7 @@ public class PanelEstadisticas extends JPanel implements ActionListener{
 		btnEstTemporada = new JButton("Resultados de la temporada");
 		btnEstTemporada.setActionCommand(TEMPORADA);
 		btnEstTemporada.addActionListener(this);
+		
 		setLayout(new FlowLayout());
 		
 		add(btnEstEquipo);
@@ -36,7 +38,15 @@ public class PanelEstadisticas extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		String evento = e.getActionCommand();
+		if(evento.equals(EQUIPO)) {
+			this.padre.mostrarEstadisticasEquipo();
+		}
+		if(evento.equals(JORNADA)) {
+			this.padre.mostrarEstadisticasJornada();
+		}
+		if(evento.equals(TEMPORADA)) {
+			this.padre.mostrarEstadisticasTemporada();
+		}
 	}
 }

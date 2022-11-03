@@ -25,4 +25,16 @@ public class VentanaEstadisticas extends JFrame{
 		add(panel);
 		
 	}
+	public void mostrarEstadisticasEquipo() {
+		this.padre.mostrarEstadisticasEquipo();
+		
+	}
+	public void mostrarEstadisticasJornada() {
+		this.padre.mostrarEstadisticasJornada();
+		
+	}
+	public void mostrarEstadisticasTemporada() {
+		this.padre.mostrarEstadisticasTemporada();
+		
+	}
 }

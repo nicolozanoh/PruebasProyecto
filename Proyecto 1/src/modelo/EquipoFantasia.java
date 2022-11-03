@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class EquipoFantasia {
 	private String nombre;
@@ -296,5 +297,19 @@ public class EquipoFantasia {
 			}
 		}
 		return resp;
+	}
+	public String puntosJornadaToString() {
+		String puntosJornada = Double.toString(this.puntosJornada.get(0));
+		for(int i = 1; i<this.puntosJornada.size();i++) {
+			puntosJornada += ", " +Double.toString(this.puntosJornada.get(i));
+		}
+		return puntosJornada;
+	}
+	public void organizarJugadores() {
+		ArrayList<Jugador>cJugadores = new ArrayList<Jugador>(this.jugadores);
+		cJugadores.removeAll(Collections.singleton(null));
+		if(cJugadores.size() == 15) {
+			this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
+		}
 	}
 }

@@ -32,4 +32,5 @@ public class VentanaCrearEquipo extends JFrame{
 	public InterfazPrincipal getInterfaz() {
 		return this.padre;
 	}
+	
 }
