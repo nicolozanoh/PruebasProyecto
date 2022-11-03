@@ -550,22 +550,33 @@ public class Aplicacion {
 		return resp;
 	}
 	public int cambiarAlineacionV2(ArrayList<String> jugadoresCambiar) {
-		int resp = ((Participante)this.getUsuarioActivo()).modificarAlineacionV2(jugadoresCambiar);
+		int resp = 4;
+		boolean modificar = permitirModificar();
+		if(modificar) {
+			resp = ((Participante)this.getUsuarioActivo()).modificarAlineacionV2(jugadoresCambiar);
+		}
 		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
 	}
 	public int cambiarCapitanV2(ArrayList<String> seleccion) {
-		int resp = ((Participante)this.getUsuarioActivo()).cambiarCapitanV2(seleccion);
+		int resp =3;
+		boolean modificar = permitirModificar();
+		if(modificar) {
+			resp = ((Participante)this.getUsuarioActivo()).cambiarCapitanV2(seleccion);
+		}
 		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
 	}
 	public int venderJugadorV2(ArrayList<String>seleccion) {
-		int resp = ((Participante)this.usuarioActivo).venderJugadorV2(seleccion);
-		
+		int resp = 4;
+		boolean modificar = permitirModificar();
+		if(modificar) {
+			resp = ((Participante)this.usuarioActivo).venderJugadorV2(seleccion);
+		}
 		return resp;
 	}
 	public int comprarJugadorV2(ArrayList<Jugador> jugadoresComprar) {

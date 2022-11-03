@@ -142,6 +142,9 @@ public class InterfazPrincipal extends JFrame{
 		if (resp == 0) {
 			JOptionPane.showMessageDialog(this, "Se ha realizado el cambio","",JOptionPane.INFORMATION_MESSAGE);
 		}
+		else if (resp== 4) {
+    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
+		}
 		return resp;
 	}
 
@@ -155,6 +158,9 @@ public class InterfazPrincipal extends JFrame{
 		}
 		if (resp == 0) {
 			JOptionPane.showMessageDialog(this, "Se ha realizado el cambio","",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (resp== 3) {
+    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
 		}
 		return resp;
 	}
@@ -189,11 +195,14 @@ public class InterfazPrincipal extends JFrame{
 		if(resp == 1) {
 			JOptionPane.showMessageDialog(this, "Su equipo tiene menos de 15 jugadores, para vender más jugadores, compre un jugador antes","Error",JOptionPane.ERROR_MESSAGE);
 		}
-		if(resp == 2||resp == 3) {
+		else if(resp == 2||resp == 3) {
 			JOptionPane.showMessageDialog(this, "Debe seleccionar 1 jugador","Error",JOptionPane.ERROR_MESSAGE);
 		}
-		if (resp == 0) {
+		else if (resp == 0) {
 			JOptionPane.showMessageDialog(this, "El jugador se ha vendido, recuerde que para poder guardar los cambios realizados, debe comprar un jugador.","",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (resp== 4) {
+    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
 		}
 		return resp;
 	}
@@ -239,7 +248,7 @@ public class InterfazPrincipal extends JFrame{
     		JOptionPane.showMessageDialog(this, "Su equipo está lleno, para comprar un nuevo jugador, primero venda otro.","Error",JOptionPane.ERROR_MESSAGE);
     	}
     	else if (resp== 8) {
-    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo mientras en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
 		}
     	else if (resp== 11) {
     		JOptionPane.showMessageDialog(this, "El Jugador seleccionado ya hace parte de su equipo, por favor seleccione otro","Error",JOptionPane.ERROR_MESSAGE);
