@@ -20,7 +20,7 @@ public class InterfazPrincipal extends JFrame{
 	private VentanaEstadisticas vEstadisticas;
 	private VentanaEstadisticaEquipo vEstEquipo;
 	private VentanaEstadisticaJornada vEstJornada;
-	private VentanaEstadisticaTemporada vEstadisticaTemporada;
+	private VentanaEstadisticaTemporada vEstTemporada;
 	
 	boolean temporadaConfigurada;
 
@@ -251,6 +251,9 @@ public class InterfazPrincipal extends JFrame{
     	else if (resp== 8) {
     		JOptionPane.showMessageDialog(this, "No sé puede modificar el equipo en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
 		}
+    	else if (resp== 9) {
+    		JOptionPane.showMessageDialog(this, "Seleccione solo un jugador.","Error",JOptionPane.ERROR_MESSAGE);
+		}
     	else if (resp== 11) {
     		JOptionPane.showMessageDialog(this, "El Jugador seleccionado ya hace parte de su equipo, por favor seleccione otro","Error",JOptionPane.ERROR_MESSAGE);
 		}
@@ -262,12 +265,12 @@ public class InterfazPrincipal extends JFrame{
 	}
 
 	public void mostrarEstadisticasJornada() {
-		// TODO Auto-generated method stub
+		this.vEstJornada = new VentanaEstadisticaJornada(this);
 		
 	}
 
 	public void mostrarEstadisticasTemporada() {
-		// TODO Auto-generated method stub
+		this.vEstTemporada = new VentanaEstadisticaTemporada(this);
 		
 	}
 

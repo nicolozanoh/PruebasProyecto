@@ -110,6 +110,10 @@ public class PanelInferiorComprar extends JPanel implements ActionListener{
 				this.arrayDelanteros.add(jugadores.get(i));
 			}
 		}
+		this.arrayArqueros.add(0, null);
+		this.arrayDefensas.add(0, null);
+		this.arrayMediocampistas.add(0, null);;
+		this.arrayDelanteros.add(0, null);;
 	}
 	private double recalcularSaldoRestante() {
 		double saldo = presupuestoInicial;

@@ -17,7 +17,7 @@ public class VentanaEstadisticas extends JFrame{
 		panel = new PanelEstadisticas(this);
 		
 		setTitle("Fantasy Football");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(new Dimension(300, 150));
 		setResizable(false);
 		setVisible(true);
