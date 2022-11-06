@@ -109,17 +109,18 @@ public class Aplicacion {
 		return jornada.mejorJugadorJornada();
 	}
 	public EquipoFantasia mejorEquipoActual() { //Si es el mejor equipo de fantasia de la temporada actual esto esta bien, si no, esta mal
-		  ArrayList<EquipoFantasia> equiposTemporadaActual=new ArrayList<EquipoFantasia>(); 
-		  EquipoFantasia mejorEquipo=null; 
-		  for (int i=0;i<participantes.size();i++) {
-			  equiposTemporadaActual.add(participantes.get(i).getEquipo()); 
-		  } 
-		  for (int i=0;i<equiposTemporadaActual.size();i++) { 
-			  if(equiposTemporadaActual.get(i).getPuntosTotales()>mejorEquipo.getPuntosTotales()) { 
-				  mejorEquipo=equiposTemporadaActual.get(i); 
-				  } 
-			  } 
-		  return mejorEquipo; 
+		/*
+		 * ArrayList<EquipoFantasia> equiposTemporadaActual=new
+		 * ArrayList<EquipoFantasia>(); EquipoFantasia mejorEquipo=null; for (int
+		 * i=0;i<participantes.size();i++) {
+		 * equiposTemporadaActual.add(participantes.get(i).getEquipo()); } for (int
+		 * i=0;i<equiposTemporadaActual.size();i++) {
+		 * if(equiposTemporadaActual.get(i).getPuntosTotales()>mejorEquipo.
+		 * getPuntosTotales()) { mejorEquipo=equiposTemporadaActual.get(i); } } return
+		 * mejorEquipo;
+		 */
+		
+		return this.temporadaActual.mejorEquipoFantasiaTemporada();
 	  }
 	public Jugador mejorJugadorActual() {
 		return this.temporadaActual.mejorJugadorTemporada();
