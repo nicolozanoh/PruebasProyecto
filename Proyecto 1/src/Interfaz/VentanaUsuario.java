@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import modelo.Participante;
 
+@SuppressWarnings("serial")
 public class VentanaUsuario extends JFrame{
 	
 	private PanelUsuario panelUsuario;
@@ -16,7 +17,6 @@ public class VentanaUsuario extends JFrame{
 	private PanelUsuarioIzquierda panelUsuarioIzquierda;
 	private InterfazPrincipal padre;
 	private Participante usuario;
-	private VentanaComprar vComprar;
 	public VentanaUsuario(InterfazPrincipal papa) {
 		padre = papa;
 		usuario = (Participante)padre.getAplicacion().getUsuarioActivo();
@@ -87,5 +87,12 @@ public class VentanaUsuario extends JFrame{
 		// TODO Auto-generated method stub
 		this.padre.verEtadisticas();
 		
+	}
+
+	public void cerrarSesion() {
+		this.padre.cerrarSesionUsuario();
+	}
+	public void borrarEquipo() {
+		this.padre.borrarEquipo();
 	}
 }

@@ -1,12 +1,9 @@
 package Interfaz;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class VentanaEstadisticas extends JFrame{
 	
 	private InterfazPrincipal padre;

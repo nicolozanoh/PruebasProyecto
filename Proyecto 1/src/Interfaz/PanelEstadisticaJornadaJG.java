@@ -47,10 +47,10 @@ public class PanelEstadisticaJornadaJG extends JPanel{
 		cNombre.setText(jugador.getNombre());
 		cNombre.setEditable(false);
 		
-		cNombre.setText(Double.toString(jugador.getPuntosTotales()));
+		cPuntosTotales.setText(Double.toString(jugador.getPuntosTotales()));
 		cPuntosTotales.setEditable(false);
 		
-		cNombre.setText(jugador.puntosJornadaToString());
+		cPuntosJornada.setText(jugador.puntosJornadaToString());
 		cPuntosJornada.setEditable(false);
 	}
 }

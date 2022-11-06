@@ -41,6 +41,10 @@ public class VentanaAdmin extends JFrame{
 		
 		int resp = padre.cargarResulPartido(pathPartido);
 	}
-	
-	
+	public void cerrarSesion() {
+		this.padre.cerrarSesionAdmin();
+	}
+	public void borrarTemporada() {
+		this.padre.borrarTemporada();
+	}
 }

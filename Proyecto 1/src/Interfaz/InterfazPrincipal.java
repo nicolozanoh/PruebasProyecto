@@ -72,7 +72,8 @@ public class InterfazPrincipal extends JFrame{
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(this, "Su usuario se ha creado, pero la temporada aún no se ha configurado, por favor vuelva más tarde","Error",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "La temporada aún no se ha configurado, por favor vuelva más tarde","Error",JOptionPane.WARNING_MESSAGE);
+					System.exit(0);
 				}
 			}
 			if (this.app.getUsuarioActivo().getClass().getName().equals("modelo.Administrador")) {
@@ -89,6 +90,7 @@ public class InterfazPrincipal extends JFrame{
 			JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña no validos, seleccione otro","Error",JOptionPane.WARNING_MESSAGE);
 		}
 		if (resp == 0){
+			JOptionPane.showMessageDialog(this, "Su usuario se ha creada!","",JOptionPane.INFORMATION_MESSAGE);
 			iniciarSesion(usuario, contrasena);
 		}
 		return resp;
@@ -179,7 +181,7 @@ public class InterfazPrincipal extends JFrame{
     	}
     	else if (resp == 0) {
     		JOptionPane.showMessageDialog(this, "La información se ha cargado exitosamente!","",JOptionPane.INFORMATION_MESSAGE);
-    		
+    		this.temporadaConfigurada = true;
     	}
 		return resp;
 	}
@@ -219,9 +221,10 @@ public class InterfazPrincipal extends JFrame{
 	public void comprarJugador(ArrayList<Jugador> jugadoresComprar) {
 		int resp = this.app.comprarJugadorV2(jugadoresComprar);
 		if (resp == 0) {
-			JOptionPane.showMessageDialog(this, "Compra exitosa, su nuevo saldo es: " + Double.toString(((Participante)this.app.getUsuarioActivo()).getPresupuesto()),"",JOptionPane.INFORMATION_MESSAGE);
-			this.vComprar.dispatchEvent(new WindowEvent(vComprar, WindowEvent.WINDOW_CLOSING));
 			this.vUsuario.actualizarVentana();
+			this.vComprar.dispatchEvent(new WindowEvent(vComprar, WindowEvent.WINDOW_CLOSING));
+			JOptionPane.showMessageDialog(this, "Compra exitosa, su nuevo saldo es: " + Double.toString(((Participante)this.app.getUsuarioActivo()).getPresupuesto()),"",JOptionPane.INFORMATION_MESSAGE);
+			
 		}
     	else if(resp==1) {
     		System.out.println("\nError: El número digitado no corresponde a ningun jugadorr");
@@ -274,4 +277,28 @@ public class InterfazPrincipal extends JFrame{
 		
 	}
 
+	public void cerrarSesionAdmin() {
+		this.app.cerrarSesion();
+		this.vAdministrador.dispose();
+		JOptionPane.showMessageDialog(this, "Su sesión se ha cerrado.","",JOptionPane.INFORMATION_MESSAGE);
+		this.vInicio = new VentanaInicio(this);
+	}
+
+	public void borrarTemporada() {
+		this.app.borrarArchivosTemporada();
+		JOptionPane.showMessageDialog(this, "Se ha eliminado la información de la temporada.","",JOptionPane.INFORMATION_MESSAGE);
+		this.temporadaConfigurada = false;
+	}
+	public void borrarEquipo() {
+		this.app.borrarEquipo();
+		JOptionPane.showMessageDialog(this, "Su equipo se ha eliminado.","",JOptionPane.INFORMATION_MESSAGE);
+		this.vUsuario.dispose();
+		this.vCrear = new VentanaCrearEquipo(this);
+	}
+	public void cerrarSesionUsuario() {
+		this.app.cerrarSesion();
+		this.vUsuario.dispose();
+		JOptionPane.showMessageDialog(this, "Su sesión se ha cerrado.","",JOptionPane.INFORMATION_MESSAGE);
+		this.vInicio = new VentanaInicio(this);
+	}
 }

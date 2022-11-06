@@ -14,11 +14,15 @@ public class PanelUsuarioSuperior extends JPanel implements ActionListener{
 	private static final String COMPRAR = "COMPRAR";
 	private static final String VENDER = "VENDER";
 	private static final String ESTADISTICAS = "ESTADISTICAS";
+	private static final String CERRAR = "CERRAR";
+	private static final String BORRAR= "BORRAR";
 	private VentanaUsuario padre;
 	private VentanaComprar vComprar;
 	private JButton verEstadisticas;
 	private JButton comprarJugador;
 	private JButton venderJugador;
+	private JButton cerrarSesion;
+	private JButton borrarEquipo;
 	
 	public PanelUsuarioSuperior(VentanaUsuario papa) {
 		padre = papa;
@@ -36,11 +40,21 @@ public class PanelUsuarioSuperior extends JPanel implements ActionListener{
 		venderJugador.setActionCommand(VENDER);
 		venderJugador.addActionListener(this);
 		
+		cerrarSesion = new JButton("Cerrar Sesión");
+		cerrarSesion.setActionCommand(CERRAR);
+		cerrarSesion.addActionListener(this);
+		
+		borrarEquipo = new JButton("Borrar Equipo");
+		borrarEquipo.setActionCommand(BORRAR);
+		borrarEquipo.addActionListener(this);
+		
 		setBorder(new TitledBorder("Bienvenido "+ padre.getInterfaz().getAplicacion().getUsuarioActivo().getNombreUsuario()+"!"));
 		setLayout(new FlowLayout());
 		add(verEstadisticas);
 		add(comprarJugador);
 		add(venderJugador);
+		add(borrarEquipo);
+		add(cerrarSesion);
 	}
 
 	@Override
@@ -54,6 +68,12 @@ public class PanelUsuarioSuperior extends JPanel implements ActionListener{
 		}
 		if (evento.equals(ESTADISTICAS)) {
 			this.padre.verEstadisticas();
+		}
+		if (evento.equals(CERRAR)) {
+			this.padre.cerrarSesion();
+		}
+		if (evento.equals(BORRAR)) {
+			this.padre.borrarEquipo();
 		}
 	}
 
