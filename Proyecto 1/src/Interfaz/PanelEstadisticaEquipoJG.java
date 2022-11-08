@@ -15,9 +15,11 @@ public class PanelEstadisticaEquipoJG extends JPanel{
 	private JLabel lNombre;
 	private JLabel lPuntosTotales;
 	private JLabel lPuntosJornada;
+	private JLabel lPosicion;
 	private JTextField cNombre;
 	private JTextField cPuntosTotales;
 	private JTextField cPuntosJornada;
+	private JTextField cPosicion;
 	private VentanaEstadisticaEquipo padre;
 	public PanelEstadisticaEquipoJG(VentanaEstadisticaEquipo papa){
 		padre = papa;
@@ -26,6 +28,7 @@ public class PanelEstadisticaEquipoJG extends JPanel{
 		lNombre = new JLabel("Nombre:");
 		lPuntosTotales = new JLabel("Puntos Totales:");
 		lPuntosJornada= new JLabel("Puntos Jornada:");
+		lPosicion= new JLabel("Posicion Actual:");
 		
 		cNombre = new JTextField(mejorJugador.getNombre());
 		cNombre.setEditable(false);
@@ -36,7 +39,13 @@ public class PanelEstadisticaEquipoJG extends JPanel{
 		cPuntosJornada = new JTextField(mejorJugador.puntosJornadaToString());
 		cPuntosJornada.setEditable(false);
 		
-		setLayout(new GridLayout(3,2));
+		int posicion = this.padre.getInterfaz().getAplicacion().getTemporada().getRankingJugadores().indexOf(mejorJugador);
+		
+		cPosicion = new JTextField(Integer.toString(posicion+1));
+		cPosicion.setEditable(false);
+		
+		
+		setLayout(new GridLayout(4,2));
 		setBorder(new TitledBorder("Mejor Jugador"));
 		
 		add(lNombre);
@@ -45,5 +54,7 @@ public class PanelEstadisticaEquipoJG extends JPanel{
 		add(cPuntosTotales);
 		add(lPuntosJornada);
 		add(cPuntosJornada);
+		add(lPosicion);
+		add(cPosicion);
 	}
 }

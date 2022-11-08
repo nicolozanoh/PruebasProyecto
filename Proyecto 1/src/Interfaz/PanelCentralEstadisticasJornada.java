@@ -3,6 +3,7 @@ package Interfaz;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modelo.EquipoFantasia;
@@ -23,11 +24,13 @@ public class PanelCentralEstadisticasJornada extends JPanel{
 	public void buscarInfoJornada(int numJornada) {
 		EquipoFantasia equipo = this.padre.getInterfaz().getAplicacion().mejorEquipoFecha(numJornada);
 		Jugador jugador = this.padre.getInterfaz().getAplicacion().mejorJugadorFecha(numJornada);
-		this.panelEquipo.actualizarInfo(equipo);
-		this.panelJugador.actualizarInfo(jugador);
-		
-	}
-	public void buscarInfoJornadaJugador(int numJornada) {
+		if(jugador != null && equipo != null) {
+			this.panelEquipo.actualizarInfo(equipo);
+			this.panelJugador.actualizarInfo(jugador);
+		}
+		else {
+			JOptionPane.showMessageDialog(this, "No hay información de la jornada seleccionada, por favor seleccione otra.","Error",JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 	public VentanaEstadisticaJornada getVentanaJornada() {

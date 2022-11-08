@@ -66,10 +66,18 @@ public class Jornada {
 		}
 	}
 	public Jugador mejorJugadorJornada() {
-		return this.rankingJugadores.get(0);
+		try {
+			return this.rankingJugadores.get(0);
+		}catch (Exception ex) {
+			return null;
+		}
 	}
 	public EquipoFantasia mejorEquipoFantasiaJornada() {
-		return this.rankingEquiposFantasia.get(0);
+		try {
+			return this.rankingEquiposFantasia.get(0);
+		}catch(Exception ex) {
+			return null;
+		}
 	}
 	public void actualizarResultadosJornada() {
 		for(Partido p: this.partidos) {

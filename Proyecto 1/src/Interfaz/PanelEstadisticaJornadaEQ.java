@@ -14,9 +14,11 @@ public class PanelEstadisticaJornadaEQ extends JPanel{
 	private JLabel lNombreEquipo;
 	private JLabel lPuntosTotales;
 	private JLabel lPuntosJornada;
+	//private JLabel lPosicion;
 	private JTextField campoNombre;
 	private JTextField campoPuntosTotales;
 	private JTextField campoPuntosJornada;
+	//private JTextField campoPosicion;
 	private PanelCentralEstadisticasJornada padre;
 	public PanelEstadisticaJornadaEQ(PanelCentralEstadisticasJornada papa) {
 		padre = papa;
@@ -24,6 +26,7 @@ public class PanelEstadisticaJornadaEQ extends JPanel{
 		lNombreEquipo = new JLabel("Nombre:");
 		lPuntosTotales = new JLabel("Puntos Totales:");
 		lPuntosJornada= new JLabel("Puntos Jornada:");
+		//lPosicion = new JLabel("Posición Actual");
 		
 		campoNombre = new JTextField("");
 		campoNombre.setEditable(false);
@@ -34,6 +37,9 @@ public class PanelEstadisticaJornadaEQ extends JPanel{
 		campoPuntosJornada = new JTextField("");
 		campoPuntosJornada.setEditable(false);
 		
+		//campoPosicion = new JTextField("");
+		//campoPosicion.setEditable(false);
+		
 		setLayout(new GridLayout(3,2));
 		setBorder(new TitledBorder("Resultados Equipo"));
 		
@@ -43,6 +49,8 @@ public class PanelEstadisticaJornadaEQ extends JPanel{
 		add(campoPuntosTotales);
 		add(lPuntosJornada);
 		add(campoPuntosJornada);
+		//add(lPosicion);
+		//add(campoPosicion);
 	}
 	public void actualizarInfo(EquipoFantasia equipo) {
 		campoNombre.setText(equipo.getNombre());
@@ -53,6 +61,11 @@ public class PanelEstadisticaJornadaEQ extends JPanel{
 		
 		campoPuntosJornada.setText(equipo.puntosJornadaToString());
 		campoPuntosJornada.setEditable(false);
+		
+		//int posicion = this.padre.getVentanaJornada().getInterfaz().getAplicacion().getTemporada().getRankingEquiposFantasia().indexOf(equipo);
+		
+		//campoPosicion.setText(Integer.toString(posicion+1));
+		//campoPosicion.setEditable(false);
 		
 		
 	}
