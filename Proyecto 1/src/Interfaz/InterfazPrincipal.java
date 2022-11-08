@@ -132,6 +132,9 @@ public class InterfazPrincipal extends JFrame{
     	else if(resp == 11) {
     		JOptionPane.showMessageDialog(this, "Debe seleccionar 15 jugadores diferentes","Error",JOptionPane.ERROR_MESSAGE);
     	}
+    	else if (resp== 4) {
+    		JOptionPane.showMessageDialog(this, "No sé permite crear equipos en esta fecha, intente de nuevo el día siguiente al último partido de la jornada.","Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public int CambiarAlineacion(ArrayList<String> seleccion) {
@@ -139,10 +142,10 @@ public class InterfazPrincipal extends JFrame{
 		if(resp == 1||resp == 3) {
 			JOptionPane.showMessageDialog(this, "Debe seleccionar un titular y un suplente para hacer el cambio","Error",JOptionPane.ERROR_MESSAGE);
 		}
-		if(resp == 2) {
+		else if(resp == 2) {
 			JOptionPane.showMessageDialog(this, "Los jugadores deben jugar en la misma posición","Error",JOptionPane.ERROR_MESSAGE);
 		}
-		if (resp == 0) {
+		else if (resp == 0) {
 			JOptionPane.showMessageDialog(this, "Se ha realizado el cambio","",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (resp== 4) {

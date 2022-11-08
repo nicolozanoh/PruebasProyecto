@@ -542,15 +542,19 @@ public class Aplicacion {
 		
 	}
 	public int crearEquipoV2(ArrayList<Jugador> equipo, String nombre) {
-		int resp = 10;
-		if (!(nombre.equals(""))&& nombre!=null) {
-			resp = 9;
-			if (equipo != null && equipo.size() == 15) {
-				resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
-				if (resp == 0) {
-					this.loader.guardarParticipantes(participantes);
-					EquipoFantasia equipoCreado = ((Participante)this.usuarioActivo).getEquipo();
-					this.temporadaActual.getRankingEquiposFantasia().add(equipoCreado);
+		boolean modificar = permitirModificar();
+		int resp = 12;
+		if(modificar) {
+			resp = 10;
+			if (!(nombre.equals(""))&& nombre!=null) {
+				resp = 9;
+				if (equipo != null && equipo.size() == 15) {
+					resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
+					if (resp == 0) {
+						this.loader.guardarParticipantes(participantes);
+						EquipoFantasia equipoCreado = ((Participante)this.usuarioActivo).getEquipo();
+						this.temporadaActual.getRankingEquiposFantasia().add(equipoCreado);
+					}
 				}
 			}
 		}
