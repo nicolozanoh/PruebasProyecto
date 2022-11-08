@@ -90,7 +90,7 @@ public class InterfazPrincipal extends JFrame{
 			JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña no validos, seleccione otro","Error",JOptionPane.WARNING_MESSAGE);
 		}
 		if (resp == 0){
-			JOptionPane.showMessageDialog(this, "Su usuario se ha creada!","",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Su usuario se ha creado!","",JOptionPane.INFORMATION_MESSAGE);
 			iniciarSesion(usuario, contrasena);
 		}
 		return resp;
