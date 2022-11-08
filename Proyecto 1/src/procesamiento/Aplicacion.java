@@ -101,8 +101,13 @@ public class Aplicacion {
 		this.usuarioActivo = null;
 	}
 	public EquipoFantasia mejorEquipoFecha(int numJornada) {
-		Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
-		return jornada.mejorEquipoFantasiaJornada();
+		try {
+			Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
+			return jornada.mejorEquipoFantasiaJornada();
+		}catch(Exception ex){
+			return null;
+		}
+		
 	}
 	public Jugador mejorJugadorFecha(int numJornada) {
 		Jornada jornada = this.temporadaActual.getJornadas().get(numJornada-1);
@@ -373,7 +378,7 @@ public class Aplicacion {
 			fechaPrimerPartido = LocalDateTime.parse(this.temporadaActual.getJornadas().get(i).getFechaPrimerPartido());
 			inicioJornada = LocalDateTime.of(fechaPrimerPartido.getYear(), fechaPrimerPartido.getMonth(), fechaPrimerPartido.getDayOfMonth(), 00, 00);
 			fechaUltimoPartido = LocalDateTime.parse(this.temporadaActual.getJornadas().get(i).getFechaUltimoPartido());
-			finJornada = LocalDateTime.of(fechaUltimoPartido.getYear(), fechaUltimoPartido.getMonth(), fechaUltimoPartido.getDayOfMonth(), 00, 00);
+			finJornada = LocalDateTime.of(fechaUltimoPartido.getYear(), fechaUltimoPartido.getMonth(), fechaUltimoPartido.getDayOfMonth()+1, 00, 00);
 			if (fechaActual.isAfter(inicioJornada)&&fechaActual.isBefore(finJornada)) {
 				resp = false;
 				break;
