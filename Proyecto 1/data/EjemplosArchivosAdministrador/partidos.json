@@ -1,7 +1,7 @@
 [
 	{
 		"numeroJornada": 1,
-		"fecha": "2022-08-06T10:30:00",
+		"fecha": "2022-08-13T10:30:00",
 		"equipoLocal":{
 			"nombre":"Junior"
 		},
@@ -11,7 +11,7 @@
 	},
 	{
 		"numeroJornada": 1,
-		"fecha": "2022-08-07T09:20:00",
+		"fecha": "2022-08-13T09:20:00",
 		"equipoLocal":{
 			"nombre":"Millonarios"
 		},
@@ -21,7 +21,7 @@
 	},
 	{
 		"numeroJornada": 1,
-		"fecha": "2022-08-08T15:15:00",
+		"fecha": "2022-08-14T15:15:00",
 		"equipoLocal":{
 			"nombre":"America"
 		},
@@ -31,7 +31,7 @@
 	},
 	{
 		"numeroJornada": 2,
-		"fecha": "2022-09-11T20:00:00",
+		"fecha": "2022-10-01T20:00:00",
 		"equipoLocal":{
 			"nombre":"Nacional"
 		},
@@ -41,7 +41,7 @@
 	},
 	{
 		"numeroJornada": 2,
-		"fecha": "2022-09-10T16:25:00",
+		"fecha": "2022-10-01T16:25:00",
 		"equipoLocal":{
 			"nombre":"Santa Fe"
 		},
@@ -51,7 +51,7 @@
 	},
 	{
 		"numeroJornada": 2,
-		"fecha": "2022-09-05T23:55:00",
+		"fecha": "2022-10-02T22:10:00",
 		"equipoLocal":{
 			"nombre":"Deportivo Cali"
 		},
@@ -61,7 +61,7 @@
 	},
 	{
 		"numeroJornada": 3,
-		"fecha": "2022-10-07T22:05:00",
+		"fecha": "2022-11-19T22:05:00",
 		"equipoLocal":{
 			"nombre":"Millonarios"
 		},
@@ -71,7 +71,7 @@
 	},
 	{
 		"numeroJornada": 3,
-		"fecha": "2022-10-07T11:10:00",
+		"fecha": "2022-11-19T11:10:00",
 		"equipoLocal":{
 			"nombre":"Santa Fe"
 		},
@@ -81,7 +81,7 @@
 	},
 	{
 		"numeroJornada": 3,
-		"fecha": "2022-10-08T06:10:00",
+		"fecha": "2022-11-20T06:10:00",
 		"equipoLocal":{
 			"nombre":"Nacional"
 		},

@@ -549,6 +549,8 @@ public class Aplicacion {
 				resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
 				if (resp == 0) {
 					this.loader.guardarParticipantes(participantes);
+					EquipoFantasia equipoCreado = ((Participante)this.usuarioActivo).getEquipo();
+					this.temporadaActual.getRankingEquiposFantasia().add(equipoCreado);
 				}
 			}
 		}
