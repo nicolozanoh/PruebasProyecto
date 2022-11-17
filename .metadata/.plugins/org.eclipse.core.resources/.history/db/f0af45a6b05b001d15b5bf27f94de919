@@ -1,0 +1,17 @@
+package Interfaz;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class PanelEstadisticaEquipoEQ extends JPanel{
+	private JLabel lNombreEquipo;
+	private JLabel lPuntosTotales;
+	private JLabel lPuntosJornada;
+	private JTextField campoPresupuesto;
+	private JTextField campoCapitan;
+	public PanelEstadisticaEquipoEQ() {
+		
+	}
+}

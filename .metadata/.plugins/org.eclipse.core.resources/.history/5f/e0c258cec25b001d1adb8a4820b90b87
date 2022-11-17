@@ -1,0 +1,14 @@
+package Interfaz;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class PanelCentralEstadisticasJornada extends JPanel{
+	private PanelEstadisticaJornadaEQ panelEquipo;
+	private PanelEstadisticaJornadaJG panelJugador;
+	public void buscarInfoJornada(int numJornada) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

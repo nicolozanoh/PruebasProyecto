@@ -1,0 +1,347 @@
+package Interfaz;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import modelo.Jugador;
+import modelo.Participante;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+public class PanelUsuario extends JPanel implements ActionListener{
+	private static final String CAMBIOSELECCION = "CAMBIOSELECCION";
+	private VentanaUsuario padre;
+	
+	private JLabel titulares;
+	private JLabel suplentes;
+	private ArrayList<String> seleccion = new ArrayList<String>();
+	private JCheckBox  titular1;
+	private JCheckBox  titular2;
+	private JCheckBox  titular3;
+	private JCheckBox  titular4;
+	private JCheckBox  titular5;
+	private JCheckBox  titular6;
+	private JCheckBox  titular7;
+	private JCheckBox  titular8;
+	private JCheckBox  titular9;
+	private JCheckBox  titular10;
+	private JCheckBox  titular11;
+	private JCheckBox  suplente1;
+	private JCheckBox  suplente2;
+	private JCheckBox  suplente3;
+	private JCheckBox  suplente4;
+	
+	public PanelUsuario(VentanaUsuario papa) {
+		padre = papa;
+		
+		if (((Participante)padre.getInterfaz().getAplicacion().getUsuarioActivo()).getEquipo()!=null) {
+			setBorder(new TitledBorder(((Participante)padre.getInterfaz().getAplicacion().getUsuarioActivo()).getEquipo().getNombre()));
+		}
+		
+		titulares = new JLabel("Titulares:");
+		suplentes = new JLabel("Suplentes:");
+		
+		titular1 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(0).toString());
+		
+		//jugador1.setPreferredSize(new Dimension(70,10));
+		//jugador1.setEditable(false);
+		titular2 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(1).toString());
+		//jugador2.setPreferredSize(new Dimension(70,10));
+		//jugador2.setEditable(false);
+		titular3 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(2).toString());
+		//jugador3.setPreferredSize(new Dimension(70,10));
+		//jugador3.setEditable(false);
+		titular4 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(3).toString());
+		//jugador4.setPreferredSize(new Dimension(70,10));
+		//jugador4.setEditable(false);
+		titular5 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(4).toString());
+		//jugador5.setPreferredSize(new Dimension(70,10));
+		//jugador5.JCheckBox (false);
+		titular6 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(5).toString());
+		//jugador6.setPreferredSize(new Dimension(70,10));
+		//jugador6.setEditable(false);
+		titular7 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(6).toString());
+		//jugador7.setPreferredSize(new Dimension(70,10));
+		//jugador7.setEditable(false);
+		titular8 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(7).toString());
+		//jugador8.setPreferredSize(new Dimension(70,10));
+		//jugador8.setEditable(false);
+		titular9 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(8).toString());
+		//jugador9.setPreferredSize(new Dimension(70,10));
+		//jugador9.setEditable(false);
+		titular10 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(9).toString());
+		//jugador10.setPreferredSize(new Dimension(70,10));
+		//jugador10.setEditable(false);
+		titular11 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(10).toString());
+		//jugador11.setPreferredSize(new Dimension(70,10));
+		//jugador11.setEditable(false);
+		suplente1 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(0).toString());
+		//jugador12.setPreferredSize(new Dimension(70,10));
+		//jugador12.setEditable(false);
+		suplente2 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(1).toString());
+		//jugador13.setPreferredSize(new Dimension(70,10));
+		//jugador13.setEditable(false);
+		suplente3 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(2).toString());
+		//jugador14.setPreferredSize(new Dimension(70,10));
+		//jugador14.setEditable(false);
+		suplente4 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(3).toString());
+		//jugador15.setPreferredSize(new Dimension(70,10));
+		//jugador15.setEditable(false);
+		
+		setLayout(new GridLayout(15,1));
+		
+		add(titulares);
+		add(titular1);
+		add(titular2);
+		add(titular3);
+		add(titular4);
+		add(titular5);
+		add(titular6);
+		add(titular7);
+		add(titular8);
+		add(titular9);
+		add(titular10);
+		add(titular11);
+		add(suplentes);
+		add(new JLabel());
+		add(suplente1);
+		add(suplente2);
+		add(suplente3);
+		add(suplente4);
+		
+	}
+
+	public ArrayList<String> getSeleccion() {
+		return seleccion;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String evento = e.getActionCommand();
+		Jugador jugador;
+		String modificar;
+		if(evento.equals(CAMBIOSELECCION)) {
+			JCheckBox comp = (JCheckBox) e.getSource();
+			if (comp == titular1) {
+				String[] infoJug = titular1.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular1.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular2) {
+				String[] infoJug = titular2.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular2.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular3) {
+				String[] infoJug = titular3.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular3.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular4) {
+				String[] infoJug = titular4.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular4.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular5) {
+				String[] infoJug = titular5.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular5.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular6) {
+				String[] infoJug = titular6.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular6.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular7) {
+				String[] infoJug = titular7.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular7.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular8) {
+				String[] infoJug = titular8.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular8.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular9) {
+				String[] infoJug = titular9.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular9.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular10) {
+				String[] infoJug = titular10.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular10.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == titular11) {
+				String[] infoJug = titular11.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (titular11.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == suplente1) {
+				String[] infoJug = suplente1.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (suplente1.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == suplente2) {
+				String[] infoJug = suplente2.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (suplente2.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == suplente3) {
+				String[] infoJug = suplente3.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (suplente3.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+			if (comp == suplente4) {
+				String[] infoJug = suplente4.getText().split(",");
+				modificar = infoJug[0] + ", "+ infoJug[2];
+				if (suplente4.isSelected()) {
+					seleccion.add(modificar);
+				}
+				else {
+					for(int i = 0; i < seleccion.size(); i++) {
+						if (seleccion.get(i).equals(modificar)) {
+							seleccion.remove(i);
+						}
+					}
+				}
+			}
+		}	
+	}
+}

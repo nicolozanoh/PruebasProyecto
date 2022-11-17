@@ -1,0 +1,10 @@
+package Interfaz;
+
+public class VentanaEstadisticaJornada {
+	PanelSuperiorEstadisticasJornada panelSuperior;
+	PanelCentralEstadisticasJornada panelCentral;
+	public void buscarInfoJornada(numJornada) {
+		panelCentral.buscarInfoJornada(numJornada);
+	}
+
+}

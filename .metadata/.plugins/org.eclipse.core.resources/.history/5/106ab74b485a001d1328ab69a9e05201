@@ -1,0 +1,209 @@
+package Interfaz;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import modelo.Jugador;
+import modelo.Participante;
+
+public class PanelInferiorCrearEquipo extends JPanel implements ActionListener{
+	VentanaCrearEquipo padre;
+	
+	private static final String SELECCION1 = "SELECCION1";
+	private static final String SELECCION2 = "SELECCION2";
+	private static final String SELECCION3 = "SELECCION3";
+	private static final String SELECCION4 = "SELECCION4";
+	private static final String SELECCION5 = "SELECCION5";
+	private static final String SELECCION6 = "SELECCION6";
+	private static final String SELECCION7 = "SELECCION7";
+	private static final String SELECCION8 = "SELECCION8";
+	private static final String SELECCION9 = "SELECCION9";
+	private static final String SELECCION10 = "SELECCION10";
+	private static final String SELECCION11 = "SELECCION11";
+	private static final String SELECCION12 = "SELECCION12";
+	private static final String SELECCION13 = "SELECCION13";
+	private static final String SELECCION14 = "SELECCION14";
+	private static final String SELECCION15 = "SELECCION15";
+	
+	private static final String CREAR = "CREAR";
+	
+	private ArrayList<Jugador> arrayDefensas;
+	private ArrayList<Jugador> arrayMediocampistas;
+	private ArrayList<Jugador> arrayArqueros;
+	private ArrayList<Jugador> arrayDelanteros;
+	private JLabel arqueros;
+	private JLabel defensas;
+	private JLabel mediocampistas;
+	private JLabel delanteros;
+	private double presupuestoInicial;
+	
+	private JLabel total;
+	private JComboBox<?>  arquero1;
+	private JComboBox<?>  arquero2;
+	private JComboBox<?>  defensa1;
+	private JComboBox<?>  defensa2;
+	private JComboBox<?>  defensa3;
+	private JComboBox<?>  defensa4;
+	private JComboBox<?>  defensa5;
+	private JComboBox<?>  mediocampista1;
+	private JComboBox<?>  mediocampista2;
+	private JComboBox<?>  mediocampista3;
+	private JComboBox<?>  mediocampista4;
+	private JComboBox<?>  mediocampista5;
+	private JComboBox<?>  delantero1;
+	private JComboBox<?>  delantero2;
+	private JComboBox<?>  delantero3;
+	public PanelInferiorCrearEquipo(VentanaCrearEquipo papa) {
+		padre = papa;
+		setLayout(new GridLayout(19,1));
+		arqueros = new JLabel("Arqueros:");
+		defensas = new JLabel("Defensas:");
+		mediocampistas = new JLabel("Mediocampistas:");
+		delanteros = new JLabel("Delanteros:");
+		presupuestoInicial = ((Participante)this.padre.getInterfaz().getAplicacion().getUsuarioActivo()).getPresupuesto();
+		armarListas();
+		
+		total = new JLabel("Total: " + Double.toString(presupuestoInicial));
+		
+		arquero1 = new JComboBox<>();
+		arquero1.setModel(new DefaultComboBoxModel(arrayArqueros.toArray()));
+		arquero1.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION1);
+		//arquero1.setPreferredSize(new Dimension (170, 50));
+		arquero2 = new JComboBox<>();
+		arquero2.setModel(new DefaultComboBoxModel(arrayArqueros.toArray()));
+		arquero2.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION2);
+		//arquero2.setPreferredSize(new Dimension (170, 50));
+		defensa1 = new JComboBox<>();
+		defensa1.setModel(new DefaultComboBoxModel(arrayDefensas.toArray()));
+		defensa1.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION3);
+		//defensa1.setPreferredSize(new Dimension (170, 50));
+		defensa2 = new JComboBox<>();
+		defensa2.setModel(new DefaultComboBoxModel(arrayDefensas.toArray()));
+		defensa2.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION4);
+		//defensa2.setPreferredSize(new Dimension (170, 50));
+		defensa3 = new JComboBox<>();
+		defensa3.setModel(new DefaultComboBoxModel(arrayDefensas.toArray()));
+		defensa3.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION5);
+		//defensa3.setPreferredSize(new Dimension (170, 50));
+		defensa4 = new JComboBox<>();
+		defensa4.setModel(new DefaultComboBoxModel(arrayDefensas.toArray()));
+		defensa4.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION6);
+		//defensa4.setPreferredSize(new Dimension (170, 50));
+		defensa5 = new JComboBox<>();
+		defensa5.setModel(new DefaultComboBoxModel(arrayDefensas.toArray()));
+		defensa5.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION7);
+		//defensa5.setPreferredSize(new Dimension (170, 50));
+		mediocampista1 = new JComboBox<>();
+		mediocampista1.setModel(new DefaultComboBoxModel(arrayMediocampistas.toArray()));
+		mediocampista1.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION8);
+		//mediocampista1.setPreferredSize(new Dimension (170, 50));
+		mediocampista2 = new JComboBox<>();
+		mediocampista2.setModel(new DefaultComboBoxModel(arrayMediocampistas.toArray()));
+		mediocampista2.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION9);
+		//mediocampista2.setPreferredSize(new Dimension (170, 50));
+		mediocampista3 = new JComboBox<>();
+		mediocampista3.setModel(new DefaultComboBoxModel(arrayMediocampistas.toArray()));
+		mediocampista3.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION10);
+		//mediocampista3.setPreferredSize(new Dimension (170, 50));
+		mediocampista4 = new JComboBox<>();
+		mediocampista4.setModel(new DefaultComboBoxModel(arrayMediocampistas.toArray()));
+		mediocampista4.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION11);
+		//mediocampista4.setPreferredSize(new Dimension (170, 50));
+		mediocampista5 = new JComboBox<>();
+		mediocampista5.setModel(new DefaultComboBoxModel(arrayMediocampistas.toArray()));
+		mediocampista5.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION12);
+		//mediocampista5.setPreferredSize(new Dimension (170, 50));
+		delantero1 = new JComboBox<>();
+		delantero1.setModel(new DefaultComboBoxModel(arrayDelanteros.toArray()));
+		delantero1.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION13);
+		//delantero1.setPreferredSize(new Dimension (170, 50));
+		delantero2 = new JComboBox<>();
+		delantero2.setModel(new DefaultComboBoxModel(arrayDelanteros.toArray()));
+		delantero2.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION14);
+		//delantero2.setPreferredSize(new Dimension (170, 50));
+		delantero3 = new JComboBox<>();
+		delantero3.setModel(new DefaultComboBoxModel(arrayDelanteros.toArray()));
+		delantero3.setSelectedIndex(-1);
+		arquero1.setActionCommand(SELECCION15);
+		//delantero3.setPreferredSize(new Dimension (170, 50));
+		
+		add(arqueros);
+		add(arquero1);
+		add(arquero2);
+		
+		add(defensas);
+		add(defensa1);
+		add(defensa2);
+		add(defensa3);
+		add(defensa4);
+		add(defensa5);
+		
+		add(mediocampistas);
+		add(mediocampista1);
+		add(mediocampista2);
+		add(mediocampista3);
+		add(mediocampista4);
+		add(mediocampista5);
+		
+		add(delanteros);
+		add(delantero1);
+		add(delantero2);
+		add(delantero3);
+		add(total);
+	}
+	private void armarListas() {
+		ArrayList<Jugador> jugadores = this.padre.getInterfaz().getAplicacion().getTemporada().getJugadores();
+		this.arrayArqueros = new ArrayList<Jugador>();
+		this.arrayDefensas = new ArrayList<Jugador>();
+		this.arrayMediocampistas = new ArrayList<Jugador>();
+		this.arrayDelanteros = new ArrayList<Jugador>();
+		for (int i = 0; i<jugadores.size();i++) {
+			if(jugadores.get(i).getPosicion().equals("defensa")) {
+				this.arrayDefensas.add(jugadores.get(i));
+			}
+			if(jugadores.get(i).getPosicion().equals("arquero")) {
+				this.arrayArqueros.add(jugadores.get(i));
+			}
+			if(jugadores.get(i).getPosicion().equals("mediocampista")) {
+				this.arrayMediocampistas.add(jugadores.get(i));
+			}
+			if(jugadores.get(i).getPosicion().equals("delantero")) {
+				this.arrayDelanteros.add(jugadores.get(i));
+			}
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String evento = e.getActionCommand();
+		if (evento.equals(SELECCION1)) {
+			double precio = ((Jugador)arquero1.getSelectedItem()).getPrecio();
+			presupuestoInicial -= precio;
+			total = new JLabel("Total: " + Double.toString(presupuestoInicial));
+			this.remove(total);
+			this.add(total);
+			
+		}
+	}
+}

@@ -1,0 +1,17 @@
+package Interfaz;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class PanelEstadisticaEquipoJG {
+	private JLabel lNombre;
+	private JLabel lPuntosTotales;
+	private JLabel lPuntosJornada;
+	private JTextField cNombre;
+	private JTextField cPuntosTotales;
+	private JTextField cPuntosJornada;
+	private VentanaEstadisticaEquipo padre;
+	public PanelEstadisticaEquipoJG(VentanaEstadisticaEquipo papa){
+		padre = papa;
+	}
+}

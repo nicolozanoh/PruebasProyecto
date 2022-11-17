@@ -1,0 +1,31 @@
+package Interfaz;
+
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class PanelCentralEstadisticasJornada extends JPanel{
+	private PanelEstadisticaJornadaEQ panelEquipo;
+	private PanelEstadisticaJornadaJG panelJugador;
+	private VentanaEstadisticaJornada padre;
+	public PanelCentralEstadisticasJornada (VentanaEstadisticaJornada papa) {
+		padre = papa;
+		this.panelEquipo = new PanelEstadisticaJornadaEQ(this);
+		this.panelJugador = new PanelEstadisticaJornadaJG(this);
+		setLayout(new GridLayout(1,2));
+		add(panelEquipo);
+		add(panelJugador);
+	}
+	public void buscarInfoJornadaEquipo(int numJornada) {
+		
+	}
+	public void buscarInfoJornadaJugador(int numJornada) {
+		
+	}
+	public VentanaEstadisticaJornada getVentanaJornada() {
+		return this.padre;
+	}
+
+	
+}

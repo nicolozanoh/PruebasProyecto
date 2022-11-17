@@ -1,0 +1,11 @@
+package Interfaz;
+
+public class VentanaComprar {
+	private VentanaUsuario padre;
+	private PanelSuperiorComprar panelSuperior;
+	public VentanaComprar(VentanaUsuario papa) {
+		padre= papa;
+		this.panelSuperior = new PanelSuperiorComprar(this);
+		
+	}
+}

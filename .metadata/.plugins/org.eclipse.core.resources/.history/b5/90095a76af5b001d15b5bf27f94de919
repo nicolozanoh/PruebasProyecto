@@ -1,0 +1,10 @@
+package Interfaz;
+
+import javax.swing.JPanel;
+
+
+public class PanelEstadisticaEquipoEQ extends JPanel{
+	private JLabel lNombreEquipo;
+	private JLabel lPuntosTotales;
+	private JLabel lPuntosJornada;
+}

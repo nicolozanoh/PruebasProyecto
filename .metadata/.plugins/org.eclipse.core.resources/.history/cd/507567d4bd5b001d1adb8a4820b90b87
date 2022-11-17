@@ -1,0 +1,24 @@
+package Interfaz;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class PanelSuperiorEstadisticasJornada extends JPanel implements ActionListener{
+	private JLabel lnumJornada;
+	private JTextField numJornada;
+	private JButton btnBuscar;
+	private VentanaEstadisticaJornada padre;
+	public PanelSuperiorEstadisticasJornada(VentanaEstadisticaJornada papa) {
+		padre = papa;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

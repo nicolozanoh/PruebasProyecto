@@ -1,0 +1,34 @@
+package Interfaz;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+public class VentanaEstadisticaEquipo extends JFrame{
+	InterfazPrincipal padre;
+	PanelEstadisticaEquipoEQ panelEquipo;
+	PanelEstadisticaEquipoJG panelJugador;
+	public VentanaEstadisticaEquipo(InterfazPrincipal papa) {
+		padre=papa;
+		this.panelEquipo = new PanelEstadisticaEquipoEQ(this);
+		this.panelJugador = new PanelEstadisticaEquipoJG(this);
+
+		//setTitle("Fantasy Football");
+		setTitle("Fantasy Football");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setSize(new Dimension(1300, 800));
+		setResizable(false);
+		setVisible(true);
+		
+		setLayout(new BorderLayout());
+		add(panelEquipo,  BorderLayout.EAST);
+		add(panelJugador,  BorderLayout.CENTER);
+		add(panelUsuarioIzquierda, BorderLayout.WEST);
+		add(panelUsuarioSuperior, BorderLayout.NORTH);
+	}
+	public InterfazPrincipal getInterfaz() {
+		return this.padre;
+	}
+
+}
