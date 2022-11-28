@@ -3,6 +3,9 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Temporada {
@@ -70,5 +73,30 @@ public class Temporada {
 	}
 	public EquipoFantasia mejorEquipoFantasiaTemporada() {
 		return this.rankingEquiposFantasia.get(0);
+	}
+	public EquipoFantasia getEquipoFantasia(String nombreDelEquipo) {
+		boolean centinela = false;
+		int contador=0;
+		EquipoFantasia respuesta=null;
+		while(centinela==false) {
+			if(nombreDelEquipo==equiposFantasia.get(contador).getNombre()) {
+				respuesta=equiposFantasia.get(contador);
+				centinela=true;
+			}
+			else {
+				contador++;
+			}
+		}
+		return respuesta;
+	}
+	
+	public void graficoComparacionEquipos(String equipo1, String equipo2) {
+		EquipoFantasia e1 = getEquipoFantasia(equipo1);
+		EquipoFantasia e2 = getEquipoFantasia(equipo2);
+		
+		ArrayList<Double> puntosEquipo1= e1.getPuntosJornada();
+		ArrayList<Double> puntosEquipo2= e2.getPuntosJornada();
+		
+		
 	}
 }
