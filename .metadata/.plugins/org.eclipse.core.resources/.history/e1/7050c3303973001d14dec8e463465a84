@@ -262,9 +262,6 @@ public abstract class Jugador {
 		return this.nombreEquipo;
 	}
 	public void iniciarPuntosJornada(int numJornadas) {
-		if (this.puntosJornada == null) {
-			this.puntosJornada = new ArrayList<Double>();
-		}
 		for (int i = 0; i<numJornadas;i++) {
 			this.puntosJornada.add(0.00);
 		}
