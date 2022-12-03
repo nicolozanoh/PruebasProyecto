@@ -609,5 +609,8 @@ public class Aplicacion {
 		((Participante)this.usuarioActivo).organizarJugadores();
 		
 	}
+	public void mostrarGraficoComparacionPuntosEquipos(String equipo1, String equipo2) {
+		temporadaActual.graficoComparacionEquipos(equipo1, equipo2);
+	}
 	
 }

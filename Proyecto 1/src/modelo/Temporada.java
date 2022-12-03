@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -96,7 +97,17 @@ public class Temporada {
 		
 		ArrayList<Double> puntosEquipo1= e1.getPuntosJornada();
 		ArrayList<Double> puntosEquipo2= e2.getPuntosJornada();
+		DefaultCategoryDataset dts = new DefaultCategoryDataset();
 		
+		for (int i=0; i<puntosEquipo1.size();i++) {
+			dts.setValue(puntosEquipo1.get(i), e1.getNombre(), String.valueOf(i));
+		}
 		
+		for (int i=0; i<puntosEquipo2.size();i++) {
+			dts.setValue(puntosEquipo2.get(i), e2.getNombre(), String.valueOf(i));
+		}
+		
+		JFreeChart graficoLineas = ChartFactory.createLineChart("Comparacion de los puntos de dos equipos"
+				, "Puntos" , "Equipos" , dts);
 	}
 }
