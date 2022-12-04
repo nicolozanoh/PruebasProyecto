@@ -46,16 +46,16 @@ public class Partido {
 	}
 	public void actualizarResultadoPartido(int numJornada) {
 		if (this.golesLocal > this.golesVisitante) {
-			this.equipoLocal.actualizarResultadoPartido(numJornada, true);
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, false);
+			this.equipoLocal.actualizarResultadoPartido(numJornada, "Ganó");
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, "Perdió");
 		}
 		else if (this.golesLocal < this.golesVisitante) {
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, true);
-			this.equipoLocal.actualizarResultadoPartido(numJornada, false);
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, "Ganó");
+			this.equipoLocal.actualizarResultadoPartido(numJornada, "Perdió");
 		}
 		else {
-			this.equipoVisitante.actualizarResultadoPartido(numJornada, false);
-			this.equipoLocal.actualizarResultadoPartido(numJornada, false);
+			this.equipoVisitante.actualizarResultadoPartido(numJornada, "Empató");
+			this.equipoLocal.actualizarResultadoPartido(numJornada, "Empató");
 		}
 	}
 }

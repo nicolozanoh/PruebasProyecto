@@ -39,15 +39,38 @@ public class EquipoFantasia {
 		return puntosJornada;
 	}
 	public void actualizarPuntosJornada(int numJornada) {
-		double puntos=0;
+		double puntos= 0;
+		double ganadores= 0;
+		double noPerdio= 0;
+		double mas60Minutos = 0;
 		for (Jugador j: titulares) {
 			if (j==capitan) {
-				puntos= puntos + (j.getPuntosJornada().get(numJornada-1))*2;
+				puntos= (j.getPuntosJornada().get(numJornada-1))*2;
 			}	
 			else {
 				puntos+=j.getPuntosJornada().get(numJornada-1);
 			}
+			if(j.getResultadoPartidoJornada().get(numJornada-1)=="Ganó") {
+				ganadores+= 1;
+			}
+			if(j.getResultadoPartidoJornada().get(numJornada-1)!="Perdió") {
+				noPerdio+= 1;
+			}
+			if(j.getMinutosJugadosJornada().get(numJornada-1)>60) {
+				mas60Minutos+= 1;
+			}
 		}
+		 
+		if(ganadores==11) {
+			puntos += 15; 
+		}
+		if(noPerdio==11) {
+			puntos += 10; 
+		}
+		if(mas60Minutos==11) {
+			puntos += 5; 
+		}
+		
 		this.puntosTotales += puntos;
 		this.puntosJornada.set(numJornada-1, puntos);
 	}

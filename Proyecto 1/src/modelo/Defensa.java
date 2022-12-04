@@ -21,7 +21,9 @@ public class Defensa extends Jugador{
 		penaltisErradosJornada= new ArrayList<Integer>();
 		amarillasJornada= new ArrayList<Integer>();
 		rojasJornada= new ArrayList<Integer>();
-		golesRecibidosJornada = new ArrayList<Integer>();
+		golesRecibidosJornada = new ArrayList<Integer>();manosJornada = new ArrayList<Integer>();
+		tirosLibresCobradosJornada = new ArrayList<Integer>();
+		tirosLibresAnotadosJornada = new ArrayList<Integer>();
 	}
 	public void setGolesRecibidosJornada(ArrayList<Integer> golesRecibidosJornada) {
 		this.golesRecibidosJornada = golesRecibidosJornada;
@@ -43,6 +45,12 @@ public class Defensa extends Jugador{
 		puntos += -1 * (double) this.amarillasJornada.get(numJornada-1);
 		puntos += -3 * (double) this.rojasJornada.get(numJornada-1);
 		puntos += -2 * (double) this.autogolesJornada.get(numJornada-1);
+		puntos += -1 * (double) this.manosJornada.get(numJornada-1);
+		puntos += 1 * (double) this.tirosLibresCobradosJornada.get(numJornada-1);
+		puntos += 2 * (double) this.tirosLibresAnotadosJornada.get(numJornada-1);
+		puntos += -1 * (double) this.manosJornada.get(numJornada-1);
+		puntos += 1 * (double) this.tirosLibresCobradosJornada.get(numJornada-1);
+		puntos += 2 * (double) this.tirosLibresAnotadosJornada.get(numJornada-1);
 		
 		if(this.golesRecibidosJornada.get(numJornada-1) == 0) {
 			puntos += 4;
@@ -54,6 +62,13 @@ public class Defensa extends Jugador{
 		if(this.minutosJugadosJornada.get(numJornada-1) > 60) {
 			puntos += 2;
 		}
+		if(this.minutosJugadosJornada.get(numJornada-1) > 60 && this.minutosJugadosJornada.get(numJornada-2) > 60 && this.minutosJugadosJornada.get(numJornada-3) > 60) {
+			puntos+= 5;
+		}
+		if(this.golesAnotadosJornada.get(numJornada-1) > 1 && this.golesAnotadosJornada.get(numJornada-2) > 1 && this.golesAnotadosJornada.get(numJornada-3) > 1) {
+			puntos+= 10;
+		}
+		
 		if (this.puntosJornada == null) {
 			this.puntosJornada = new ArrayList<Double>();
 		}
