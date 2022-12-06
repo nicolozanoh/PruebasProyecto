@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -91,23 +92,29 @@ public class Temporada {
 		return respuesta;
 	}
 	
-	public void graficoComparacionEquipos(String equipo1, String equipo2) {
-		EquipoFantasia e1 = getEquipoFantasia(equipo1);
-		EquipoFantasia e2 = getEquipoFantasia(equipo2);
+	public JFreeChart graficoComparacionEquipos(int nRanking) {
 		
-		ArrayList<Double> puntosEquipo1= e1.getPuntosJornada();
-		ArrayList<Double> puntosEquipo2= e2.getPuntosJornada();
+		DefaultCategoryDataset dts = new DefaultCategoryDataset();
+		for (int i=0; i<nRanking;i++) {
+			EquipoFantasia equipo= rankingEquiposFantasia.get(i);
+			
+			for (int j=0; j<equipo.getPuntosJornada().size()-1; j++) {
+				dts.addValue(equipo.getPuntosJornada().get(j),equipo.getNombre(),""+(j+1));
+			}
+		}
+		JFreeChart graficoLineas = ChartFactory.createLineChart("Evolucion de los mejores equipos"
+				, "Puntos" , "Jornadas" , dts, PlotOrientation.VERTICAL, true, false, false);
+		return graficoLineas;
+	}
+	public void graficoPuntosJugadoresEquipo(Participante usuario) {
+		ArrayList<Jugador> jugadores =usuario.getEquipo().getJugadores();
+		
 		DefaultCategoryDataset dts = new DefaultCategoryDataset();
 		
-		for (int i=0; i<puntosEquipo1.size();i++) {
-			dts.setValue(puntosEquipo1.get(i), e1.getNombre(), String.valueOf(i));
-		}
+		for (int i = 0; i<jugadores.size(); i++)
+			  dts.addValue(jugadores.get(i).getPuntosTotales(), "Puntos Totales", jugadores.get(i).getNombre());
+
+		JFreeChart chart = ChartFactory.createBarChart("Aporte de jugadores en la temporada" , "Puntos" , "Equipos" , dts);
 		
-		for (int i=0; i<puntosEquipo2.size();i++) {
-			dts.setValue(puntosEquipo2.get(i), e2.getNombre(), String.valueOf(i));
-		}
-		
-		JFreeChart graficoLineas = ChartFactory.createLineChart("Comparacion de los puntos de dos equipos"
-				, "Puntos" , "Equipos" , dts);
 	}
 }

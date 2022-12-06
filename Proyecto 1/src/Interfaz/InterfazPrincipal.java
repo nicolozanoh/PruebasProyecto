@@ -5,6 +5,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import org.jfree.chart.ChartFrame;
+
 import procesamiento.Aplicacion;
 import modelo.Jugador;
 import modelo.Participante;
@@ -21,6 +24,7 @@ public class InterfazPrincipal extends JFrame{
 	private VentanaEstadisticaEquipo vEstEquipo;
 	private VentanaEstadisticaJornada vEstJornada;
 	private VentanaEstadisticaTemporada vEstTemporada;
+	private VentanaEstadisticaAdmin vEstAdmin;
 	
 	boolean temporadaConfigurada;
 
@@ -303,5 +307,19 @@ public class InterfazPrincipal extends JFrame{
 		this.vUsuario.dispose();
 		JOptionPane.showMessageDialog(this, "Su sesión se ha cerrado.","",JOptionPane.INFORMATION_MESSAGE);
 		this.vInicio = new VentanaInicio(this);
+	}
+	public void verEstadisticasAdmin() {
+		vEstAdmin = new VentanaEstadisticaAdmin(this);
+	}
+	public void mostrarComparacionRankEquipos() {
+		ChartFrame fr = new ChartFrame("Evolucion de los mejores equipos", app.mostrarGraficoComparacionPuntosEquipos());
+        fr.pack();
+        fr.setVisible(true);
+	}
+	public void mostrarJugadoresMayorAporte() {
+		
+	}
+	public void mostrarJugadoresMasPuntosUnEquipo() {
+		
 	}
 }

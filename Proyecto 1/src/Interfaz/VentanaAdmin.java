@@ -47,4 +47,7 @@ public class VentanaAdmin extends JFrame{
 	public void borrarTemporada() {
 		this.padre.borrarTemporada();
 	}
+	public void verEstadisticasAdmin() {
+		this.padre.verEstadisticasAdmin();
+	}
 }

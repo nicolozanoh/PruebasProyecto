@@ -3,6 +3,10 @@ package procesamiento;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+
 import modelo.ManejoPersistencia;
 import modelo.Administrador;
 import modelo.Arquero;
@@ -609,8 +613,12 @@ public class Aplicacion {
 		((Participante)this.usuarioActivo).organizarJugadores();
 		
 	}
-	public void mostrarGraficoComparacionPuntosEquipos(String equipo1, String equipo2) {
-		temporadaActual.graficoComparacionEquipos(equipo1, equipo2);
+	/**
+	 * Para este metodo falta el input del numero que se recibe por parametro
+	 * @return 
+	 */
+	public JFreeChart mostrarGraficoComparacionPuntosEquipos() {
+		return temporadaActual.graficoComparacionEquipos(5);
 	}
 	
 }
