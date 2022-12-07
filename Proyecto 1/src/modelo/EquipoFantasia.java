@@ -6,6 +6,7 @@ import java.util.Collections;
 public class EquipoFantasia {
 	private String nombre;
 	private double puntosTotales;
+	private double presupuesto;
 	private Jugador capitan;
 	private ArrayList<Double> puntosJornada;
 	private ArrayList<Jugador> jugadores;
@@ -316,6 +317,10 @@ public class EquipoFantasia {
 					}
 					jugadores.remove(jugadorVender);
 					resp = 0;
+					if(resp == 0) {
+						Double precio = Double.parseDouble((seleccion.get(0).split(","))[2].trim());
+						this.presupuesto += (0.97*(precio)); 
+					}
 				}
 			}
 		}
@@ -334,5 +339,35 @@ public class EquipoFantasia {
 		if(cJugadores.size() == 15) {
 			this.jugadores.sort((Jugador a , Jugador b) -> -(Double.compare(a.getPuntosTotales(), b.getPuntosTotales())));
 		}
+	}
+	public int comprarJugador(Jugador jugador) {
+		int respuesta;
+		if (this.getJugadores().size() < 15)
+		{
+			if(presupuesto >= jugador.getPrecio()){
+				respuesta = this.agregarJugador(jugador);
+				if (respuesta == 0) {
+					presupuesto+= -1*jugador.getPrecio();
+				}
+			}
+			else {
+				respuesta = 6;
+			}
+		}
+		else {
+			respuesta = 7;
+		}
+		return respuesta;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+	public Double getPresupuesto() {
+		return presupuesto;
+	}
+	public void setPresupuesto(Double presupuesto2) {
+		this.presupuesto = presupuesto2;
 	}
 }

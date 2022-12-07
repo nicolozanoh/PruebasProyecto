@@ -60,7 +60,7 @@ public class PanelInferiorCrearEquipo extends JPanel implements ActionListener{
 		defensas = new JLabel("Defensas:");
 		mediocampistas = new JLabel("Mediocampistas:");
 		delanteros = new JLabel("Delanteros:");
-		presupuestoInicial = ((Participante)this.padre.getInterfaz().getAplicacion().getUsuarioActivo()).getPresupuesto();
+		presupuestoInicial = 1000000;
 		armarListas();
 		
 		saldo = new JLabel("Saldo: " + Double.toString(presupuestoInicial));

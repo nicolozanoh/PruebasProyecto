@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import modelo.EquipoFantasia;
 import modelo.Jugador;
 import modelo.Participante;
 import javax.swing.JButton;
@@ -44,33 +45,25 @@ public class PanelUsuario extends JPanel{
 	public PanelUsuario(VentanaUsuario papa) {
 		padre = papa;
 		
-		if (((Participante)padre.getInterfaz().getAplicacion().getUsuarioActivo()).getEquipo()!=null) {
-			setBorder(new TitledBorder(((Participante)padre.getInterfaz().getAplicacion().getUsuarioActivo()).getEquipo().getNombre()));
-		}
-		
 		titulares = new JLabel("Titulares:");
 		suplentes = new JLabel("Suplentes:");
 		
-		titular1 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(0).toString());
-		titular2 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(1).toString());
-		titular3 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(2).toString());
-		titular4 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(3).toString());
-		titular5 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(4).toString());
-		titular6 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(5).toString());
-		titular7 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(6).toString());
-		titular8 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(7).toString());
-		titular9 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(8).toString());
-		titular10 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(9).toString());
-		titular11 = new JCheckBox (padre.getUsuario().getEquipo().getTitulares().get(10).toString());
-		suplente1 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(0).toString());
-		suplente2 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(1).toString());
-		suplente3 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(2).toString());
-		if (padre.getUsuario().getEquipo().getSuplentes().size()==4) {
-			suplente4 = new JCheckBox (padre.getUsuario().getEquipo().getSuplentes().get(3).toString());
-		}
-		else {
-			suplente4 = new JCheckBox();
-		}
+		titular1 = new JCheckBox ("");
+		titular2 = new JCheckBox ("");
+		titular3 = new JCheckBox ("");
+		titular4 = new JCheckBox ("");
+		titular5 = new JCheckBox ("");
+		titular6 = new JCheckBox ("");
+		titular7 = new JCheckBox ("");
+		titular8 = new JCheckBox ("");
+		titular9 = new JCheckBox ("");
+		titular10 = new JCheckBox ("");
+		titular11 = new JCheckBox ("");
+		suplente1 = new JCheckBox ("");
+		suplente2 = new JCheckBox ("");
+		suplente3 = new JCheckBox ("");
+		suplente4 = new JCheckBox("");
+		
 		setLayout(new GridLayout(15,1));
 		
 		add(titulares);
@@ -150,24 +143,27 @@ public class PanelUsuario extends JPanel{
 	}
 
 
-	public void actualizarAlineacion() {
-		titular1.setText(padre.getUsuario().getEquipo().getTitulares().get(0).toString());
-		titular2.setText(padre.getUsuario().getEquipo().getTitulares().get(1).toString());
-		titular3.setText(padre.getUsuario().getEquipo().getTitulares().get(2).toString());
-		titular4.setText(padre.getUsuario().getEquipo().getTitulares().get(3).toString());
-		titular5.setText(padre.getUsuario().getEquipo().getTitulares().get(4).toString());
-		titular6.setText(padre.getUsuario().getEquipo().getTitulares().get(5).toString());
-		titular7.setText(padre.getUsuario().getEquipo().getTitulares().get(6).toString());
-		titular8.setText(padre.getUsuario().getEquipo().getTitulares().get(7).toString());
-		titular9.setText(padre.getUsuario().getEquipo().getTitulares().get(8).toString());
-		titular10.setText(padre.getUsuario().getEquipo().getTitulares().get(9).toString());
-		titular11.setText(padre.getUsuario().getEquipo().getTitulares().get(10).toString());
-		suplente1.setText(padre.getUsuario().getEquipo().getSuplentes().get(0).toString());
-		suplente2.setText(padre.getUsuario().getEquipo().getSuplentes().get(1).toString());
-		suplente3.setText(padre.getUsuario().getEquipo().getSuplentes().get(2).toString());
+	public void actualizarAlineacion(EquipoFantasia equipo) {
+		if (equipo !=null) {
+			setBorder(new TitledBorder(equipo.getNombre()));
+		}
+		titular1.setText(equipo.getTitulares().get(0).toString());
+		titular2.setText(equipo.getTitulares().get(1).toString());
+		titular3.setText(equipo.getTitulares().get(2).toString());
+		titular4.setText(equipo.getTitulares().get(3).toString());
+		titular5.setText(equipo.getTitulares().get(4).toString());
+		titular6.setText(equipo.getTitulares().get(5).toString());
+		titular7.setText(equipo.getTitulares().get(6).toString());
+		titular8.setText(equipo.getTitulares().get(7).toString());
+		titular9.setText(equipo.getTitulares().get(8).toString());
+		titular10.setText(equipo.getTitulares().get(9).toString());
+		titular11.setText(equipo.getTitulares().get(10).toString());
+		suplente1.setText(equipo.getSuplentes().get(0).toString());
+		suplente2.setText(equipo.getSuplentes().get(1).toString());
+		suplente3.setText(equipo.getSuplentes().get(2).toString());
 		suplente4.setText("");
-		if (padre.getUsuario().getEquipo().getSuplentes().size()==4) {
-			suplente4.setText(padre.getUsuario().getEquipo().getSuplentes().get(3).toString());	
+		if (equipo.getSuplentes().size()==4) {
+			suplente4.setText(equipo.getSuplentes().get(3).toString());	
 		}
 			
 	}

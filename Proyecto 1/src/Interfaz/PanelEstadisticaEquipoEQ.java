@@ -21,9 +21,9 @@ public class PanelEstadisticaEquipoEQ extends JPanel{
 	private JTextField campoPuntosJornada;
 	private JTextField campoPosicion;
 	private VentanaEstadisticaEquipo padre;
-	public PanelEstadisticaEquipoEQ(VentanaEstadisticaEquipo papa) {
+	public PanelEstadisticaEquipoEQ(VentanaEstadisticaEquipo papa, EquipoFantasia equipoSeleccionado) {
 		padre = papa;
-		EquipoFantasia equipo = ((Participante)this.padre.getInterfaz().getAplicacion().getUsuarioActivo()).getEquipo();
+		EquipoFantasia equipo = equipoSeleccionado;
 		lNombreEquipo = new JLabel("Nombre:");
 		lPuntosTotales = new JLabel("Puntos Totales:");
 		lPuntosJornada= new JLabel("Puntos Jornada:");

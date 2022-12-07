@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Participante extends Usuario{
-	private double presupuesto;
-	private EquipoFantasia equipo;
+	private ArrayList<EquipoFantasia> equipos;
+	private EquipoFantasia equipoActivo;
 	public Participante() {
+		this.equipos = new ArrayList<EquipoFantasia>();
 	}
 	public Participante(String nombreUsuario, String contraseña, double presupuesto) {
 		this.nombreUsuario = nombreUsuario;
 		this.contraseña = contraseña;
-		this.presupuesto = presupuesto;
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -26,120 +26,94 @@ public class Participante extends Usuario{
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-	public double getPresupuesto() {
-		return presupuesto;
+	public ArrayList<EquipoFantasia> getEquipos(){
+		return this.equipos;
 	}
-	public void setPresupuesto(double presupuesto) {
-		this.presupuesto = presupuesto;
-	}
-	public EquipoFantasia getEquipo() {
-		return equipo;
-	}
-	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo, int numJornadas) {
+	 
+	public int crearEquipo(ArrayList<Jugador> jugadoresSeleccionados, String nombreEquipo, int numJornadas, Double presupuesto) {
 		int resp = 0;
-		double presupuestoInicial = presupuesto;
-		if (equipo == null) {
+		EquipoFantasia equipoNuevo = new EquipoFantasia();
+		
 			if (jugadoresSeleccionados.size() == 15){
-				this.equipo = new EquipoFantasia();
-				this.equipo.setNombre(nombreEquipo);
+				//equipo = new EquipoFantasia();
+				equipoNuevo.setNombre(nombreEquipo);
+				equipoNuevo.setPresupuesto(presupuesto);
 				for (int i = 0; i< jugadoresSeleccionados.size();i++) {
-					resp = comprarJugador(jugadoresSeleccionados.get(i));
+					resp = equipoNuevo.comprarJugador(jugadoresSeleccionados.get(i));
 					if(resp != 0) {
-						this.equipo = null;
-						presupuesto = presupuestoInicial;
 						break;
 					}
 				}
 				if(resp == 0) {
-					this.equipo.iniciarPuntosJornada(numJornadas);
-					this.equipo.seleccionarAlineacionDefault();
+					equipoNuevo.iniciarPuntosJornada(numJornadas);
+					equipoNuevo.seleccionarAlineacionDefault();
+					if (this.equipos == null) {
+						this.equipos = new ArrayList<EquipoFantasia>();
+					}
+					this.equipos.add(equipoNuevo);
 				}
-				else {
-					this.equipo =null;
-				}
+				
 			}
 			else{
 				resp = 7;
 			}
-		}
-		else {
-			resp = 6;
-		}
-			
 		return resp;
 	}
 	public int borrarEquipo() {
 		int resp = 1;
-		if(this.equipo != null) {
-			this.equipo = null;
-			this.presupuesto = 1000000;
-			resp = 0;
-		}
+		
 		return resp;
 	}
-	public int venderJugador(int numJugador) {
-		int resp;
-		try {
-			Jugador jugador = this.equipo.getJugadores().get(numJugador-1);
-			resp = equipo.quitarJugador(numJugador);
-			presupuesto+= 0.97*(jugador.getPrecio());
-		}catch(Exception ex) {
-			resp = 1;
-		}
-		return resp;
+	public void setEquipoActivo(EquipoFantasia equipo) {
+		equipoActivo = equipo;
 	}
-	public int comprarJugador(Jugador jugador) {
-		int respuesta;
-		if (this.equipo.getJugadores().size() < 15)
-		{
-			if(presupuesto >= jugador.getPrecio()){
-				respuesta = this.equipo.agregarJugador(jugador);
-				if (respuesta == 0) {
-					presupuesto+= -1*jugador.getPrecio();
-				}
-			}
-			else {
-				respuesta = 6;
-			}
-		}
-		else {
-			respuesta = 7;
-		}
-		return respuesta;
+	public EquipoFantasia getEquipoActivo() {
+		return this.equipoActivo;
 	}
-	public int modificarAlineacion(int nuevoTitular, int nuevoSuplente) {
-		int resp = this.equipo.cambiarAlineacion(nuevoTitular, nuevoSuplente);
-		return resp;
-	}
-	public double consultarPuntajesEquipo() {
-		return this.equipo.getPuntosTotales();
-	}
-	public double consultarPuntajeJugador(Jugador jugador) {
-		return jugador.getPuntosTotales();
-	}
-	public void setEquipoFantasia(EquipoFantasia equipo) {
-		this.equipo = equipo;
-	}
+	
+//	public int venderJugador(int numJugador) {
+//		int resp;
+//		try {
+//			Jugador jugador = this.equipo.getJugadores().get(numJugador-1);
+//			resp = equipo.quitarJugador(numJugador);
+//			presupuesto+= 0.97*(jugador.getPrecio());
+//		}catch(Exception ex) {
+//			resp = 1;
+//		}
+//		return resp;
+//	}
+		
+//	
+//	public int modificarAlineacion(int nuevoTitular, int nuevoSuplente) {
+//		int resp = this.equipo.cambiarAlineacion(nuevoTitular, nuevoSuplente);
+//		return resp;
+//	}
+//	public double consultarPuntajesEquipo() {
+//		return this.equipo.getPuntosTotales();
+//	}
+//	public double consultarPuntajeJugador(Jugador jugador) {
+//		return jugador.getPuntosTotales();
+//	}
+//	public void setEquipoFantasia(EquipoFantasia equipo) {
+//		this.equipo = equipo;
+//	}
 	public void cambiarCapitan(int nuevoCapitan) {
-		this.equipo.cambiarEquipo(nuevoCapitan);
+		this.equipoActivo.cambiarEquipo(nuevoCapitan);
 	}
 	public int modificarAlineacionV2(ArrayList<String> jugadoresCambiar) {
-		int resp = this.equipo.cambiarAlineacionV2(jugadoresCambiar);
+		int resp = this.equipoActivo.cambiarAlineacionV2(jugadoresCambiar);
 		return resp;
 	}
 	public int cambiarCapitanV2(ArrayList<String> nuevoCapitan) {
-		int resp = this.equipo.cambiarCapitanV2(nuevoCapitan);
+		int resp = this.equipoActivo.cambiarCapitanV2(nuevoCapitan);
 		return resp;
 	}
 	public int venderJugadorV2(ArrayList<String> seleccion) {
-		int resp = this.equipo.quitarJugadorV2(seleccion);
-		if (resp == 0) {
-			Double precio = Double.parseDouble((seleccion.get(0).split(","))[2].trim());
-			this.presupuesto += (0.97*(precio)); 
-		}
+		int resp = this.equipoActivo.quitarJugadorV2(seleccion);
 		return resp;
 	}
 	public void organizarJugadores() {
-		this.equipo.organizarJugadores();
+		this.equipoActivo.organizarJugadores();
 	}
+	
 }

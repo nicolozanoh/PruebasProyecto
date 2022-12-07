@@ -26,11 +26,13 @@ public class Aplicacion {
 	private Temporada temporadaActual;
 	private ManejoPersistencia loader;
 	private Usuario usuarioActivo;
+	private Double presupuestoInicial;
 	public Aplicacion() {
 		administrador = new Administrador();
 		participantes = new ArrayList<Participante>();
 		temporadaActual = new Temporada();
 		loader = new ManejoPersistencia();
+		presupuestoInicial = 1000000.00;
 	}
 	public Administrador getAdministrador() {
 		return administrador;
@@ -141,58 +143,8 @@ public class Aplicacion {
 		for (int i = 0; i<jugadoresSeleccionados.length;i++) {
 			jugadores.add(this.temporadaActual.getJugadores().get(Integer.parseInt(jugadoresSeleccionados[i])-1));
 		}
-		resp = ((Participante) usuarioActivo).crearEquipo(jugadores, nombreEquipo, this.temporadaActual.getJornadas().size());
+		resp = ((Participante) usuarioActivo).crearEquipo(jugadores, nombreEquipo, this.temporadaActual.getJornadas().size(),this.presupuestoInicial);
 		return resp;
-	}
-	public int venderJugador(int numJugador) {
-		boolean modificar = permitirModificar();
-		int resp;
-		if (modificar) {
-			resp = ((Participante)this.getUsuarioActivo()).venderJugador(numJugador);
-		}
-		else {
-			resp = 3;
-		}
-		return resp;
-	}
-	public int comprarJugador(int numJugador) {
-		int resp;
-		boolean modificar = permitirModificar();
-		if(modificar) {
-			try {		
-				Jugador jugador = this.getTemporada().getJugadores().get(numJugador- 1);
-				resp = ((Participante)this.getUsuarioActivo()).comprarJugador(jugador);
-				if (resp == 0) {
-					((Participante)this.getUsuarioActivo()).getEquipo().getSuplentes().add(jugador);
-					guardarEquipo();
-					loader.guardarParticipantes(participantes);
-				}
-			}catch(Exception ex){
-				resp = 1;
-			}
-		}
-		else{
-			resp = 8;
-		}
-		return resp;
-	}
-	public int cambiarAlineacion(int nuevoTitular, int nuevoSuplente) {
-		boolean modificar = permitirModificar();
-		int resp;
-		if(modificar) {
-			resp = ((Participante)this.usuarioActivo).modificarAlineacion(nuevoTitular, nuevoSuplente);
-			//loader.guardarEquipo(((Participante)this.usuarioActivo).getEquipo(), this.usuarioActivo.getNombreUsuario());
-			loader.guardarParticipantes(participantes);
-		}
-		else {
-			resp = 3;
-		}
-		return resp;
-	}
-	public int consultarPuntajeEquipo(EquipoFantasia equipo) {
-		//TODO No deberia recibir por parametro el equipo?
-		
-		return 0;
 	}
 	public double consultarPuntajeJugador(Jugador jugador) {
 		// Suponiendo que entra por parametro un jugador y que se consultan los puntos totales
@@ -245,36 +197,40 @@ public class Aplicacion {
 		String equipo;
 		String posicion;
 		Partido partido;
+		EquipoFantasia equipoActual;
 		for(int i = 0; i<this.temporadaActual.getJugadores().size();i++) {
 			jugador = this.temporadaActual.getJugadores().get(i);
 			for(int j = 0; j<this.participantes.size();j++) {
 				participante = this.participantes.get(j);
-				if (participante.getEquipo()!= null) {
-					for(int h = 0; h<participante.getEquipo().getJugadores().size(); h++) {
-						nombre =participante.getEquipo().getJugadores().get(h).getNombre();
-						equipo = participante.getEquipo().getJugadores().get(h).getNombreEquipo();
-						posicion = participante.getEquipo().getJugadores().get(h).getPosicion();
-						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
-							participante.getEquipo().getJugadores().set(h, jugador);
-							break;
+				if (participante.getEquipos()!= null) {
+					for(int l = 0; l<participante.getEquipos().size();l++) {
+						equipoActual = participante.getEquipos().get(l);
+						for(int h = 0; h<equipoActual.getJugadores().size(); h++) {
+							nombre =equipoActual.getJugadores().get(h).getNombre();
+							equipo = equipoActual.getJugadores().get(h).getNombreEquipo();
+							posicion = equipoActual.getJugadores().get(h).getPosicion();
+							if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+								equipoActual.getJugadores().set(h, jugador);
+								break;
+							}
 						}
-					}
-					for(int h = 0; h<participante.getEquipo().getTitulares().size(); h++) {
-						nombre =participante.getEquipo().getTitulares().get(h).getNombre();
-						equipo = participante.getEquipo().getTitulares().get(h).getNombreEquipo();
-						posicion = participante.getEquipo().getTitulares().get(h).getPosicion();
-						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
-							participante.getEquipo().getTitulares().set(h, jugador);
-							break;
+						for(int h = 0; h<equipoActual.getTitulares().size(); h++) {
+							nombre =equipoActual.getTitulares().get(h).getNombre();
+							equipo = equipoActual.getTitulares().get(h).getNombreEquipo();
+							posicion = equipoActual.getTitulares().get(h).getPosicion();
+							if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+								equipoActual.getTitulares().set(h, jugador);
+								break;
+							}
 						}
-					}
-					for(int h = 0; h<participante.getEquipo().getSuplentes().size(); h++) {
-						nombre =participante.getEquipo().getSuplentes().get(h).getNombre();
-						equipo = participante.getEquipo().getSuplentes().get(h).getNombreEquipo();
-						posicion = participante.getEquipo().getSuplentes().get(h).getPosicion();
-						if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
-							participante.getEquipo().getSuplentes().set(h, jugador);
-							break;
+						for(int h = 0; h<equipoActual.getSuplentes().size(); h++) {
+							nombre =equipoActual.getSuplentes().get(h).getNombre();
+							equipo = equipoActual.getSuplentes().get(h).getNombreEquipo();
+							posicion = equipoActual.getSuplentes().get(h).getPosicion();
+							if(nombre.equals(jugador.getNombre())&&equipo.equals(jugador.getNombreEquipo())&&posicion.equals(jugador.getPosicion())) {
+								equipoActual.getSuplentes().set(h, jugador);
+								break;
+							}
 						}
 					}
 				}
@@ -317,16 +273,9 @@ public class Aplicacion {
 		return resp;
 	}
 
-	/*
-	 * public void cargarEquipoParticipanteActivo(File archivoEquipo) {
-	 * ((Participante)this.usuarioActivo).setEquipoFantasia(loader.
-	 * cargarEquipoParticipanteActivo(archivoEquipo));
-	 * 
-	 * }
-	 */
 	public int guardarCambiosParticipante() {
 		int resp = 1;
-		if (((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
+		if (((Participante)this.getUsuarioActivo()).getEquipoActivo().getJugadores().size()==15) {
 			resp = 0;
 			guardarEquipo();
 			loader.guardarParticipantes(participantes);
@@ -523,10 +472,10 @@ public class Aplicacion {
 	}
 	public ArrayList<EquipoFantasia> crearArrayEquipos(){
 		ArrayList<EquipoFantasia> equipos = new ArrayList<EquipoFantasia>();
-		EquipoFantasia equipo = new EquipoFantasia();
 		for (int i = 0; i<this.participantes.size();i++) {
-			equipo = this.participantes.get(i).getEquipo();
-			equipos.add(equipo);
+			if (this.participantes.get(i).getEquipos()!=null) {
+				equipos.addAll(this.participantes.get(i).getEquipos());
+			}
 		}
 		return equipos;
 	}
@@ -542,7 +491,7 @@ public class Aplicacion {
 		((Participante)this.usuarioActivo).cambiarCapitan(nuevoCapitan);
 	}
 	public int encontrarPosicion() {
-		return this.temporadaActual.getRankingEquiposFantasia().indexOf(((Participante)usuarioActivo).getEquipo());
+		return this.temporadaActual.getRankingEquiposFantasia().indexOf(((Participante)usuarioActivo).getEquipoActivo());
 		
 	}
 	public int crearEquipoV2(ArrayList<Jugador> equipo, String nombre) {
@@ -553,10 +502,10 @@ public class Aplicacion {
 			if (!(nombre.equals(""))&& nombre!=null) {
 				resp = 9;
 				if (equipo != null && equipo.size() == 15) {
-					resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size());
+					resp = ((Participante)this.usuarioActivo).crearEquipo(equipo, nombre, this.temporadaActual.getJornadas().size(), this.presupuestoInicial);
 					if (resp == 0) {
 						this.loader.guardarParticipantes(participantes);
-						EquipoFantasia equipoCreado = ((Participante)this.usuarioActivo).getEquipo();
+						EquipoFantasia equipoCreado = ((Participante)this.usuarioActivo).getEquipos().get(((Participante)this.usuarioActivo).getEquipos().size()-1);
 						this.temporadaActual.getRankingEquiposFantasia().add(equipoCreado);
 					}
 				}
@@ -570,7 +519,7 @@ public class Aplicacion {
 		if(modificar) {
 			resp = ((Participante)this.getUsuarioActivo()).modificarAlineacionV2(jugadoresCambiar);
 		}
-		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
+		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipoActivo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
@@ -581,7 +530,7 @@ public class Aplicacion {
 		if(modificar) {
 			resp = ((Participante)this.getUsuarioActivo()).cambiarCapitanV2(seleccion);
 		}
-		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipo().getJugadores().size()==15) {
+		if (resp == 0&&((Participante)this.getUsuarioActivo()).getEquipoActivo().getJugadores().size()==15) {
 			this.loader.guardarParticipantes(participantes);
 		}
 		return resp;
@@ -600,25 +549,31 @@ public class Aplicacion {
 			resp = 8;
 			boolean modificar = permitirModificar();
 			if (modificar) {
-				resp = ((Participante)this.getUsuarioActivo()).comprarJugador(jugadoresComprar.get(0));	
+				resp = ((Participante)this.getUsuarioActivo()).getEquipoActivo().comprarJugador(jugadoresComprar.get(0));	
 				if(resp == 0) {
-					((Participante)this.getUsuarioActivo()).getEquipo().getSuplentes().add(jugadoresComprar.get(0));
+					((Participante)this.getUsuarioActivo()).getEquipoActivo().getSuplentes().add(jugadoresComprar.get(0));
 					loader.guardarParticipantes(participantes);
 				}
 			}
 		}
 		return resp;
 	}
-	public void organizarJugadoresEquipo() {
-		((Participante)this.usuarioActivo).organizarJugadores();
-		
-	}
+//	public void organizarJugadoresEquipo() {
+//		((Participante)this.usuarioActivo).organizarJugadores();
+//		
+//	}
 	/**
 	 * Para este metodo falta el input del numero que se recibe por parametro
 	 * @return 
 	 */
 	public JFreeChart mostrarGraficoComparacionPuntosEquipos() {
 		return temporadaActual.graficoComparacionEquipos(5);
+	}
+	public void setEquipoSeleccionado(EquipoFantasia equipo) {
+		((Participante)this.usuarioActivo).setEquipoActivo(equipo);
+	}
+	public double getPresupuestoInicial() {
+		return this.presupuestoInicial;
 	}
 	
 }

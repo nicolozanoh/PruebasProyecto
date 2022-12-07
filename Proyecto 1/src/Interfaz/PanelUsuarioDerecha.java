@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import modelo.EquipoFantasia;
+
 public class PanelUsuarioDerecha extends JPanel{
 
 	private VentanaUsuario padre;
@@ -29,12 +31,12 @@ public class PanelUsuarioDerecha extends JPanel{
 		capitan = new JLabel("CAPITAN:",SwingConstants.CENTER);
 		capitan.setPreferredSize(new Dimension(70,50));
 		
-		campoPresupuesto = new JTextField(Double.toString(this.padre.getUsuario().getPresupuesto()),SwingConstants.CENTER);
+		campoPresupuesto = new JTextField("");
 		campoPresupuesto.setHorizontalAlignment(SwingConstants.CENTER);
 		campoPresupuesto.setPreferredSize(new Dimension(70,10));
 		campoPresupuesto.setEditable(false);
 		
-		campoCapitan= new JTextField(this.padre.getUsuario().getEquipo().getCapitan().getNombre());
+		campoCapitan= new JTextField("");
 		campoCapitan.setHorizontalAlignment(SwingConstants.CENTER);
 		campoCapitan.setPreferredSize(new Dimension(70,10));
 		campoCapitan.setEditable(false);
@@ -48,12 +50,12 @@ public class PanelUsuarioDerecha extends JPanel{
 	}
 
 	public void actualizarCapitan() {
-		this.campoCapitan.setText(this.padre.getUsuario().getEquipo().getCapitan().getNombre());
+		this.campoCapitan.setText(this.padre.getEquipoSeleccionado().getCapitan().getNombre());
 		
 	}
 
 	public void actualizarPresupuesto() {
-		this.campoPresupuesto.setText(Double.toString(this.padre.getUsuario().getPresupuesto()));
+		this.campoPresupuesto.setText(Double.toString(this.padre.getEquipoSeleccionado().getPresupuesto()));
 		
 	}
 	

@@ -106,15 +106,15 @@ public class Temporada {
 				, "Puntos" , "Jornadas" , dts, PlotOrientation.VERTICAL, true, false, false);
 		return graficoLineas;
 	}
-	public void graficoPuntosJugadoresEquipo(Participante usuario) {
-		ArrayList<Jugador> jugadores =usuario.getEquipo().getJugadores();
-		
-		DefaultCategoryDataset dts = new DefaultCategoryDataset();
-		
-		for (int i = 0; i<jugadores.size(); i++)
-			  dts.addValue(jugadores.get(i).getPuntosTotales(), "Puntos Totales", jugadores.get(i).getNombre());
-
-		JFreeChart chart = ChartFactory.createBarChart("Aporte de jugadores en la temporada" , "Puntos" , "Equipos" , dts);
-		
-	}
+//	public void graficoPuntosJugadoresEquipo(Participante usuario) {
+//		ArrayList<Jugador> jugadores =usuario.getEquipo().getJugadores();
+//		
+//		DefaultCategoryDataset dts = new DefaultCategoryDataset();
+//		
+//		for (int i = 0; i<jugadores.size(); i++)
+//			  dts.addValue(jugadores.get(i).getPuntosTotales(), "Puntos Totales", jugadores.get(i).getNombre());
+//
+//		JFreeChart chart = ChartFactory.createBarChart("Aporte de jugadores en la temporada" , "Puntos" , "Equipos" , dts);
+//		
+//	}
 }
